@@ -208,7 +208,7 @@ const Projects = () => {
   }, { scope: sectionRef });
 
   return (
-    <section ref={sectionRef} id="projects" className="h-[100svh] w-full relative z-10 bg-transparent flex flex-col justify-center overflow-x-hidden md:overflow-visible mix-blend-screen pointer-events-auto">
+    <section ref={sectionRef} id="projects" className="h-[100svh] w-full relative z-10 bg-transparent flex flex-col justify-center overflow-x-hidden md:overflow-visible md:mix-blend-screen pointer-events-auto">
       
       <div className="absolute top-8 sm:top-10 left-4 sm:left-6 md:left-20 z-20 pointer-events-none pr-4">
         <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-display font-black tracking-tighter mix-blend-overlay opacity-80 text-white leading-tight break-words">
@@ -216,7 +216,7 @@ const Projects = () => {
         </h2>
       </div>
 
-      <div className="absolute top-[30%] left-[5%] w-[800px] h-[800px] bg-neon-purple/5 rounded-full blur-[200px] pointer-events-none transform-gpu"></div>
+      <div className="absolute top-[30%] left-[5%] w-[400px] md:w-[800px] h-[400px] md:h-[800px] bg-neon-purple/5 rounded-full blur-[100px] md:blur-[200px] pointer-events-none transform-gpu will-change-transform"></div>
 
       {/* The Horizontal Track - On mobile we use a native scroll-snap container if GSAP is skipped */}
       <div 

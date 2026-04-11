@@ -38,7 +38,7 @@ const Hero = () => {
   return (
     <section 
       ref={containerRef} 
-      className="relative h-screen flex items-center justify-center overflow-hidden mix-blend-screen"
+      className="relative h-screen flex items-center justify-center overflow-hidden md:mix-blend-screen"
     >
       <motion.div 
         style={{ y: yText, opacity, scale }}
@@ -111,7 +111,7 @@ const Hero = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 4.8, duration: 1.5, ease: "easeOut" }}
         style={{ opacity }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center Mix-blend-difference"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center mix-blend-difference transform-gpu"
       >
         <span className="text-[10px] uppercase tracking-[0.5em] font-mono mb-4 text-neon-cyan font-bold">Scroll Down</span>
         <div className="w-[2px] h-[80px] bg-white/10 relative overflow-hidden rounded-full">

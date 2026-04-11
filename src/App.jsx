@@ -13,7 +13,7 @@ import CustomCursor from './components/CustomCursor';
 import CanvasBackground from './components/CanvasBackground';
 import Terminal from './components/Terminal';
 import { useSoundEffect } from './hooks/useSoundEffect';
-import { Bell } from 'lucide-react';
+import { Bell, Sun, Moon } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -36,8 +36,52 @@ function App() {
   const [showToast, setShowToast] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [loadingTextIndex, setLoadingTextIndex] = useState(0);
+  const [theme, setTheme] = useState('light');
   
   const { playBlip } = useSoundEffect();
+
+  useEffect(() => {
+    // Initialize default theme body class on mount
+    document.body.classList.toggle('light', theme === 'light');
+  }, []);
+
+  const toggleTheme = (e) => {
+    playBlip();
+    const nextTheme = theme === 'light' ? 'dark' : 'light';
+    
+    if (!document.startViewTransition) {
+      setTheme(nextTheme);
+      document.body.classList.toggle('light', nextTheme === 'light');
+      return;
+    }
+
+    const x = e.clientX || window.innerWidth / 2;
+    const y = e.clientY || 50;
+
+    const endRadius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    );
+
+    const transition = document.startViewTransition(() => {
+      setTheme(nextTheme);
+      document.body.classList.toggle('light', nextTheme === 'light');
+    });
+
+    transition.ready.then(() => {
+      document.documentElement.animate(
+        [
+          { clipPath: `circle(0px at ${x}px ${y}px)` },
+          { clipPath: `circle(${endRadius}px at ${x}px ${y}px)` },
+        ],
+        {
+          duration: 1000,
+          easing: "ease-in-out",
+          pseudoElement: "::view-transition-new(root)",
+        }
+      );
+    });
+  };
 
   const lenisRef = useRef(null);
 
@@ -205,17 +249,34 @@ function App() {
               transition={{ duration: 0.5 }}
               className="flex flex-col items-center relative z-10"
             >
-              <div className="relative">
-                <motion.div 
-                  animate={{ rotate: 360 }}
-                  transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
-                  className="w-24 h-24 border-[3px] border-dark-surfaces border-t-neon-cyan border-b-neon-purple rounded-full shadow-[0_0_40px_rgba(34,211,238,0.2)] mb-8"
-                ></motion.div>
-                <motion.div 
-                  animate={{ rotate: -360 }}
-                  transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
-                  className="absolute inset-2 border-[2px] border-transparent border-l-neon-blue rounded-full"
-                ></motion.div>
+              <div className="relative w-32 h-32 mb-8 flex items-center justify-center">
+                <motion.svg viewBox="0 0 100 100" className="w-full h-full text-neon-cyan overflow-visible drop-shadow-[0_0_15px_rgba(34,211,238,0.5)]">
+                  {/* Isometric 3D Hexagon/Cube Outline */}
+                  <motion.polygon
+                    points="50,5 90,25 90,75 50,95 10,75 10,25"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinejoin="round"
+                    initial={{ pathLength: 0, rotate: -90, scale: 0.8 }}
+                    animate={{ pathLength: 1, rotate: 0, scale: 1 }}
+                    transition={{ duration: 1.8, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
+                    style={{ transformOrigin: "50px 50px" }}
+                  />
+                  {/* Inner Structural Lines -> 3D Cube illusion */}
+                  <motion.line x1="50" y1="5" x2="50" y2="50" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.2, delay: 0.2, repeat: Infinity, repeatType: "reverse", ease: "circInOut" }} />
+                  <motion.line x1="90" y1="75" x2="50" y2="50" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.2, delay: 0.4, repeat: Infinity, repeatType: "reverse", ease: "circInOut" }} />
+                  <motion.line x1="10" y1="75" x2="50" y2="50" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.2, delay: 0.6, repeat: Infinity, repeatType: "reverse", ease: "circInOut" }} />
+                  
+                  {/* Central Energy Orb Node */}
+                  <motion.circle
+                    cx="50" cy="50" r="3"
+                    className="fill-neon-purple drop-shadow-[0_0_10px_rgba(168,85,247,1)]"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: [0, 2.5, 1], filter: ["blur(0px)", "blur(3px)", "blur(0px)"] }}
+                    transition={{ duration: 1.8, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+                  />
+                </motion.svg>
               </div>
               <div className="overflow-hidden">
                 <motion.h2 
@@ -261,7 +322,7 @@ function App() {
             initial={{ opacity: 0, y: -40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
-            className="fixed top-0 left-0 w-full p-4 sm:p-6 lg:px-12 flex justify-between items-center z-50 mix-blend-difference text-white"
+            className="fixed top-0 left-0 w-full p-4 sm:p-6 lg:px-12 flex justify-between items-center z-50 mix-blend-difference text-white transform-gpu will-change-transform"
           >
             <div 
               onClick={handleLogoClick}
@@ -294,6 +355,14 @@ function App() {
                 className="px-3 sm:px-4 py-1.5 border border-white/20 rounded-full font-mono text-[10px] sm:text-xs hover:bg-white/10 transition-colors shadow-[0_0_15px_rgba(255,255,255,0.05)] cursor-pointer"
               >
                 [ &gt;_ OS ]
+              </button>
+              <button 
+                onClick={toggleTheme}
+                onMouseEnter={playBlip}
+                className="p-1 border border-white/20 rounded-full hover:bg-white/10 transition-colors shadow-[0_0_15px_rgba(255,255,255,0.05)] cursor-pointer flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8"
+                title="Toggle Theme"
+              >
+                {theme === 'light' ? <Moon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" /> : <Sun className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />}
               </button>
               {/* Mobile hamburger */}
               <button

@@ -23,6 +23,21 @@ body.hacked {
   --color-dark-border: rgba(255, 0, 0, 0.3);
 }
 
+body.light {
+  --color-dark-bg: #ffffff;
+  --color-dark-surfaces: #f3f4f6;
+  --color-dark-border: rgba(0, 0, 0, 0.1);
+  --color-white: #0a0f1c;
+  --background: #ffffff;
+  --foreground: #0a0f1c;
+  --color-gray-300: #475569;
+  --color-gray-400: #334155;
+  --color-gray-500: #1e293b;
+  --color-neon-cyan: #0284c7;
+  --color-neon-blue: #2563eb;
+  --color-neon-purple: #9333ea;
+}
+
 @layer base {
   :root {
     --background: theme('colors.dark-bg');
@@ -64,10 +79,14 @@ html {
 
 /* Glassmorphism utility */
 .glass {
-  background: rgba(17, 24, 39, 0.6);
+  background: rgba(17, 24, 39, 0.1);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--color-dark-border);
+}
+
+body:not(.light) .glass {
+  background: rgba(17, 24, 39, 0.6);
 }
 
 /* Hide cursor when custom cursor is active (optional, for desktop) */
@@ -83,4 +102,40 @@ html {
 .border-text {
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
   color: transparent;
+}
+
+/* View Transition API Animations */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 2;
+}
+
+/* Ambient Orbs Theme Engine */
+.ambient-orb-1 {
+  background-color: var(--color-neon-purple);
+  opacity: 0.1;
+  mix-blend-mode: screen;
+}
+.ambient-orb-2 {
+  background-color: var(--color-neon-cyan);
+  opacity: 0.05;
+  mix-blend-mode: screen;
+}
+
+body.light .ambient-orb-1 {
+  background-color: rgba(30, 41, 59, 0.5); /* Deep Slate Blur */
+  opacity: 1;
+  mix-blend-mode: multiply;
+}
+body.light .ambient-orb-2 {
+  background-color: rgba(15, 23, 42, 0.3); /* Dark Slate Blur */
+  opacity: 1;
+  mix-blend-mode: multiply;
 }

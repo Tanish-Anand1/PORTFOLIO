@@ -86,13 +86,18 @@ const Contact = () => {
           <div className="absolute top-0 right-0 w-64 h-64 bg-neon-cyan/10 rounded-full blur-[80px]"></div>
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-neon-purple/10 rounded-full blur-[80px]"></div>
           
-          <form className="relative z-10 flex flex-col gap-6">
+          <form action="https://formsubmit.co/atanish920@gmail.com" method="POST" className="relative z-10 flex flex-col gap-6">
+            <input type="hidden" name="_subject" value="New Portfolio Message!" />
+            <input type="hidden" name="_captcha" value="false" />
+            
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="flex flex-col gap-2 relative group">
                 <label htmlFor="name" className="text-sm font-mono text-gray-400 uppercase tracking-wider group-focus-within:text-neon-cyan transition-colors">Name</label>
                 <input 
                   type="text" 
                   id="name" 
+                  name="name"
+                  required
                   className="bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon-cyan focus:bg-white/5 transition-all shadow-inner"
                   placeholder="John Doe"
                 />
@@ -102,6 +107,8 @@ const Contact = () => {
                 <input 
                   type="email" 
                   id="email" 
+                  name="email"
+                  required
                   className="bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon-cyan focus:bg-white/5 transition-all shadow-inner"
                   placeholder="john@example.com"
                 />
@@ -110,14 +117,16 @@ const Contact = () => {
             <div className="flex flex-col gap-2 relative group">
               <label htmlFor="message" className="text-sm font-mono text-gray-400 uppercase tracking-wider group-focus-within:text-neon-cyan transition-colors">Message</label>
               <textarea 
-                id="message" 
+                id="message"
+                name="message"
+                required
                 rows="5"
                 className="bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon-cyan focus:bg-white/5 transition-all resize-none shadow-inner"
                 placeholder="Hello Tanish, I'd like to talk about..."
               ></textarea>
             </div>
             
-            <MagneticButton className="mt-4 self-end bg-white text-dark-bg font-bold px-8 py-4 w-full md:w-auto flex items-center justify-center gap-2 group/btn hover:bg-neon-cyan transition-colors">
+            <MagneticButton type="submit" className="mt-4 self-end bg-white text-dark-bg font-bold px-8 py-4 w-full md:w-auto flex items-center justify-center gap-2 group/btn hover:bg-neon-cyan transition-colors">
               <span className="relative z-10">Send Message</span>
               <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform relative z-10" />
             </MagneticButton>
