@@ -268,7 +268,7 @@ const Projects = () => {
                 <p className="text-gray-400 font-sans text-sm sm:text-base">Including Telebot Agents, Edge Computes, GameDev, and more hardware schematics.</p>
               </div>
               <button className="mt-4 px-8 py-4 bg-white text-dark-bg font-bold rounded-full hover:bg-neon-cyan hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all duration-300">
-                Unlock Full Archive
+                <a href="https://github.com/Tanish-Anand1">Unlock Full Archive</a>
               </button>
             </div>
           </motion.div>
