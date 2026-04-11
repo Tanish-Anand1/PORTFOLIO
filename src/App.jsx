@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Lenis from 'lenis';
 import gsap from 'gsap';
@@ -17,6 +17,17 @@ import { Bell } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
+const loadingTexts = [
+  "INITIALIZING HARDWARE NODES...",
+  "BOOTING REACT KERNEL...",
+  "ESTABLISHING SECURE CONNECTION...",
+  "COMPILING SHADERS...",
+  "LOADING AI MODULES...",
+  "WAKING UP LLM...",
+  "DECRYPTING ASSETS...",
+  "BYPASSING SECURITY PROTOCOLS..."
+];
+
 function App() {
   const [loading, setLoading] = useState(true);
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
@@ -24,12 +35,15 @@ function App() {
   const [hacked, setHacked] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [loadingTextIndex, setLoadingTextIndex] = useState(0);
   
   const { playBlip } = useSoundEffect();
 
+  const lenisRef = useRef(null);
+
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.5,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       direction: 'vertical',
       gestureDirection: 'vertical',
@@ -40,6 +54,8 @@ function App() {
       infinite: false,
     });
 
+    lenisRef.current = lenis;
+
     lenis.on('scroll', ScrollTrigger.update);
 
     gsap.ticker.add((time) => {
@@ -47,7 +63,24 @@ function App() {
     });
     gsap.ticker.lagSmoothing(0);
 
+    const handleAnchorClick = (e) => {
+      const target = e.target.closest('a[href^="#"]');
+      if (target) {
+        e.preventDefault();
+        const id = target.getAttribute('href');
+        if (id && id !== '#' && lenisRef.current) {
+          lenisRef.current.scrollTo(id, {
+            duration: 2.5,
+            easing: (t) => 1 - Math.pow(1 - t, 5), // Quintic ease-out for ultra smooth long scroll
+          });
+        }
+      }
+    };
+
+    document.addEventListener('click', handleAnchorClick);
+
     return () => {
+      document.removeEventListener('click', handleAnchorClick);
       lenis.destroy();
       gsap.ticker.remove(lenis.raf);
     };
@@ -58,9 +91,17 @@ function App() {
       setLoading(false);
       // Show instruction toast slightly after load
       setTimeout(() => setShowToast(true), 1500);
-    }, 2500);
+    }, 3200);
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    if (!loading) return;
+    const interval = setInterval(() => {
+      setLoadingTextIndex(prev => (prev + 1) % loadingTexts.length);
+    }, 350);
+    return () => clearInterval(interval);
+  }, [loading]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -153,8 +194,8 @@ function App() {
           <motion.div 
             key="loader"
             initial={{ opacity: 1 }}
-            exit={{ opacity: 0, filter: 'blur(30px)', scale: 1.2 }}
-            transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }} 
+            exit={{ opacity: 0, filter: 'blur(40px)', scale: 1.1, y: -50 }}
+            transition={{ duration: 1.8, ease: [0.76, 0, 0.24, 1] }} 
             className="fixed inset-0 z-[100] h-screen w-full flex justify-center items-center bg-dark-bg overflow-hidden"
           >
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(168,85,247,0.15)_0%,transparent_50%)]"></div>
@@ -193,6 +234,20 @@ function App() {
                 transition={{ duration: 1.8, ease: "easeInOut" }}
                 className="h-[1px] bg-gradient-to-r from-transparent via-neon-cyan to-transparent mt-4"
               ></motion.div>
+              <div className="h-10 mt-6 overflow-hidden flex justify-center items-center relative w-full">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={loadingTextIndex}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.15 }}
+                    className="font-mono text-sm sm:text-base md:text-xl text-neon-cyan tracking-[0.2em] sm:tracking-widest absolute whitespace-nowrap font-bold drop-shadow-[0_0_10px_rgba(34,211,238,0.8)]"
+                  >
+                    {loadingTexts[loadingTextIndex]}
+                  </motion.span>
+                </AnimatePresence>
+              </div>
             </motion.div>
           </motion.div>
         )}

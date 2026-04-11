@@ -180,7 +180,7 @@ const Projects = () => {
           scrollTrigger: {
             trigger: sectionRef.current,
             pin: true,
-            scrub: 0.5,
+            scrub: 2.5,
             end: () => `+=${trackWidth}`,
             invalidateOnRefresh: true,
             fastScrollEnd: true,
@@ -276,7 +276,7 @@ const Projects = () => {
 
       </div>
     </section>
-  );
+  );  
 };
 
 export default Projects;
