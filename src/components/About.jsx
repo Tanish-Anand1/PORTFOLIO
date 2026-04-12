@@ -58,7 +58,7 @@ const About = () => {
                <span className="text-[10px] sm:text-xs text-gray-500 font-mono tracking-[0.3em] font-bold">YEARS EXP.</span>
             </motion.div>
             <motion.div whileHover={{ y: -5 }} className="w-full sm:flex-1 px-4 sm:px-6 py-6 sm:py-8 rounded-3xl glass border border-white/10 flex flex-col items-center shadow-[0_0_30px_rgba(168,85,247,0.05)]">
-               <span className="text-4xl sm:text-5xl font-display font-black text-neon-purple mb-2">11</span>
+               <span className="text-4xl sm:text-5xl font-display font-black text-neon-purple mb-2">33</span>
                <span className="text-[10px] sm:text-xs text-gray-500 font-mono tracking-[0.3em] font-bold">CORE PROJECTS</span>
             </motion.div>
             <motion.div whileHover={{ y: -5 }} className="w-full sm:flex-1 px-4 sm:px-6 py-6 sm:py-8 rounded-3xl glass border border-white/10 flex flex-col items-center shadow-[0_0_30px_rgba(34,211,238,0.05)]">
