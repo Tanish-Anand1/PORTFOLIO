@@ -1,74 +1,108 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { motion } from 'framer-motion';
 
-const About = () => {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
+const fadeUp = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
 
-  const y1 = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, -200]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.9]);
-
+const About = ({ isRudraMode }) => {
   return (
-    <section ref={containerRef} id="about" className="py-24 md:py-40 px-4 sm:px-6 relative z-10 flex justify-center bg-dark-bg min-h-screen items-center overflow-hidden">
-      
-      {/* Background Decorative Typography - hidden on mobile to prevent overflow */}
-      <motion.div 
-        style={{ y: y2 }}
-        className="absolute top-1/2 left-0 -translate-y-1/2 opacity-5 pointer-events-none whitespace-nowrap hidden lg:block"
+    <section id="about" className="py-16 sm:py-20">
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ staggerChildren: 0.08 }}
       >
-        <h2 className="text-[200px] font-display font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-transparent">
-          VISIONARY ARCHITECT
-        </h2>
-      </motion.div>
-
-      <div className="max-w-4xl mx-auto w-full flex flex-col relative z-10 px-4">
-        
-        {/* Staggered Bio */}
-        <motion.div 
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
-          className="flex flex-col gap-6 md:gap-8 items-center text-center"
+        <motion.h2 
+          variants={fadeUp}
+          className={`text-xl sm:text-2xl font-semibold tracking-tight mb-6 transition-colors duration-300 ${
+            isRudraMode ? 'text-emerald-400 text-shadow-emerald' : 'text-white'
+          }`}
         >
-          <div className="flex flex-col gap-2 items-center">
-            <span className="text-neon-cyan font-mono text-sm tracking-widest uppercase mb-2">SYSTEM_BIO</span>
-            <h2 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-display font-black leading-tight break-words">
-              Bridging the gap <br />
-              between <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-gray-500">Aesthetics</span> & <br className="hidden sm:block"/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-purple to-neon-blue">Architecture</span>
-            </h2>
+          About
+        </motion.h2>
+
+        <motion.div 
+          variants={fadeUp} 
+          className={`flex flex-col gap-4 text-[15px] leading-[1.7] transition-colors duration-300 ${
+            isRudraMode ? 'text-emerald-400/50' : 'text-white/45'
+          }`}
+        >
+          <p>
+            I'm <span className={isRudraMode ? "text-emerald-300 font-medium" : "text-white/80 font-medium"}>Tanish Anand</span> — a developer and engineer who obsesses over craft. I build things that work at scale and feel right to use.
+          </p>
+          <p>
+            I work across the full stack — from fine-tuning NLP and discrete diffusion models, to orchestrating real-time map visualizations and building high-performance OSINT frameworks. The problems I find most exciting live at the boundaries between disciplines.
+          </p>
+        </motion.div>
+
+        {/* Timeline */}
+        <motion.div 
+          variants={fadeUp} 
+          className={`mt-10 flex flex-col gap-5 border-l pl-5 ml-0.5 transition-colors duration-300 ${
+            isRudraMode ? 'border-emerald-500/20' : 'border-dark-border'
+          }`}
+        >
+          <div className="relative">
+            <div className={`absolute -left-[22px] top-[7px] w-2 h-2 rounded-full ring-4 transition-all duration-300 ${
+              isRudraMode ? 'bg-emerald-400 ring-[#020603]' : 'bg-emerald-400 ring-dark-bg'
+            }`} />
+            <span className={`text-[11px] font-semibold uppercase tracking-widest transition-colors duration-300 ${
+              isRudraMode ? 'text-emerald-400' : 'text-emerald-400/80'
+            }`}>Now</span>
+            <p className={`text-sm mt-1 leading-relaxed transition-colors duration-300 ${
+              isRudraMode ? 'text-emerald-400/60' : 'text-white/50'
+            }`}>
+              Building CareLink — care coordination for aging parents in India.
+              <br />
+              Exploring NLP and benchmarking discrete text diffusion pipelines.
+            </p>
           </div>
-          
-          <div className="h-[1px] w-32 bg-gradient-to-r from-transparent via-neon-cyan to-transparent"></div>
-          
-          <p className="text-gray-400 text-base sm:text-lg md:text-xl leading-relaxed font-sans font-light max-w-2xl">
-            I'm <span className="font-bold tracking-wide text-[var(--foreground)]">Tanish Anand</span>. My journey revolves around crafting digital solutions that perform flawlessly at scale while leaving a lasting, undeniable visual impact. 
-          </p>
-          <p className="text-gray-400 text-base sm:text-lg md:text-xl leading-relaxed font-sans font-light max-w-2xl">
-            Currently, I focus on integrating cutting-edge technologies like Generative AI, engineering custom edge hardware, and building immersive experiences that redefine standard web interfaces.
-          </p>
-          
-          <div className="flex gap-4 sm:gap-6 mt-8 w-full flex-col sm:flex-row justify-center">
-            <motion.div whileHover={{ y: -5 }} className="w-full sm:flex-1 px-4 sm:px-6 py-6 sm:py-8 rounded-3xl glass border border-white/10 flex flex-col items-center shadow-[0_0_30px_rgba(34,211,238,0.05)]">
-               <span className="text-4xl sm:text-5xl font-display font-black text-neon-blue mb-2">2+</span>
-               <span className="text-[10px] sm:text-xs text-gray-500 font-mono tracking-[0.3em] font-bold">YEARS EXP.</span>
-            </motion.div>
-            <motion.div whileHover={{ y: -5 }} className="w-full sm:flex-1 px-4 sm:px-6 py-6 sm:py-8 rounded-3xl glass border border-white/10 flex flex-col items-center shadow-[0_0_30px_rgba(168,85,247,0.05)]">
-               <span className="text-4xl sm:text-5xl font-display font-black text-neon-purple mb-2">33</span>
-               <span className="text-[10px] sm:text-xs text-gray-500 font-mono tracking-[0.3em] font-bold">CORE PROJECTS</span>
-            </motion.div>
-            <motion.div whileHover={{ y: -5 }} className="w-full sm:flex-1 px-4 sm:px-6 py-6 sm:py-8 rounded-3xl glass border border-white/10 flex flex-col items-center shadow-[0_0_30px_rgba(34,211,238,0.05)]">
-               <span className="text-4xl sm:text-5xl font-display font-black text-neon-cyan mb-2">∞</span>
-               <span className="text-[10px] sm:text-xs text-gray-500 font-mono tracking-[0.3em] font-bold">POSSIBILITIES</span>
-            </motion.div>
+          <div className="relative">
+            <div className={`absolute -left-[22px] top-[7px] w-2 h-2 rounded-full ring-4 transition-all duration-300 ${
+              isRudraMode ? 'bg-emerald-500/20 ring-[#020603]' : 'bg-white/15 ring-dark-bg'
+            }`} />
+            <span className={`text-[11px] font-semibold uppercase tracking-widest transition-colors duration-300 ${
+              isRudraMode ? 'text-emerald-500/30' : 'text-white/25'
+            }`}>Previously</span>
+            <p className={`text-sm mt-1 leading-relaxed transition-colors duration-300 ${
+              isRudraMode ? 'text-emerald-400/40' : 'text-white/50'
+            }`}>
+              Project Rudra (Osiris OSINT Grid) · Text Diffusion Benchmarking · EduCore · PhysicsGPT · ComplianceGuard · Anti-Sleep Pilot
+            </p>
           </div>
         </motion.div>
 
-      </div>
+        {/* Stack */}
+        <motion.div variants={fadeUp} className="mt-10">
+          <h3 className={`text-[11px] font-semibold uppercase tracking-widest mb-4 transition-colors duration-300 ${
+            isRudraMode ? 'text-emerald-500/30' : 'text-white/20'
+          }`}>Technologies</h3>
+          <div className="flex flex-wrap gap-2">
+            {[
+              'React', 'Next.js', 'TypeScript', 'Python', 'PyTorch', 
+              'MapLibre GL', 'WebGL', 'NLP', 'LLM Fine-tuning', 
+              'Raspberry Pi', 'Computer Vision', 'TailwindCSS'
+            ].map((skill, i) => (
+              <motion.span
+                key={skill}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 + i * 0.03, duration: 0.3 }}
+                className={`text-xs px-2.5 py-1 rounded-md border transition-all duration-200 cursor-default ${
+                  isRudraMode 
+                    ? 'border-emerald-500/10 text-emerald-400/35 bg-emerald-500/[0.01] hover:text-emerald-300 hover:border-emerald-500/30' 
+                    : 'border-dark-border text-white/35 bg-dark-surface hover:text-white/50 hover:border-dark-border-hover'
+                }`}
+              >
+                {skill}
+              </motion.span>
+            ))}
+          </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };
