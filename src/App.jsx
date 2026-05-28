@@ -2,9 +2,14 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Hero from './components/Hero';
 import About from './components/About';
+import Blog from './components/Blog';
 import Projects from './components/Projects';
+import GithubContributions from './components/GithubContributions';
 import Contact from './components/Contact';
 import CommandPalette from './components/CommandPalette';
+import SecurityAdvisories from './components/SecurityAdvisories';
+import RudraSimulatorModal from './components/RudraSimulatorModal';
+import ResumeModal from './components/ResumeModal';
 
 const SunIcon = () => (
   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -36,15 +41,16 @@ const TacticalRadarIcon = ({ isActive }) => (
 const navLinks = [
   { href: '#projects', label: 'projects' },
   { href: '#about', label: 'about' },
-  { href: '#contact', label: 'contact' },
 ];
 
 function App() {
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState('light'); // default to light to match stonebg
   const [isRudraMode, setIsRudraMode] = useState(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isRudraSimOpen, setIsRudraSimOpen] = useState(false);
+  const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   // Synchronize dynamic body classes for dark/light/rudra
   useEffect(() => {
@@ -89,63 +95,83 @@ function App() {
       const next = !prev;
       if (next) {
         setTheme('dark'); // Rudra requires dark mode
+      } else {
+        setTheme('light'); // Restore to standard light stonebg
       }
       return next;
     });
   }, []);
 
   return (
-    <div className="min-h-screen font-sans relative">
-      {/* Dynamic Backgrounds */}
-      <div className="bg-grid-pattern" />
-      <div className="ambient-glow" />
-
+    <div className={`min-h-screen ${isRudraMode ? 'bg-[#020603] text-emerald-400 font-mono' : 'bg-[var(--bg)] text-[var(--foreground)] font-sans'} relative transition-colors duration-500`}>
       {/* ── Nav ─────────────────────────────── */}
       <motion.nav 
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
+        transition={{ duration: 0.5 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled 
-            ? 'bg-dark-bg/85 backdrop-blur-md border-b border-dark-border shadow-sm' 
-            : 'bg-transparent border-b border-transparent'
+          isRudraMode 
+            ? scrolled ? 'bg-zinc-950/85 backdrop-blur-md border-b border-emerald-500/10' : 'bg-transparent'
+            : scrolled 
+              ? theme === 'light'
+                ? 'bg-white/70 backdrop-blur-md border-b border-stone-200/40 shadow-sm'
+                : 'bg-stone-900/70 backdrop-blur-md border-b border-stone-850/40 shadow-sm'
+              : 'bg-transparent'
         }`}
       >
-        <div className="max-w-[720px] mx-auto px-6 h-14 flex items-center justify-between">
+        <div className="max-w-[1024px] mx-auto px-6 h-16 flex items-center justify-between">
           <a 
             href="#" 
-            className={`text-[15px] font-semibold tracking-tight transition-all duration-200 ${
-              isRudraMode ? 'text-emerald-400 hover:text-emerald-300' : 'text-white hover:opacity-60'
+            className={`text-xl font-bold tracking-tighter hover:underline ${
+              isRudraMode ? 'text-emerald-400 font-mono' : theme === 'light' ? 'text-stone-900 font-serif' : 'text-white font-serif'
             }`}
           >
-            tanish.
+            tanish.gg
             {isRudraMode && <span className="text-[10px] font-mono ml-2 border border-emerald-500/30 px-1 rounded bg-emerald-500/10 text-emerald-400">RUDRA</span>}
           </a>
           
           {/* Desktop links */}
-          <div className="hidden sm:flex items-center gap-1.5">
-            {navLinks.map(link => (
+          <div className="hidden sm:flex items-center gap-6">
+            <div className="flex gap-7 text-[0.95rem]">
               <a 
-                key={link.href}
-                href={link.href} 
-                className={`px-2.5 py-1.5 text-[13px] rounded-md transition-all duration-200 ${
-                  isRudraMode 
-                    ? 'text-emerald-400/50 hover:text-emerald-300 hover:bg-emerald-500/5' 
-                    : 'text-white/40 hover:text-white hover:bg-white/5'
+                href="#projects" 
+                className={`hover:underline underline-offset-4 transition-all ${
+                  isRudraMode ? 'text-emerald-400/80 hover:text-emerald-300 font-mono' : theme === 'light' ? 'text-stone-600 hover:text-stone-950 font-mono' : 'text-stone-300 hover:text-white font-mono'
                 }`}
               >
-                {link.label}
+                projects
               </a>
-            ))}
-            <div className="w-px h-4 bg-dark-border mx-1.5" />
+              <a 
+                href="#about" 
+                className={`hover:underline underline-offset-4 transition-all ${
+                  isRudraMode ? 'text-emerald-400/80 hover:text-emerald-300 font-mono' : theme === 'light' ? 'text-stone-600 hover:text-stone-950 font-mono' : 'text-stone-300 hover:text-white font-mono'
+                }`}
+              >
+                about
+              </a>
+              {!isRudraMode && (
+                <button 
+                  onClick={() => setIsResumeOpen(true)}
+                  className={`hover:underline underline-offset-4 transition-all cursor-pointer ${
+                    theme === 'light' ? 'text-stone-600 hover:text-stone-950 font-mono' : 'text-stone-300 hover:text-white font-mono'
+                  }`}
+                >
+                  cv
+                </button>
+              )}
+            </div>
+
+            <div className={`w-px h-4 ${isRudraMode ? 'bg-emerald-500/10' : theme === 'light' ? 'bg-stone-200' : 'bg-stone-800'} mx-1`} />
             
             {/* Command Palette Trigger */}
             <button
               onClick={() => setIsCommandPaletteOpen(true)}
-              className={`flex items-center gap-1.5 px-2 py-1.5 rounded-md text-[11px] font-mono border transition-all duration-200 cursor-pointer ${
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-[11px] font-mono border transition-all duration-200 cursor-pointer ${
                 isRudraMode 
                   ? 'border-emerald-500/20 bg-emerald-500/5 text-emerald-400/60 hover:border-emerald-500/40 hover:text-emerald-300' 
-                  : 'border-white/5 bg-white/[0.02] text-white/30 hover:border-white/10 hover:text-white/55'
+                  : theme === 'light'
+                    ? 'border-stone-200 bg-white text-stone-400 hover:border-stone-300 hover:text-stone-700 hover:bg-stone-50 shadow-sm'
+                    : 'border-stone-850 bg-stone-900 text-stone-500 hover:border-stone-700 hover:text-stone-200 hover:bg-stone-850'
               }`}
               title="Search and Commands (Ctrl+K)"
             >
@@ -159,22 +185,26 @@ function App() {
               className={`p-2 rounded-md transition-all duration-200 cursor-pointer ${
                 isRudraMode 
                   ? 'bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20' 
-                  : 'hover:bg-white/5 text-white/40 hover:text-white'
+                  : theme === 'light'
+                    ? 'hover:bg-stone-200/50 text-stone-400 hover:text-stone-700'
+                    : 'hover:bg-stone-850 text-stone-500 hover:text-stone-200'
               }`}
               title="Toggle Tactical Rudra Mode (Alt+R)"
             >
               <TacticalRadarIcon isActive={isRudraMode} />
             </button>
 
-            {/* Light / Dark Mode Toggle */}
+            {/* Light / Dark Mode Toggle (disabled in Rudra Mode) */}
             <button 
               onClick={toggleTheme}
               className={`p-2 rounded-md transition-all duration-200 cursor-pointer ${
                 isRudraMode 
                   ? 'hover:bg-emerald-500/5 text-emerald-400/30' 
-                  : 'hover:bg-white/5 text-white/40 hover:text-white'
+                  : theme === 'light'
+                    ? 'hover:bg-stone-200/50 text-stone-400 hover:text-stone-700'
+                    : 'hover:bg-stone-850 text-stone-500 hover:text-stone-200'
               }`}
-              disabled={isRudraMode} // Rudra Mode locks dark environment
+              disabled={isRudraMode}
               title={isRudraMode ? "Theme locked in Tactical HUD mode" : "Toggle theme"}
             >
               {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
@@ -186,7 +216,7 @@ function App() {
             <button
               onClick={() => setIsCommandPaletteOpen(true)}
               className={`p-2 rounded-md transition-all duration-200 cursor-pointer ${
-                isRudraMode ? 'text-emerald-400/60' : 'text-white/40 hover:text-white'
+                isRudraMode ? 'text-emerald-400/60' : theme === 'light' ? 'text-stone-400 hover:text-stone-700' : 'text-stone-500 hover:text-stone-200'
               }`}
             >
               <CommandIcon />
@@ -194,24 +224,15 @@ function App() {
             <button 
               onClick={toggleRudraMode}
               className={`p-2 rounded-md transition-all duration-200 cursor-pointer ${
-                isRudraMode ? 'text-emerald-400' : 'text-white/40 hover:text-white'
+                isRudraMode ? 'text-emerald-400' : theme === 'light' ? 'text-stone-400 hover:text-stone-700' : 'text-stone-500 hover:text-stone-200'
               }`}
             >
               <TacticalRadarIcon isActive={isRudraMode} />
             </button>
             <button 
-              onClick={toggleTheme}
-              className={`p-2 rounded-md transition-all duration-200 cursor-pointer ${
-                isRudraMode ? 'text-emerald-400/30' : 'text-white/40 hover:text-white'
-              }`}
-              disabled={isRudraMode}
-            >
-              {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
-            </button>
-            <button 
               onClick={() => setMobileOpen(prev => !prev)}
               className={`p-2 rounded-md transition-all duration-200 cursor-pointer ${
-                isRudraMode ? 'text-emerald-400' : 'text-white/40 hover:text-white'
+                isRudraMode ? 'text-emerald-400' : theme === 'light' ? 'text-stone-400 hover:text-stone-700' : 'text-stone-500 hover:text-stone-200'
               }`}
               aria-label="Toggle menu"
               aria-expanded={mobileOpen}
@@ -238,24 +259,50 @@ function App() {
               className={`sm:hidden overflow-hidden border-t ${
                 isRudraMode 
                   ? 'border-emerald-500/20 bg-zinc-950/95 text-emerald-400' 
-                  : 'border-dark-border bg-dark-bg/95 text-white'
+                  : theme === 'light'
+                    ? 'border-stone-200 bg-white/95 text-stone-850'
+                    : 'border-stone-850 bg-stone-900/95 text-stone-200'
               } backdrop-blur-md`}
             >
               <div className="px-6 py-4 flex flex-col gap-1">
-                {navLinks.map(link => (
-                  <a 
-                    key={link.href}
-                    href={link.href} 
-                    onClick={() => setMobileOpen(false)} 
-                    className={`px-3 py-2 text-sm rounded-md transition-all duration-200 ${
-                      isRudraMode 
-                        ? 'hover:text-emerald-300 hover:bg-emerald-500/5' 
-                        : 'text-white/50 hover:text-white hover:bg-white/5'
+                <a 
+                  href="#projects" 
+                  onClick={() => setMobileOpen(false)} 
+                  className={`px-3 py-2 text-sm rounded-md transition-all duration-200 ${
+                    isRudraMode 
+                      ? 'hover:text-emerald-300 hover:bg-emerald-500/5' 
+                      : theme === 'light'
+                        ? 'hover:bg-stone-100 text-stone-700'
+                        : 'hover:bg-stone-800 text-stone-300'
+                  }`}
+                >
+                  projects
+                </a>
+                <a 
+                  href="#about" 
+                  onClick={() => setMobileOpen(false)} 
+                  className={`px-3 py-2 text-sm rounded-md transition-all duration-200 ${
+                    isRudraMode 
+                      ? 'hover:text-emerald-300 hover:bg-emerald-500/5' 
+                      : theme === 'light'
+                        ? 'hover:bg-stone-100 text-stone-700'
+                        : 'hover:bg-stone-800 text-stone-300'
+                  }`}
+                >
+                  about
+                </a>
+                {!isRudraMode && (
+                  <button 
+                    onClick={() => { setMobileOpen(false); setIsResumeOpen(true); }}
+                    className={`px-3 py-2 text-sm rounded-md transition-all duration-200 text-left cursor-pointer ${
+                      theme === 'light'
+                        ? 'hover:bg-stone-100 text-stone-700'
+                        : 'hover:bg-stone-800 text-stone-300'
                     }`}
                   >
-                    {link.label}
-                  </a>
-                ))}
+                    cv
+                  </button>
+                )}
               </div>
             </motion.div>
           )}
@@ -269,18 +316,36 @@ function App() {
         onRudraToggle={toggleRudraMode}
         isRudraMode={isRudraMode}
         onThemeToggle={toggleTheme}
+        theme={theme}
       />
 
       {/* ── Main Content ───────────────────── */}
-      <main className="max-w-[720px] mx-auto px-6 pt-14 relative z-10">
-        <Hero isRudraMode={isRudraMode} onRudraClose={() => setIsRudraMode(false)} />
-        <div className="section-divider" />
-        <Projects isRudraMode={isRudraMode} />
-        <div className="section-divider" />
-        <About isRudraMode={isRudraMode} />
-        <div className="section-divider" />
-        <Contact isRudraMode={isRudraMode} />
-      </main>
+      {isRudraMode ? (
+        <main className="w-full max-w-[1024px] mx-auto px-6 pt-14 relative z-10">
+          <Hero isRudraMode={isRudraMode} onRudraClose={() => setIsRudraMode(false)} theme={theme} />
+          <About isRudraMode={isRudraMode} theme={theme} />
+          <Blog isRudraMode={isRudraMode} theme={theme} />
+          <Projects isRudraMode={isRudraMode} theme={theme} />
+          <GithubContributions isRudraMode={isRudraMode} theme={theme} />
+          <Contact isRudraMode={isRudraMode} theme={theme} />
+        </main>
+      ) : (
+        <main className="w-full max-w-[1024px] mx-auto pt-20 pb-16 px-4 sm:px-6 relative z-10 transition-all duration-300">
+          <div className="w-full bg-[var(--surface)] border border-[var(--border)] rounded-2xl shadow-xl overflow-hidden transition-colors duration-300">
+            <Hero isRudraMode={isRudraMode} onRudraClose={() => setIsRudraMode(false)} theme={theme} />
+            <About isRudraMode={isRudraMode} theme={theme} />
+            <Blog isRudraMode={isRudraMode} theme={theme} />
+            <Projects isRudraMode={isRudraMode} theme={theme} onRudraSimOpen={() => setIsRudraSimOpen(true)} />
+            <SecurityAdvisories theme={theme} />
+            <GithubContributions isRudraMode={isRudraMode} theme={theme} />
+            <Contact isRudraMode={isRudraMode} theme={theme} />
+          </div>
+        </main>
+      )}
+
+      {/* Modals & Simulation Overlays */}
+      <RudraSimulatorModal isOpen={isRudraSimOpen} onClose={() => setIsRudraSimOpen(false)} />
+      <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} theme={theme} />
     </div>
   );
 }

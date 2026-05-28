@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const CommandPalette = ({ isOpen, onClose, onRudraToggle, isRudraMode, onThemeToggle }) => {
+const CommandPalette = ({ isOpen, onClose, onRudraToggle, isRudraMode, onThemeToggle, theme }) => {
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef(null);
@@ -197,17 +197,29 @@ const CommandPalette = ({ isOpen, onClose, onRudraToggle, isRudraMode, onThemeTo
             ref={containerRef}
             className={`w-full max-w-[540px] rounded-xl overflow-hidden shadow-2xl border ${
               isRudraMode 
-                ? 'bg-zinc-950/95 border-emerald-500/20 shadow-emerald-500/5' 
-                : 'bg-dark-surface border-dark-border shadow-black/60'
+                ? 'bg-zinc-950/95 border-emerald-500/20 shadow-[0_0_30px_rgba(57,255,20,0.05)] text-emerald-400' 
+                : theme === 'light'
+                  ? 'bg-white/95 border-stone-200 shadow-stone-200/50 text-stone-850'
+                  : 'bg-stone-900/95 border-stone-800 shadow-black/80 text-stone-100'
             } backdrop-blur-xl`}
           >
             {/* Input bar */}
             <div className={`flex items-center gap-3 px-4 py-3.5 border-b relative ${
-              isRudraMode ? 'border-emerald-500/10' : 'border-dark-border'
+              isRudraMode 
+                ? 'border-emerald-500/10' 
+                : theme === 'light'
+                  ? 'border-stone-100'
+                  : 'border-stone-800'
             }`}>
               <svg 
                 width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-                className={isRudraMode ? "text-emerald-400" : "text-white/30"}
+                className={
+                  isRudraMode 
+                    ? "text-emerald-400" 
+                    : theme === 'light'
+                      ? "text-stone-400"
+                      : "text-stone-500"
+                }
               >
                 <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
               </svg>
@@ -220,9 +232,21 @@ const CommandPalette = ({ isOpen, onClose, onRudraToggle, isRudraMode, onThemeTo
                   setQuery(e.target.value);
                   setSelectedIndex(0);
                 }}
-                className="w-full bg-transparent border-0 outline-none text-[14px] text-white placeholder-white/25 font-sans"
+                className={`w-full bg-transparent border-0 outline-none text-[14px] font-sans ${
+                  isRudraMode 
+                    ? 'text-emerald-300 placeholder-emerald-850' 
+                    : theme === 'light'
+                      ? 'text-stone-900 placeholder-stone-400'
+                      : 'text-stone-100 placeholder-stone-500'
+                }`}
               />
-              <span className="text-[10px] font-mono text-white/25 px-2 py-0.5 rounded border border-white/5 bg-white/[0.02]">
+              <span className={`text-[10px] font-mono px-2 py-0.5 rounded border ${
+                isRudraMode 
+                  ? 'text-emerald-500/40 border-emerald-500/20 bg-emerald-500/5' 
+                  : theme === 'light'
+                    ? 'text-stone-400 border-stone-250 bg-stone-50'
+                    : 'text-stone-500 border-stone-800 bg-stone-850'
+              }`}>
                 ESC
               </span>
             </div>
@@ -230,7 +254,9 @@ const CommandPalette = ({ isOpen, onClose, onRudraToggle, isRudraMode, onThemeTo
             {/* List */}
             <div className="max-h-[320px] overflow-y-auto py-2 px-2 custom-scrollbar">
               {filtered.length === 0 ? (
-                <div className="py-8 text-center text-xs text-white/20 font-mono">
+                <div className={`py-8 text-center text-xs font-mono ${
+                  isRudraMode ? 'text-emerald-500/40' : theme === 'light' ? 'text-stone-400' : 'text-stone-500'
+                }`}>
                   No matching operations found.
                 </div>
               ) : (
@@ -241,18 +267,32 @@ const CommandPalette = ({ isOpen, onClose, onRudraToggle, isRudraMode, onThemeTo
                       key={item.id}
                       onClick={item.action}
                       onMouseEnter={() => setSelectedIndex(index)}
-                      className={`w-full text-left flex items-center gap-3.5 px-3 py-2.5 rounded-lg transition-all duration-150 ${
+                      className={`w-full text-left flex items-center gap-3.5 px-3 py-2.5 rounded-lg transition-all duration-150 cursor-pointer ${
                         isSelected
                           ? isRudraMode 
                             ? 'bg-emerald-500/10 text-emerald-400' 
-                            : 'bg-white/5 text-white'
-                          : 'text-white/45'
+                            : theme === 'light'
+                              ? 'bg-stone-100 text-stone-900'
+                              : 'bg-stone-800 text-stone-100'
+                          : isRudraMode
+                            ? 'text-emerald-500/60'
+                            : theme === 'light'
+                              ? 'text-stone-600 hover:text-stone-800'
+                              : 'text-stone-400 hover:text-stone-200'
                       }`}
                     >
                       <div className={`p-1.5 rounded-md transition-colors ${
                         isSelected 
-                          ? isRudraMode ? 'bg-emerald-500/20 text-emerald-400' : 'bg-white/10 text-white'
-                          : isRudraMode ? 'bg-zinc-900 text-zinc-600' : 'bg-white/[0.02] text-white/30'
+                          ? isRudraMode 
+                            ? 'bg-emerald-500/20 text-emerald-400' 
+                            : theme === 'light'
+                              ? 'bg-stone-200 text-stone-900'
+                              : 'bg-stone-700 text-stone-100'
+                          : isRudraMode 
+                            ? 'bg-emerald-500/5 text-emerald-500/40' 
+                            : theme === 'light'
+                              ? 'bg-stone-50 text-stone-450'
+                              : 'bg-stone-850/50 text-stone-500'
                       }`}>
                         {item.icon}
                       </div>
@@ -261,14 +301,28 @@ const CommandPalette = ({ isOpen, onClose, onRudraToggle, isRudraMode, onThemeTo
                           {item.title}
                         </div>
                         <div className={`text-[11px] truncate mt-0.5 ${
-                          isSelected ? isRudraMode ? 'text-emerald-400/60' : 'text-white/40' : 'text-white/20'
+                          isSelected 
+                            ? isRudraMode 
+                              ? 'text-emerald-400/60' 
+                              : theme === 'light'
+                                ? 'text-stone-550'
+                                : 'text-stone-300'
+                            : isRudraMode 
+                              ? 'text-emerald-500/30' 
+                              : theme === 'light'
+                                ? 'text-stone-400'
+                                : 'text-stone-500'
                         }`}>
                           {item.subtitle}
                         </div>
                       </div>
                       {isSelected && (
                         <span className={`text-[10px] font-mono shrink-0 uppercase tracking-widest ${
-                          isRudraMode ? 'text-emerald-500/60' : 'text-white/30'
+                          isRudraMode 
+                            ? 'text-emerald-500/60' 
+                            : theme === 'light'
+                              ? 'text-stone-400'
+                              : 'text-stone-500'
                         }`}>
                           Select ↵
                         </span>
@@ -281,7 +335,11 @@ const CommandPalette = ({ isOpen, onClose, onRudraToggle, isRudraMode, onThemeTo
             
             {/* Command palette footer */}
             <div className={`px-4 py-2.5 border-t text-[10px] font-mono flex justify-between items-center ${
-              isRudraMode ? 'border-emerald-500/10 bg-emerald-500/[0.01] text-emerald-500/40' : 'border-white/[0.04] bg-white/[0.01] text-white/20'
+              isRudraMode 
+                ? 'border-emerald-500/10 bg-emerald-500/[0.01] text-emerald-500/40' 
+                : theme === 'light'
+                  ? 'border-stone-100 bg-stone-50/50 text-stone-400'
+                  : 'border-stone-850 bg-stone-900/50 text-stone-500'
             }`}>
               <div className="flex gap-3">
                 <span>↑↓ navigate</span>
