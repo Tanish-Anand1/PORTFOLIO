@@ -68,7 +68,7 @@ const Hero = ({ isRudraMode, onRudraClose }) => {
                   transition={{ duration: 0.6, delay: 0.2 }}
                   className="mt-4 text-xl sm:text-2xl leading-snug font-mono text-gray-300"
                 >
-                  developer • engineer • researcher @ IIT Kanpur
+                  developer • builder • researcher @ IIT Kanpur
                 </motion.h2>
               </div>
 

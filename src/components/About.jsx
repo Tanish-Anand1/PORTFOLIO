@@ -112,15 +112,22 @@ const About = ({ isRudraMode, theme }) => {
                     .
                   </p>
                   <p>
-                    I'm obsessed with understanding intelligence, how to build it, accelerate it, and eventually, define it.{' '}
-                    <span className={`block mt-4 p-3 rounded-lg font-playfair italic shadow-sm border sm:inline sm:mt-0 sm:p-0 sm:bg-transparent sm:border-transparent sm:font-sans sm:not-italic sm:shadow-none sm:rounded-none sm:text-inherit transition-all duration-300 ${
-                      theme === 'light' 
-                        ? 'bg-[#fcf9f2] text-stone-850 border-[#f5eedc]' 
-                        : 'bg-amber-950/20 text-amber-200 border-amber-900/30'
-                    }`}>
-                      Founder of <span className="font-serif font-bold text-[var(--foreground)] hover:underline cursor-pointer align-baseline not-italic">CareLink</span> and developer of{' '}
-                      <span className="font-playfair font-semibold text-[var(--foreground)] hover:underline not-italic">Project Rudra</span>
-                      <span className="not-italic text-[#39FF14] font-black font-serif select-none">.</span> My ultimate goal is to build something that dents{' '}
+                    I'm obsessed with understanding intelligence, how to build it, accelerate it, and eventually, define it.
+                  </p>
+                  <div className={`p-5 sm:p-6 my-6 rounded-2xl border shadow-sm font-playfair italic text-lg leading-relaxed transition-all duration-300 relative overflow-hidden text-left ${
+                    theme === 'light' 
+                      ? 'bg-[#fcf9f2] text-stone-850 border-stone-200/80 shadow-stone-100/50' 
+                      : 'bg-stone-900/30 text-stone-200 border-stone-850/60 shadow-black/20'
+                  }`}>
+                    {/* Exquisite left gradient accent bar */}
+                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-indigo-500/80 to-purple-500/80" />
+                    
+                    <p className="pl-3">
+                      Founder of{' '}
+                      <span className="font-serif font-bold text-[var(--foreground)] hover:underline cursor-pointer not-italic">CareLink</span>{' '}
+                      and developer of{' '}
+                      <span className="font-serif font-bold text-[var(--foreground)] hover:underline not-italic">Project Rudra</span>
+                      <span className="not-italic text-[#39FF14] font-black font-serif select-none">.</span> My ultimate goal is to engineer the systems that define the next era of{' '}
                       <a
                         href="https://www.google.com/search?q=Silicon+Valley"
                         target="_blank"
@@ -130,8 +137,8 @@ const About = ({ isRudraMode, theme }) => {
                         Silicon Valley
                       </a>
                       .
-                    </span>
-                  </p>
+                    </p>
+                  </div>
                   <p>
                     For fun, I break APIs, win hackathons, reverse engineer android, do research on the{' '}
                     <a
