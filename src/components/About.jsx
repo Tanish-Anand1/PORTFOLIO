@@ -264,8 +264,8 @@ const About = ({ isRudraMode, theme }) => {
                     </span>
                     <span>
                       <span className={`font-bold ${theme === 'light' ? 'text-yellow-700' : 'text-yellow-400'}`}>#1</span> across 3,500+, India's <span className="font-bold">Top Young Founder of the Year '26</span> at <a href="https://uniform2unicorn.polariscampus.com/" target="_blank" rel="noopener noreferrer" className={`font-bold hover:underline ${theme === 'light' ? 'text-yellow-700' : 'text-yellow-400'}`}>Uniform2Unicorn</a> won ₹1,00,000 + ₹10,00,000 in credits & an exclusive dinner with <a href="https://www.google.com/search?q=iqlipse+nova" target="_blank" rel="noopener noreferrer" className={`font-medium transition-colors underline decoration-stone-400/50 ${theme === 'light' ? 'text-stone-500 hover:text-stone-750' : 'text-stone-400 hover:text-stone-200'}`}>Iqlipse Nova</a> <span className={`text-sm font-normal ${theme === 'light' ? 'text-stone-450' : 'text-stone-500'}`}>(special thanks to the team: Aditya Bhatia & Pavitra Kushwaha)</span>
-                    </span>
-                  </li>
+                    </span>                                    
+                  </li>                                                                        
                   <li className="flex items-start">
                     <span className="mr-3 w-6 h-6 flex-shrink-0 flex items-center justify-center text-xl">
                       <div className={`w-6 h-6 rounded flex items-center justify-center shrink-0 transition-all ${theme === 'light' ? 'bg-blue-100 text-blue-700' : 'bg-blue-950/60 text-blue-300 border border-blue-900/30'
@@ -274,8 +274,8 @@ const About = ({ isRudraMode, theme }) => {
                           <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2.12-1.15V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72l5 2.73 5-2.73v3.72z" />
                         </svg>
                       </div>
-                    </span>
-                    <span>
+                    </span>                                   
+                    <span>                                                                                 
                       Research Fellow at IIT Kanpur under <a href="http://scholar.google.com/citations?user=jeOME6wAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 font-bold hover:underline">Prof. Adithya Vadapalli</a> (CSE Dept.)
                     </span>
                   </li>
