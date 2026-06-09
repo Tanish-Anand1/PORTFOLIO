@@ -114,14 +114,13 @@ const About = ({ isRudraMode, theme }) => {
                   <p>
                     I'm obsessed with understanding intelligence, how to build it, accelerate it, and eventually, define it.
                   </p>
-                  <div className={`p-5 sm:p-6 my-6 rounded-2xl border shadow-sm font-playfair italic text-lg leading-relaxed transition-all duration-300 relative overflow-hidden text-left ${
-                    theme === 'light' 
-                      ? 'bg-[#fcf9f2] text-stone-850 border-stone-200/80 shadow-stone-100/50' 
+                  <div className={`p-5 sm:p-6 my-6 rounded-2xl border shadow-sm font-playfair italic text-lg leading-relaxed transition-all duration-300 relative overflow-hidden text-left ${theme === 'light'
+                      ? 'bg-[#fcf9f2] text-stone-850 border-stone-200/80 shadow-stone-100/50'
                       : 'bg-stone-900/30 text-stone-200 border-stone-850/60 shadow-black/20'
-                  }`}>
+                    }`}>
                     {/* Exquisite left gradient accent bar */}
                     <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-indigo-500/80 to-purple-500/80" />
-                    
+
                     <p className="pl-3">
                       Founder of{' '}
                       <span className="font-serif font-bold text-[var(--foreground)] hover:underline cursor-pointer not-italic">CareLink</span>{' '}
@@ -151,7 +150,7 @@ const About = ({ isRudraMode, theme }) => {
                     </a>
                     , and play tennis.
                   </p>
-               
+
                   <div className={`mt-8 flex flex-col gap-4 border-l-2 ${theme === 'light' ? 'border-stone-200' : 'border-stone-850'} pl-4 ml-1`}>
                     <div className="relative">
                       <div className="absolute -left-[21px] top-2 w-2.5 h-2.5 rounded-full bg-green-500"></div>
@@ -188,13 +187,12 @@ const About = ({ isRudraMode, theme }) => {
                     <button
                       key={category}
                       onClick={() => setActiveCategory(category)}
-                      className={`px-4 py-1.5 rounded-md text-xs font-mono font-medium tracking-wide uppercase transition-all duration-300 cursor-pointer ${
-                        activeCategory === category
+                      className={`px-4 py-1.5 rounded-md text-xs font-mono font-medium tracking-wide uppercase transition-all duration-300 cursor-pointer ${activeCategory === category
                           ? theme === 'light'
                             ? 'bg-white text-stone-900 shadow-sm border border-stone-200'
                             : 'bg-stone-800 text-stone-100 border border-stone-700'
                           : 'text-[var(--foreground)]/50 hover:text-[var(--foreground)]/80'
-                      }`}
+                        }`}
                     >
                       {category}
                     </button>
@@ -202,7 +200,7 @@ const About = ({ isRudraMode, theme }) => {
                 </div>
 
                 {/* Category Grid */}
-                <motion.div 
+                <motion.div
                   layout
                   className="grid sm:grid-cols-2 md:grid-cols-3 gap-4"
                 >
@@ -215,11 +213,10 @@ const About = ({ isRudraMode, theme }) => {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.95 }}
                         transition={{ duration: 0.25 }}
-                        className={`p-4 rounded-xl border transition-all duration-300 flex flex-col justify-between ${
-                          theme === 'light'
+                        className={`p-4 rounded-xl border transition-all duration-300 flex flex-col justify-between ${theme === 'light'
                             ? 'bg-stone-50/50 border-stone-200/60 hover:bg-stone-50'
                             : 'bg-stone-900/20 border-stone-850 hover:bg-stone-900/40'
-                        }`}
+                          }`}
                       >
                         <div>
                           <div className="flex items-center justify-between mb-2">
@@ -237,7 +234,7 @@ const About = ({ isRudraMode, theme }) => {
                             <span>{skill.metric}%</span>
                           </div>
                           <div className={`w-full h-1.5 rounded-full overflow-hidden ${theme === 'light' ? 'bg-stone-200' : 'bg-stone-800'}`}>
-                            <motion.div 
+                            <motion.div
                               initial={{ width: 0 }}
                               animate={{ width: `${skill.metric}%` }}
                               transition={{ duration: 0.8, delay: index * 0.05 }}
@@ -260,9 +257,19 @@ const About = ({ isRudraMode, theme }) => {
                 <ul className="gap-3 flex flex-col text-lg text-[var(--foreground)]/90">
                   <li className="flex items-start">
                     <span className="mr-3 w-6 h-6 flex-shrink-0 flex items-center justify-center text-xl">
-                      <div className={`w-6 h-6 rounded flex items-center justify-center shrink-0 transition-all ${
-                        theme === 'light' ? 'bg-blue-100 text-blue-700' : 'bg-blue-950/60 text-blue-300 border border-blue-900/30'
-                      }`}>
+                      <div className={`w-6 h-6 rounded flex items-center justify-center shrink-0 text-base leading-none transition-all ${theme === 'light' ? 'bg-yellow-100 text-yellow-700' : 'bg-yellow-950/60 text-yellow-300 border border-yellow-900/30'
+                        }`}>
+                        🦄
+                      </div>
+                    </span>
+                    <span>
+                      <span className={`font-bold ${theme === 'light' ? 'text-yellow-700' : 'text-yellow-400'}`}>#1</span> across 3,500+, India's <span className="font-bold">Top Young Founder of the Year '26</span> at <a href="https://uniform2unicorn.polariscampus.com/" target="_blank" rel="noopener noreferrer" className={`font-bold hover:underline ${theme === 'light' ? 'text-yellow-700' : 'text-yellow-400'}`}>Uniform2Unicorn</a> won ₹1,00,000 + ₹10,00,000 in credits & an exclusive dinner with <a href="https://www.google.com/search?q=iqlipse+nova" target="_blank" rel="noopener noreferrer" className={`font-medium transition-colors underline decoration-stone-400/50 ${theme === 'light' ? 'text-stone-500 hover:text-stone-750' : 'text-stone-400 hover:text-stone-200'}`}>Iqlipse Nova</a> <span className={`text-sm font-normal ${theme === 'light' ? 'text-stone-450' : 'text-stone-500'}`}>(special thanks to the team: Aditya Bhatia & Pavitra Kushwaha)</span>
+                    </span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="mr-3 w-6 h-6 flex-shrink-0 flex items-center justify-center text-xl">
+                      <div className={`w-6 h-6 rounded flex items-center justify-center shrink-0 transition-all ${theme === 'light' ? 'bg-blue-100 text-blue-700' : 'bg-blue-950/60 text-blue-300 border border-blue-900/30'
+                        }`}>
                         <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                           <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2.12-1.15V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72l5 2.73 5-2.73v3.72z" />
                         </svg>
@@ -274,9 +281,8 @@ const About = ({ isRudraMode, theme }) => {
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 w-6 h-6 flex-shrink-0 flex items-center justify-center text-xl">
-                      <div className={`w-6 h-6 rounded flex items-center justify-center font-bold text-[13px] leading-none shrink-0 font-sans transition-all ${
-                        theme === 'light' ? 'bg-[#FF6600] text-white' : 'bg-[#FF6600]/10 text-[#FF6600] border border-[#FF6600]/30'
-                      }`}>
+                      <div className={`w-6 h-6 rounded flex items-center justify-center font-bold text-[13px] leading-none shrink-0 font-sans transition-all ${theme === 'light' ? 'bg-[#FF6600] text-white' : 'bg-[#FF6600]/10 text-[#FF6600] border border-[#FF6600]/30'
+                        }`}>
                         Y
                       </div>
                     </span>
@@ -298,9 +304,8 @@ const About = ({ isRudraMode, theme }) => {
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 w-6 h-6 flex-shrink-0 flex items-center justify-center text-xl">
-                      <div className={`w-6 h-6 rounded flex items-center justify-center shrink-0 transition-all ${
-                        theme === 'light' ? 'bg-purple-100 text-purple-700' : 'bg-purple-950/60 text-purple-300 border border-purple-900/30'
-                      }`}>
+                      <div className={`w-6 h-6 rounded flex items-center justify-center shrink-0 transition-all ${theme === 'light' ? 'bg-purple-100 text-purple-700' : 'bg-purple-950/60 text-purple-300 border border-purple-900/30'
+                        }`}>
                         <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                           <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" />
                           <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" />
@@ -313,9 +318,8 @@ const About = ({ isRudraMode, theme }) => {
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 w-6 h-6 flex-shrink-0 flex items-center justify-center text-xl">
-                      <div className={`w-6 h-6 rounded flex items-center justify-center shrink-0 transition-all ${
-                        theme === 'light' ? 'bg-red-100 text-red-700' : 'bg-red-950/60 text-red-300 border border-red-900/30'
-                      }`}>
+                      <div className={`w-6 h-6 rounded flex items-center justify-center shrink-0 transition-all ${theme === 'light' ? 'bg-red-100 text-red-700' : 'bg-red-950/60 text-red-300 border border-red-900/30'
+                        }`}>
                         <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                           <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
                         </svg>
@@ -336,11 +340,10 @@ const About = ({ isRudraMode, theme }) => {
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: 'auto', opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
-                            className={`text-sm p-2.5 rounded-md mt-1.5 border transition-all ${
-                              theme === 'light'
+                            className={`text-sm p-2.5 rounded-md mt-1.5 border transition-all ${theme === 'light'
                                 ? 'text-green-700 bg-green-50 border-green-200'
                                 : 'text-green-300 bg-green-950/40 border-green-900/30'
-                            }`}
+                              }`}
                           >
                             Responsible disclosure submitted successfully. Secured sandbox execution escape through a prompt injection flaw. Private bounty awarded.
                           </motion.div>
@@ -350,9 +353,8 @@ const About = ({ isRudraMode, theme }) => {
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 w-6 h-6 flex-shrink-0 flex items-center justify-center text-xl">
-                      <div className={`w-6 h-6 rounded flex items-center justify-center shrink-0 transition-all ${
-                        theme === 'light' ? 'bg-green-100 text-green-700' : 'bg-green-950/60 text-green-300 border border-green-900/30'
-                      }`}>
+                      <div className={`w-6 h-6 rounded flex items-center justify-center shrink-0 transition-all ${theme === 'light' ? 'bg-green-100 text-green-700' : 'bg-green-950/60 text-green-300 border border-green-900/30'
+                        }`}>
                         <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                           <path d="M20 8h-2.81c-.45-.78-1.07-1.45-1.82-1.96L17 4.41 15.59 3l-2.17 2.17C12.96 5.06 12.49 5 12 5c-.49 0-.96.06-1.41.17L8.41 3 7 4.41l1.62 1.63C7.88 6.55 7.26 7.22 6.81 8H4v2h2.09c-.05.33-.09.66-.09 1v1H4v2h2v1c0 .34.04.67.09 1H4v2h2.81c1.04 1.79 2.97 3 5.19 3s4.15-1.21 5.19-3H20v-2h-2.09c.05-.33.09-.66.09-1v-1h2v-2h-2v-1c0-.34-.04-.67-.09-1H20V8zm-6 8h-4v-2h4v2zm0-4h-4v-2h4v2z" />
                         </svg>
@@ -373,11 +375,10 @@ const About = ({ isRudraMode, theme }) => {
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: 'auto', opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
-                            className={`text-sm p-2.5 rounded-md mt-1.5 border transition-all ${
-                              theme === 'light'
+                            className={`text-sm p-2.5 rounded-md mt-1.5 border transition-all ${theme === 'light'
                                 ? 'text-green-700 bg-green-50 border-green-200'
                                 : 'text-green-300 bg-green-950/40 border-green-900/30'
-                            }`}
+                              }`}
                           >
                             Vulnerability disclosed to the vendor under strict guidelines. The flaw allowed unauthorized cart value alterations in the state checkout endpoint. Fixed immediately.
                           </motion.div>
@@ -387,9 +388,8 @@ const About = ({ isRudraMode, theme }) => {
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 w-6 h-6 flex-shrink-0 flex items-center justify-center text-xl">
-                      <div className={`w-6 h-6 rounded flex items-center justify-center shrink-0 transition-all ${
-                        theme === 'light' ? 'bg-yellow-100 text-yellow-700' : 'bg-yellow-950/60 text-yellow-300 border border-yellow-900/30'
-                      }`}>
+                      <div className={`w-6 h-6 rounded flex items-center justify-center shrink-0 transition-all ${theme === 'light' ? 'bg-yellow-100 text-yellow-700' : 'bg-yellow-950/60 text-yellow-300 border border-yellow-900/30'
+                        }`}>
                         <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                           <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.01 5.01 0 0 0 11 15.9V19H7v2h10v-2h-4v-3.1a5.01 5.01 0 0 0 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z" />
                         </svg>
@@ -401,9 +401,8 @@ const About = ({ isRudraMode, theme }) => {
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 w-6 h-6 flex-shrink-0 flex items-center justify-center text-xl">
-                      <div className={`w-6 h-6 rounded flex items-center justify-center shrink-0 transition-all ${
-                        theme === 'light' ? 'bg-rose-100 text-rose-700' : 'bg-rose-950/60 text-rose-300 border border-rose-900/30'
-                      }`}>
+                      <div className={`w-6 h-6 rounded flex items-center justify-center shrink-0 transition-all ${theme === 'light' ? 'bg-rose-100 text-rose-700' : 'bg-rose-950/60 text-rose-300 border border-rose-900/30'
+                        }`}>
                         <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                           <path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12zm-5-6l-7 4V7z" />
                         </svg>

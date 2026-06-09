@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Hero from './components/Hero';
 import About from './components/About';
+import Funds from './components/Funds';
 import Blog from './components/Blog';
 import Projects from './components/Projects';
 import GithubContributions from './components/GithubContributions';
@@ -327,6 +328,7 @@ function App() {
           <Blog isRudraMode={isRudraMode} theme={theme} />
           <Projects isRudraMode={isRudraMode} theme={theme} />
           <GithubContributions isRudraMode={isRudraMode} theme={theme} />
+          <Funds isRudraMode={isRudraMode} theme={theme} />
           <Contact isRudraMode={isRudraMode} theme={theme} />
         </main>
       ) : (
@@ -338,6 +340,7 @@ function App() {
             <Projects isRudraMode={isRudraMode} theme={theme} onRudraSimOpen={() => setIsRudraSimOpen(true)} />
             <SecurityAdvisories theme={theme} />
             <GithubContributions isRudraMode={isRudraMode} theme={theme} />
+            <Funds isRudraMode={isRudraMode} theme={theme} />
             <Contact isRudraMode={isRudraMode} theme={theme} />
           </div>
         </main>
