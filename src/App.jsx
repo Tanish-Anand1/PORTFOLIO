@@ -40,8 +40,8 @@ const TacticalRadarIcon = ({ isActive }) => (
 );
 
 const navLinks = [
-  { href: '#projects', label: 'projects' },
-  { href: '#about', label: 'about' },
+  { id: 'projects', label: 'projects' },
+  { id: 'about', label: 'about' },
 ];
 
 function App() {
@@ -49,9 +49,36 @@ function App() {
   const [isRudraMode, setIsRudraMode] = useState(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [isRudraSimOpen, setIsRudraSimOpen] = useState(false);
   const [isResumeOpen, setIsResumeOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
+  const [hoveredIdx, setHoveredIdx] = useState(null);
+
+  // Scroll-spy tracking active section
+  useEffect(() => {
+    const sections = ['projects', 'about'];
+    
+    const observerCallback = (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, {
+      root: null,
+      rootMargin: '-30% 0px -40% 0px',
+      threshold: 0.1
+    });
+
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [isRudraMode]);
 
   // Synchronize dynamic body classes for dark/light/rudra
   useEffect(() => {
@@ -62,11 +89,7 @@ function App() {
     document.body.classList.toggle('rudra', isRudraMode);
   }, [isRudraMode]);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+
 
   // Keyboard shortcut listener: Cmd/Ctrl + K (Palette) & Alt + R (Rudra Mode)
   useEffect(() => {
@@ -106,139 +129,147 @@ function App() {
   return (
     <div className={`min-h-screen ${isRudraMode ? 'bg-[#020603] text-emerald-400 font-mono' : 'bg-[var(--bg)] text-[var(--foreground)] font-sans'} relative transition-colors duration-500`}>
       {/* ── Nav ─────────────────────────────── */}
-      <motion.nav 
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      <motion.nav
+        layout
+        initial={{ y: -40, x: "-50%", opacity: 0 }}
+        animate={{ y: 0, x: "-50%", opacity: 1 }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        className={`fixed top-4 left-1/2 z-50 w-[calc(100%-2rem)] sm:w-auto min-w-[300px] sm:min-w-[480px] md:min-w-[560px] border backdrop-blur-lg transition-colors duration-300 shadow-lg ${
+          mobileOpen ? 'rounded-2xl p-4' : 'rounded-full py-1.5 pl-5 pr-2'
+        } ${
           isRudraMode 
-            ? scrolled ? 'bg-zinc-950/85 backdrop-blur-md border-b border-emerald-500/10' : 'bg-transparent'
-            : scrolled 
-              ? theme === 'light'
-                ? 'bg-white/70 backdrop-blur-md border-b border-stone-200/40 shadow-sm'
-                : 'bg-stone-900/70 backdrop-blur-md border-b border-stone-850/40 shadow-sm'
-              : 'bg-transparent'
+            ? 'bg-[#070e09]/85 border-emerald-500/20 shadow-[0_8px_32px_rgba(57,255,20,0.06)] text-emerald-400 font-mono' 
+            : theme === 'light'
+              ? 'bg-white/75 border-stone-200/60 shadow-[0_12px_30px_rgba(0,0,0,0.03)] text-stone-800 font-sans'
+              : 'bg-stone-950/75 border-stone-850/60 shadow-[0_12px_32px_rgba(0,0,0,0.25)] text-stone-200 font-sans'
         }`}
       >
-        <div className="max-w-[1024px] mx-auto px-6 h-16 flex items-center justify-between">
+        {/* Header Row */}
+        <div className="flex items-center justify-between w-full h-9">
           <a 
             href="#" 
-            className={`text-xl font-bold tracking-tighter hover:underline ${
+            className={`text-base font-bold tracking-tighter hover:opacity-80 transition-opacity flex items-center gap-1.5 ${
               isRudraMode ? 'text-emerald-400 font-mono' : theme === 'light' ? 'text-stone-900 font-serif' : 'text-white font-serif'
             }`}
           >
-            tanish.gg
-            {isRudraMode && <span className="text-[10px] font-mono ml-2 border border-emerald-500/30 px-1 rounded bg-emerald-500/10 text-emerald-400">RUDRA</span>}
+            <span>tanish.gg</span>
+            {isRudraMode && <span className="text-[8px] font-mono border border-emerald-500/30 px-1 rounded bg-emerald-500/10 text-emerald-400 shrink-0">RUDRA</span>}
           </a>
           
-          {/* Desktop links */}
-          <div className="hidden sm:flex items-center gap-6">
-            <div className="flex gap-7 text-[0.95rem]">
-              <a 
-                href="#projects" 
-                className={`hover:underline underline-offset-4 transition-all ${
-                  isRudraMode ? 'text-emerald-400/80 hover:text-emerald-300 font-mono' : theme === 'light' ? 'text-stone-600 hover:text-stone-950 font-mono' : 'text-stone-300 hover:text-white font-mono'
-                }`}
-              >
-                projects
-              </a>
-              <a 
-                href="#about" 
-                className={`hover:underline underline-offset-4 transition-all ${
-                  isRudraMode ? 'text-emerald-400/80 hover:text-emerald-300 font-mono' : theme === 'light' ? 'text-stone-600 hover:text-stone-950 font-mono' : 'text-stone-300 hover:text-white font-mono'
-                }`}
-              >
-                about
-              </a>
-              {!isRudraMode && (
-                <button 
-                  onClick={() => setIsResumeOpen(true)}
-                  className={`hover:underline underline-offset-4 transition-all cursor-pointer ${
-                    theme === 'light' ? 'text-stone-600 hover:text-stone-950 font-mono' : 'text-stone-300 hover:text-white font-mono'
+          {/* Desktop Links */}
+          <div className="hidden sm:flex items-center gap-1">
+            {[
+              { id: 'projects', label: 'projects', action: null },
+              { id: 'about', label: 'about', action: null },
+              ...(!isRudraMode ? [{ id: 'cv', label: 'cv', action: () => setIsResumeOpen(true) }] : [])
+            ].map((link, idx) => {
+              const isScrollLink = link.id !== 'cv';
+              const isActive = isScrollLink && activeSection === link.id;
+              return (
+                <a
+                  key={link.id}
+                  href={isScrollLink ? `#${link.id}` : undefined}
+                  onClick={link.action ? (e) => { e.preventDefault(); link.action(); } : undefined}
+                  onMouseEnter={() => setHoveredIdx(idx)}
+                  onMouseLeave={() => setHoveredIdx(null)}
+                  className={`relative px-3.5 py-1.5 rounded-full transition-all duration-350 cursor-pointer text-xs font-mono select-none ${
+                    isActive 
+                      ? isRudraMode 
+                        ? 'text-emerald-300 font-bold font-mono' 
+                        : 'text-[var(--foreground)] font-semibold'
+                      : isRudraMode
+                        ? 'text-emerald-500/60 hover:text-emerald-300'
+                        : theme === 'light'
+                          ? 'text-stone-500 hover:text-stone-900'
+                          : 'text-stone-400 hover:text-white'
                   }`}
                 >
-                  cv
-                </button>
-              )}
-            </div>
+                  {hoveredIdx === idx && (
+                    <motion.div
+                      layoutId="nav-hover-pill"
+                      className={`absolute inset-0 rounded-full -z-10 ${
+                        isRudraMode 
+                          ? 'bg-emerald-500/10 border border-emerald-500/20' 
+                          : theme === 'light'
+                            ? 'bg-stone-200/50'
+                            : 'bg-stone-850/60'
+                      }`}
+                      transition={{ type: "spring", stiffness: 350, damping: 26 }}
+                    />
+                  )}
+                  {isActive && !isRudraMode && (
+                    <span className={`absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full ${
+                      theme === 'light' ? 'bg-stone-900' : 'bg-white'
+                    }`} />
+                  )}
+                  {link.label}
+                </a>
+              );
+            })}
+          </div>
 
-            <div className={`w-px h-4 ${isRudraMode ? 'bg-emerald-500/10' : theme === 'light' ? 'bg-stone-200' : 'bg-stone-800'} mx-1`} />
-            
-            {/* Command Palette Trigger */}
+          {/* Controls & Mobile Toggle */}
+          <div className="flex items-center gap-1.5 pl-2">
+            {/* Search (Cmd+K) */}
             <button
               onClick={() => setIsCommandPaletteOpen(true)}
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-[11px] font-mono border transition-all duration-200 cursor-pointer ${
+              className={`p-1.5 rounded-full border transition-all duration-200 cursor-pointer ${
                 isRudraMode 
                   ? 'border-emerald-500/20 bg-emerald-500/5 text-emerald-400/60 hover:border-emerald-500/40 hover:text-emerald-300' 
                   : theme === 'light'
                     ? 'border-stone-200 bg-white text-stone-400 hover:border-stone-300 hover:text-stone-700 hover:bg-stone-50 shadow-sm'
-                    : 'border-stone-850 bg-stone-900 text-stone-500 hover:border-stone-700 hover:text-stone-200 hover:bg-stone-850'
+                    : 'border-stone-850 bg-stone-900/60 text-stone-500 hover:border-stone-700 hover:text-stone-200 hover:bg-stone-850'
               }`}
               title="Search and Commands (Ctrl+K)"
             >
               <CommandIcon />
-              <span>⌘K</span>
             </button>
 
-            {/* Rudra Tactical HUD toggle */}
+            {/* Radar (Alt+R) */}
             <button 
               onClick={toggleRudraMode}
-              className={`p-2 rounded-md transition-all duration-200 cursor-pointer ${
+              className={`p-1.5 rounded-full border transition-all duration-200 cursor-pointer ${
                 isRudraMode 
-                  ? 'bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20' 
+                  ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20' 
                   : theme === 'light'
-                    ? 'hover:bg-stone-200/50 text-stone-400 hover:text-stone-700'
-                    : 'hover:bg-stone-850 text-stone-500 hover:text-stone-200'
+                    ? 'border-stone-200 bg-white hover:border-stone-300 text-stone-400 hover:text-stone-700 shadow-sm'
+                    : 'border-stone-850 bg-stone-900/60 hover:border-stone-700 text-stone-500 hover:text-stone-200 hover:bg-stone-850'
               }`}
               title="Toggle Tactical Rudra Mode (Alt+R)"
             >
               <TacticalRadarIcon isActive={isRudraMode} />
             </button>
 
-            {/* Light / Dark Mode Toggle (disabled in Rudra Mode) */}
+            {/* Theme Toggle */}
             <button 
               onClick={toggleTheme}
-              className={`p-2 rounded-md transition-all duration-200 cursor-pointer ${
+              className={`p-1.5 rounded-full border transition-all duration-200 cursor-pointer ${
                 isRudraMode 
-                  ? 'hover:bg-emerald-500/5 text-emerald-400/30' 
+                  ? 'border-emerald-500/10 text-emerald-400/20 cursor-not-allowed' 
                   : theme === 'light'
-                    ? 'hover:bg-stone-200/50 text-stone-400 hover:text-stone-700'
-                    : 'hover:bg-stone-850 text-stone-500 hover:text-stone-200'
+                    ? 'border-stone-200 bg-white hover:border-stone-300 text-stone-400 hover:text-stone-700 shadow-sm'
+                    : 'border-stone-850 bg-stone-900/60 hover:border-stone-700 text-stone-500 hover:text-stone-200 hover:bg-stone-850'
               }`}
               disabled={isRudraMode}
               title={isRudraMode ? "Theme locked in Tactical HUD mode" : "Toggle theme"}
             >
               {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
             </button>
-          </div>
 
-          {/* Mobile controls */}
-          <div className="sm:hidden flex items-center gap-1">
-            <button
-              onClick={() => setIsCommandPaletteOpen(true)}
-              className={`p-2 rounded-md transition-all duration-200 cursor-pointer ${
-                isRudraMode ? 'text-emerald-400/60' : theme === 'light' ? 'text-stone-400 hover:text-stone-700' : 'text-stone-500 hover:text-stone-200'
-              }`}
-            >
-              <CommandIcon />
-            </button>
-            <button 
-              onClick={toggleRudraMode}
-              className={`p-2 rounded-md transition-all duration-200 cursor-pointer ${
-                isRudraMode ? 'text-emerald-400' : theme === 'light' ? 'text-stone-400 hover:text-stone-700' : 'text-stone-500 hover:text-stone-200'
-              }`}
-            >
-              <TacticalRadarIcon isActive={isRudraMode} />
-            </button>
+            {/* Mobile Menu Toggle */}
             <button 
               onClick={() => setMobileOpen(prev => !prev)}
-              className={`p-2 rounded-md transition-all duration-200 cursor-pointer ${
-                isRudraMode ? 'text-emerald-400' : theme === 'light' ? 'text-stone-400 hover:text-stone-700' : 'text-stone-500 hover:text-stone-200'
+              className={`sm:hidden p-1.5 rounded-full border transition-all duration-200 cursor-pointer ${
+                isRudraMode 
+                  ? 'border-emerald-500/20 text-emerald-400 hover:border-emerald-500/40' 
+                  : theme === 'light'
+                    ? 'border-stone-200 bg-white text-stone-400 hover:border-stone-750 hover:bg-stone-50 shadow-sm'
+                    : 'border-stone-850 bg-stone-900/60 text-stone-500 hover:border-stone-250'
               }`}
               aria-label="Toggle menu"
               aria-expanded={mobileOpen}
             >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 {mobileOpen ? (
                   <><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></>
                 ) : (
@@ -249,61 +280,39 @@ function App() {
           </div>
         </div>
 
-        {/* Mobile dropdown menu */}
+        {/* Mobile Menu Drawer inside capsule */}
         <AnimatePresence>
           {mobileOpen && (
             <motion.div
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className={`sm:hidden overflow-hidden border-t ${
-                isRudraMode 
-                  ? 'border-emerald-500/20 bg-zinc-950/95 text-emerald-400' 
-                  : theme === 'light'
-                    ? 'border-stone-200 bg-white/95 text-stone-850'
-                    : 'border-stone-850 bg-stone-900/95 text-stone-200'
-              } backdrop-blur-md`}
+              transition={{ duration: 0.25, ease: 'easeInOut' }}
+              className={`sm:hidden overflow-hidden w-full mt-3 border-t ${
+                isRudraMode ? 'border-emerald-500/15' : theme === 'light' ? 'border-stone-200' : 'border-stone-850'
+              }`}
             >
-              <div className="px-6 py-4 flex flex-col gap-1">
-                <a 
-                  href="#projects" 
-                  onClick={() => setMobileOpen(false)} 
-                  className={`px-3 py-2 text-sm rounded-md transition-all duration-200 ${
-                    isRudraMode 
-                      ? 'hover:text-emerald-300 hover:bg-emerald-500/5' 
-                      : theme === 'light'
-                        ? 'hover:bg-stone-100 text-stone-700'
-                        : 'hover:bg-stone-800 text-stone-300'
-                  }`}
-                >
-                  projects
-                </a>
-                <a 
-                  href="#about" 
-                  onClick={() => setMobileOpen(false)} 
-                  className={`px-3 py-2 text-sm rounded-md transition-all duration-200 ${
-                    isRudraMode 
-                      ? 'hover:text-emerald-300 hover:bg-emerald-500/5' 
-                      : theme === 'light'
-                        ? 'hover:bg-stone-100 text-stone-700'
-                        : 'hover:bg-stone-800 text-stone-300'
-                  }`}
-                >
-                  about
-                </a>
-                {!isRudraMode && (
-                  <button 
-                    onClick={() => { setMobileOpen(false); setIsResumeOpen(true); }}
-                    className={`px-3 py-2 text-sm rounded-md transition-all duration-200 text-left cursor-pointer ${
-                      theme === 'light'
-                        ? 'hover:bg-stone-100 text-stone-700'
-                        : 'hover:bg-stone-800 text-stone-300'
+              <div className="flex flex-col gap-1 pt-3 pb-1 text-sm font-mono">
+                {[
+                  { id: 'projects', label: 'projects', action: null },
+                  { id: 'about', label: 'about', action: null },
+                  ...(!isRudraMode ? [{ id: 'cv', label: 'cv', action: () => setIsResumeOpen(true) }] : [])
+                ].map((link) => (
+                  <a 
+                    key={link.id}
+                    href={link.id !== 'cv' ? `#${link.id}` : undefined} 
+                    onClick={link.action ? () => { setMobileOpen(false); link.action(); } : () => setMobileOpen(false)} 
+                    className={`px-3 py-2 rounded-lg transition-all duration-200 cursor-pointer ${
+                      isRudraMode 
+                        ? 'hover:text-emerald-300 hover:bg-emerald-500/5' 
+                        : theme === 'light'
+                          ? 'hover:bg-stone-100 text-stone-700 hover:text-stone-950'
+                          : 'hover:bg-stone-850 text-stone-300 hover:text-white'
                     }`}
                   >
-                    cv
-                  </button>
-                )}
+                    {link.label}
+                  </a>
+                ))}
               </div>
             </motion.div>
           )}
