@@ -3,8 +3,14 @@ import { motion } from 'framer-motion';
 
 const RudraTerminal = ({ onClose }) => {
   const [history, setHistory] = useState([
-    { text: 'RUDRA SECURE TERMINAL v6.6.6 [ACTIVE]', type: 'system' },
-    { text: 'ISRO CARTOSAT-3 SAT-NET CONNECTION STABLE', type: 'system' },
+    { text: 'Arch Linux 5.13.12-arch1-1 (tty1)', type: 'system' },
+    { text: '', type: 'blank' },
+    { text: 'G7510 login: root', type: 'user' },
+    { text: 'Password: *********', type: 'info' },
+    { text: 'Last login: Fri Jun 12 00:41:34 on tty1', type: 'info' },
+    { text: 'root@G7510 ~# neofetch', type: 'user' },
+    { text: '', type: 'neofetch' },
+    { text: '', type: 'blank' },
     { text: 'Type "help" to list available mainframe sub-routines.', type: 'info' },
     { text: '', type: 'blank' }
   ]);
@@ -26,7 +32,7 @@ const RudraTerminal = ({ onClose }) => {
     const args = trimmed.split(' ');
     const primaryCmd = args[0];
 
-    const newHistory = [...history, { text: `Tanish@Rudra:~$ ${cmdStr}`, type: 'user' }];
+    const newHistory = [...history, { text: `root@G7510:~# ${cmdStr}`, type: 'user' }];
 
     if (!trimmed) {
       setHistory([...newHistory, { text: '', type: 'blank' }]);
@@ -38,13 +44,21 @@ const RudraTerminal = ({ onClose }) => {
         setHistory([
           ...newHistory,
           { text: 'Available Command Matrices:', type: 'header' },
-          { text: '  sys        - Display RUDRA command grid telemetry & specs', type: 'info' },
-          { text: '  whoami     - Access personal dossier of Agent Tanish Anand', type: 'info' },
+          { text: '  neofetch   - Display system telemetry profile & spec grid', type: 'info' },
+          { text: '  sys        - Access detailed grid telemetry specifications', type: 'info' },
+          { text: '  whoami     - Access personal dossier of Tanish Anand', type: 'info' },
           { text: '  projects   - Query engineering works index', type: 'info' },
           { text: '  skills     - Access tech stack mapping database', type: 'info' },
           { text: '  matrix     - Activate cyber digital rain stream', type: 'info' },
           { text: '  clear      - Clear terminal screen buffers', type: 'info' },
           { text: '  exit       - Terminate terminal session', type: 'info' }
+        ]);
+        break;
+
+      case 'neofetch':
+        setHistory([
+          ...newHistory,
+          { text: '', type: 'neofetch' }
         ]);
         break;
 
@@ -174,7 +188,7 @@ const RudraTerminal = ({ onClose }) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
       className="w-full rounded-xl border border-emerald-500/30 bg-black/90 p-4 font-mono shadow-2xl relative overflow-hidden rudra-glow"
-      style={{ borderColor: 'rgba(57, 255, 20, 0.25)' }}
+      style={{ borderColor: 'rgba(23, 147, 209, 0.25)' }}
     >
       {/* Scanline CRT overlay */}
       <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_60%,rgba(0,0,0,0.4)_100%)] z-10" />
@@ -184,7 +198,7 @@ const RudraTerminal = ({ onClose }) => {
       <div className="flex items-center justify-between pb-3 border-b border-emerald-500/20 text-xs text-emerald-400/60 mb-3 select-none">
         <div className="flex items-center gap-2">
           <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 animate-pulse" />
-          <span>SYS_GRID_CONSOLE // tanish_anand</span>
+          <span>SYS_GRID_CONSOLE // root@G7510</span>
         </div>
         <div className="flex gap-2">
           <button 
@@ -203,17 +217,68 @@ const RudraTerminal = ({ onClose }) => {
       </div>
 
       {/* Screen logs */}
-      <div className="h-[240px] overflow-y-auto pr-1 flex flex-col gap-1 text-[13px] custom-scrollbar z-20 relative">
+      <div className="h-[280px] overflow-y-auto pr-1 flex flex-col gap-1 text-[13px] custom-scrollbar z-20 relative">
         {history.map((log, index) => {
+          if (log.type === 'neofetch') {
+            return (
+              <div key={index} className="flex gap-4 sm:gap-6 font-mono text-[11px] sm:text-xs leading-[1.25] select-none my-2 text-left">
+                <div className="text-sky-400 shrink-0 whitespace-pre">
+{`                  -\`
+              .o+ooooooooooooooooo+o.
+              /ooooooooooooooooooooo/
+              /:::/+++/+ooo+\\:::/:::/
+                      \`+ooo+\`
+                      \`+ooo+\`
+                      \`+ooo+\`
+                      \`+ooo+\`
+                      \`+ooo+\`
+                      \`+ooo+\`
+                      \`+ooo+\`
+                      \`+ooo+\`
+                      \`+ooo+\`
+                      \`+ooo+\`
+                      \`+ooo+\`
+                      \`+ooo+\`
+                      \`+ooo+\``}
+                </div>
+                <div className="text-gray-300 flex-1">
+                  <span className="text-sky-400 font-bold">root@G7510</span><br />
+                  <span className="text-gray-500">------------</span><br />
+                  <span className="text-sky-400 font-medium">OS:</span> Arch Linux x86_64<br />
+                  <span className="text-sky-400 font-medium">Host:</span> Tanish Anand (Founder & Builder)<br />
+                  <span className="text-sky-400 font-medium">Kernel:</span> 5.13.12-arch1-tanish<br />
+                  <span className="text-sky-400 font-medium">Uptime:</span> 17 years (born 2008)<br />
+                  <span className="text-sky-400 font-medium">Packages:</span> npm (React 19), pip (PyTorch)<br />
+                  <span className="text-sky-400 font-medium">Shell:</span> zsh 5.9<br />
+                  <span className="text-sky-400 font-medium">Resolution:</span> 3840x2160 (4K Ultra-Wide)<br />
+                  <span className="text-sky-400 font-medium">Terminal:</span> Alacritty (tty1)<br />
+                  <span className="text-sky-400 font-medium">CPU:</span> IIT Kanpur Student Brain @ 5.80GHz<br />
+                  <span className="text-sky-400 font-medium">GPU:</span> NVIDIA RTX 4090 / Neural Core<br />
+                  <span className="text-sky-400 font-medium">Memory:</span> 32GB / 64GB<br />
+                  <br />
+                  <div className="flex gap-1.5 mt-1">
+                    <span className="w-5 h-3 bg-red-600 inline-block rounded-sm" />
+                    <span className="w-5 h-3 bg-green-600 inline-block rounded-sm" />
+                    <span className="w-5 h-3 bg-yellow-500 inline-block rounded-sm" />
+                    <span className="w-5 h-3 bg-blue-600 inline-block rounded-sm" />
+                    <span className="w-5 h-3 bg-pink-600 inline-block rounded-sm" />
+                    <span className="w-5 h-3 bg-cyan-500 inline-block rounded-sm" />
+                    <span className="w-5 h-3 bg-gray-300 inline-block rounded-sm" />
+                  </div>
+                </div>
+              </div>
+            );
+          }
+
           let style = 'text-emerald-400/85';
           if (log.type === 'system') style = 'text-emerald-400 font-bold';
-          if (log.type === 'user') style = 'text-emerald-300 font-bold';
-          if (log.type === 'header') style = 'text-emerald-300 font-extrabold tracking-wide uppercase border-b border-emerald-500/10 pb-0.5 mt-1';
+          if (log.type === 'user') style = 'text-emerald-350 font-bold';
+          if (log.type === 'header') style = 'text-emerald-350 font-extrabold tracking-wide uppercase border-b border-emerald-500/10 pb-0.5 mt-1';
           if (log.type === 'error') style = 'text-red-400/90 font-semibold';
           if (log.type === 'info') style = 'text-emerald-400/60';
 
           return (
-            <div key={index} className={`${style} whitespace-pre-wrap leading-relaxed`}>
+            <div key={index} className={`${style} whitespace-pre-wrap leading-relaxed text-left`}>
               {log.text}
             </div>
           );
@@ -223,11 +288,11 @@ const RudraTerminal = ({ onClose }) => {
 
       {/* Quick click suggestions (perfect for mobile or rapid checks!) */}
       <div className="flex flex-wrap gap-1.5 mt-4 pt-3 border-t border-emerald-500/10 select-none z-20 relative">
-        {['sys', 'whoami', 'projects', 'skills', 'matrix', 'clear'].map(suggestion => (
+        {['neofetch', 'sys', 'whoami', 'projects', 'skills', 'matrix', 'clear'].map(suggestion => (
           <button
             key={suggestion}
             onClick={() => handleCommand(suggestion)}
-            className="text-[11px] px-2 py-0.5 rounded border border-emerald-500/20 bg-emerald-500/[0.04] text-emerald-400/60 hover:text-emerald-300 hover:border-emerald-500/40 hover:bg-emerald-500/10 transition-all duration-200"
+            className="text-[11px] px-2 py-0.5 rounded border border-emerald-500/20 bg-emerald-500/[0.04] text-emerald-400/60 hover:text-emerald-300 hover:border-emerald-500/40 hover:bg-emerald-500/10 transition-all duration-200 cursor-pointer"
           >
             {suggestion}
           </button>
@@ -236,13 +301,13 @@ const RudraTerminal = ({ onClose }) => {
 
       {/* Input row */}
       <form onSubmit={handleFormSubmit} className="flex items-center gap-2 mt-2 pt-1.5 select-none z-20 relative">
-        <span className="text-emerald-300 font-bold text-[13px]">Tanish@Rudra:~$</span>
+        <span className="text-emerald-350 font-bold text-[13px]">root@G7510:~#</span>
         <input
           ref={inputRef}
           type="text"
           value={inputValue}
           onChange={e => setInputValue(e.target.value)}
-          className="flex-1 bg-transparent border-none outline-none text-emerald-300 font-mono text-[13px] caret-emerald-300"
+          className="flex-1 bg-transparent border-none outline-none text-emerald-350 font-mono text-[13px] caret-sky-400"
           autoFocus
           placeholder="Enter command code..."
         />

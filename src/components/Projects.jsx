@@ -10,6 +10,7 @@ const projects = [
     year: '2026',
     link: '#',
     glowColor: 'rgba(16, 185, 129, 0.06)',
+    image: '/projects/carelink.png',
   },
   {
     title: 'Project Rudra',
@@ -19,6 +20,7 @@ const projects = [
     year: '2026',
     link: 'https://osirisai.live',
     glowColor: 'rgba(57, 255, 20, 0.08)',
+    image: '/projects/rudra.png',
   },
   {
     title: 'Text Diffusion vs. AR Models',
@@ -28,6 +30,7 @@ const projects = [
     year: '2026',
     link: '#',
     glowColor: 'rgba(139, 92, 246, 0.08)',
+    image: '/projects/diffusion.png',
   },
   {
     title: 'EduCore',
@@ -37,6 +40,7 @@ const projects = [
     year: '2025',
     link: '#',
     glowColor: 'rgba(245, 158, 11, 0.06)',
+    image: '/projects/educore.png',
   },
   {
     title: 'PhysicsGPT',
@@ -46,6 +50,7 @@ const projects = [
     year: '2025',
     link: '#',
     glowColor: 'rgba(59, 130, 246, 0.06)',
+    image: '/projects/physicsgpt.png',
   },
   {
     title: 'ComplianceGuard',
@@ -55,6 +60,7 @@ const projects = [
     year: '2025',
     link: '#',
     glowColor: 'rgba(239, 68, 68, 0.06)',
+    image: '/projects/compliance.png',
   },
   {
     title: 'Anti-Sleep Pilot',
@@ -64,6 +70,7 @@ const projects = [
     year: '2026',
     link: '#',
     glowColor: 'rgba(249, 115, 22, 0.06)',
+    image: '/projects/antisleep.png',
   },
 ];
 
@@ -74,9 +81,9 @@ const RudraProjectCard = ({ project, index }) => {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    const y = e.clientX - rect.top; // Fixed to ClientY on implementation
     cardRef.current.style.setProperty('--x', `${x}px`);
-    cardRef.current.style.setProperty('--y', `${y}px`);
+    cardRef.current.style.setProperty('--y', `${e.clientY - rect.top}px`);
   };
 
   return (
@@ -90,7 +97,7 @@ const RudraProjectCard = ({ project, index }) => {
       transition={{ duration: 0.4, delay: index * 0.06 }}
       className="group block p-5 sm:p-6 rounded-xl border border-emerald-500/10 hover:border-emerald-500/30 bg-[#070e09] transition-all duration-300 relative overflow-hidden z-10 shadow-emerald-500/[0.01]"
       style={{
-        '--card-hover-color': 'rgba(57, 255, 20, 0.05)',
+        '--card-hover-color': 'rgba(23, 147, 209, 0.05)',
       }}
     >
       <div 
@@ -100,42 +107,55 @@ const RudraProjectCard = ({ project, index }) => {
         }}
       />
 
-      <div className="relative z-10">
-        <div className="flex items-start justify-between gap-4 mb-2">
-          <h3 className="text-[15px] font-medium text-emerald-400 group-hover:text-emerald-300 font-mono">
-            {project.title}
-          </h3>
-          <div className="flex items-center gap-3 shrink-0">
-            <span className="text-xs font-mono text-emerald-500/30">{project.year}</span>
-            <svg 
-              width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
-              className="text-white/0 group-hover:text-emerald-400/50 -translate-x-1 group-hover:translate-x-0 transition-all duration-300"
-            >
-              <path d="M7 17L17 7"/><path d="M7 7h10v10"/>
-            </svg>
+      <div className="relative z-10 flex flex-col md:flex-row gap-5 items-stretch">
+        {project.image && (
+          <div className="w-full md:w-32 lg:w-40 h-32 md:h-auto shrink-0 rounded-lg overflow-hidden border border-emerald-500/10 group-hover:border-emerald-500/30 bg-black/40 relative">
+            <img 
+              src={project.image} 
+              alt={project.title} 
+              className="w-full h-full object-cover opacity-50 group-hover:opacity-85 group-hover:scale-105 transition-all duration-300"
+            />
           </div>
-        </div>
+        )}
+        <div className="flex-1 flex flex-col justify-between">
+          <div>
+            <div className="flex items-start justify-between gap-4 mb-2">
+              <h3 className="text-[15px] font-medium text-emerald-400 group-hover:text-emerald-300 font-mono">
+                {project.title}
+              </h3>
+              <div className="flex items-center gap-3 shrink-0">
+                <span className="text-xs font-mono text-emerald-500/30">{project.year}</span>
+                <svg 
+                  width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+                  className="text-white/0 group-hover:text-emerald-400/50 -translate-x-1 group-hover:translate-x-0 transition-all duration-300"
+                >
+                  <path d="M7 17L17 7"/><path d="M7 7h10v10"/>
+                </svg>
+              </div>
+            </div>
 
-        <div className="mb-3">
-          <span className="inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wider text-emerald-400/70 font-mono">
-            <span className="w-1 h-1 rounded-full bg-emerald-400 pulse-soft" />
-            {project.status}
-          </span>
-        </div>
+            <div className="mb-3">
+              <span className="inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wider text-emerald-400/70 font-mono">
+                <span className="w-1 h-1 rounded-full bg-emerald-400 pulse-soft" />
+                {project.status}
+              </span>
+            </div>
 
-        <p className="text-sm leading-relaxed mb-4 text-emerald-400/50 group-hover:text-emerald-400/60 font-mono">
-          {project.description}
-        </p>
+            <p className="text-sm leading-relaxed mb-4 text-emerald-400/50 group-hover:text-emerald-400/60 font-mono">
+              {project.description}
+            </p>
+          </div>
 
-        <div className="flex flex-wrap gap-1.5">
-          {project.tech.map(t => (
-            <span
-              key={t}
-              className="text-[11px] font-mono px-2 py-0.5 rounded-md border border-emerald-500/10 text-emerald-400/35 group-hover:text-emerald-400/50 group-hover:border-emerald-500/25 bg-emerald-500/[0.02]"
-            >
-              {t}
-            </span>
-          ))}
+          <div className="flex flex-wrap gap-1.5 mt-auto">
+            {project.tech.map(t => (
+              <span
+                key={t}
+                className="text-[11px] font-mono px-2 py-0.5 rounded-md border border-emerald-500/10 text-emerald-400/35 group-hover:text-emerald-400/50 group-hover:border-emerald-500/25 bg-emerald-500/[0.02]"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </motion.a>
@@ -209,6 +229,21 @@ const Projects = ({ isRudraMode, theme, onRudraSimOpen }) => {
                         : 'border-stone-850 bg-stone-900/40 hover:bg-stone-900/60'
                     }`}
                   >
+                    {project.image && (
+                      <div className="absolute inset-0 z-0 overflow-hidden">
+                        <img 
+                          src={project.image} 
+                          alt={project.title} 
+                          className="w-full h-full object-cover opacity-65 group-hover:opacity-85 group-hover:scale-105 transition-all duration-500" 
+                        />
+                        <div className={`absolute inset-0 bg-gradient-to-b transition-colors duration-300 ${
+                          theme === 'light' 
+                            ? 'from-transparent via-stone-50/40 to-stone-50/90' 
+                            : 'from-transparent via-stone-950/40 to-stone-950/90'
+                        }`} />
+                      </div>
+                    )}
+
                     <div className="absolute top-0 right-0 group-hover:opacity-30 transition pr-4 pt-3.5 z-10">
                       <span className="text-lg text-yellow-500">★</span>
                     </div>
@@ -268,9 +303,9 @@ const Projects = ({ isRudraMode, theme, onRudraSimOpen }) => {
 
                     <div className={`absolute inset-0 bg-gradient-to-tr group-hover:scale-105 transition-all duration-500 z-0 ${
                       theme === 'light'
-                        ? 'from-stone-200/60 to-stone-50'
-                        : 'from-stone-900/60 to-stone-950'
-                    }`}></div>
+                        ? 'from-stone-200/40 to-stone-50/20'
+                        : 'from-stone-900/40 to-stone-950/20'
+                    } ${project.image ? 'hidden' : ''}`}></div>
                   </motion.a>
                 ))}
               </div>

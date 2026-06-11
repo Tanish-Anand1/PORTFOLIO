@@ -33,7 +33,7 @@ const CommandIcon = () => (
 const TacticalRadarIcon = ({ isActive }) => (
   <svg 
     width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"
-    className={`transition-all duration-300 ${isActive ? "text-emerald-400 rotate-90" : "text-white/40"}`}
+    className={`transition-all duration-300 ${isActive ? "text-emerald-400 rotate-90" : "rotate-0"}`}
   >
     <polygon points="12 2 2 7 12 12 22 7 12 2" /><polyline points="2 17 12 22 22 17" /><polyline points="2 12 12 17 22 12" />
   </svg>

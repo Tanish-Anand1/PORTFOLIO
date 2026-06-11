@@ -38,15 +38,27 @@ body.light {
   --foreground: #1c1917; /* stone-900 foreground */
 }
 
-/* ── Cyberpunk Rudra Mode Customization ─────── */
+/* ── Arch Linux Cyan Rudra Mode Customization ── */
 body.rudra {
-  --accent: #39FF14;
-  --accent-hover: #76ff5c;
-  --bg: #020603;
-  --surface: #070e09;
-  --border: rgba(57, 255, 20, 0.12);
-  --border-hover: rgba(57, 255, 20, 0.35);
-  --foreground: #9eff93;
+  --accent: #1793d1;
+  --accent-hover: #5ce1e6;
+  --bg: #0a0e14;
+  --surface: #10161f;
+  --border: rgba(23, 147, 209, 0.18);
+  --border-hover: rgba(23, 147, 209, 0.45);
+  --foreground: #d8dee9;
+
+  /* Redefine Tailwind's emerald colors to map to Arch Linux Cyan */
+  --color-emerald-50: #e6f7ff;
+  --color-emerald-100: #bae7ff;
+  --color-emerald-200: #91d5ff;
+  --color-emerald-300: #69c0ff;
+  --color-emerald-400: #1793d1;
+  --color-emerald-500: #1793d1;
+  --color-emerald-600: #0a75a7;
+  --color-emerald-700: #005073;
+  --color-emerald-800: #002f45;
+  --color-emerald-950: #030a0f;
 }
 
 /* ── Base ──────────────────────────────────── */
@@ -89,6 +101,13 @@ body {
   box-shadow: 0 0 25px rgba(57, 255, 20, 0.15);
 }
 
+body.rudra .rudra-glow {
+  box-shadow: 0 0 15px rgba(23, 147, 209, 0.08);
+}
+body.rudra .rudra-glow:hover {
+  box-shadow: 0 0 25px rgba(23, 147, 209, 0.22);
+}
+
 /* ── Focus States ──────────────────────────── */
 :focus-visible {
   outline: 2px solid var(--accent);
@@ -127,12 +146,12 @@ body.light ::-webkit-scrollbar-thumb:hover {
 }
 
 body.rudra ::-webkit-scrollbar-thumb {
-  background: rgba(57, 255, 20, 0.2);
+  background: rgba(23, 147, 209, 0.25);
   border: 2px solid transparent;
   background-clip: padding-box;
 }
 body.rudra ::-webkit-scrollbar-thumb:hover {
-  background: rgba(57, 255, 20, 0.45);
+  background: rgba(23, 147, 209, 0.5);
   border: 2px solid transparent;
   background-clip: padding-box;
 }
@@ -143,8 +162,8 @@ body.rudra ::-webkit-scrollbar-thumb:hover {
   color: #831843; /* pink-900 */
 }
 body.rudra ::selection {
-  background: #39FF14;
-  color: #020603;
+  background: #1793d1;
+  color: #0a0e14;
 }
 
 /* ── Section Separator ─────────────────────── */
