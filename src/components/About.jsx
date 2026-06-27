@@ -82,12 +82,12 @@ const About = ({ isRudraMode, theme }) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
           >
-            <section id="about" className="px-6 py-12 sm:py-16 relative transition-colors duration-300">
+            <section id="about" className="px-6 py-12 sm:py-16 relative transition-colors duration-300" data-section="about" itemScope itemType="https://schema.org/Person">
               <div className="max-w-5xl mx-auto">
                 <h1 className="text-4xl font-bold font-serif text-[var(--foreground)]">Hey there!</h1>
                 <div className="mt-5 text-xl text-[var(--foreground)]/90 space-y-4 leading-relaxed">
                   <p>
-                    I'm <span className="font-serif font-semibold text-[var(--foreground)]">Tanish Anand</span>, a builder,{' '}
+                    I'm <span className="font-serif font-semibold text-[var(--foreground)]" itemProp="name">Tanish Anand</span>, a builder,{' '}
                     <a
                       href="https://www.stanford.edu/"
                       target="_blank"
@@ -155,7 +155,7 @@ const About = ({ isRudraMode, theme }) => {
                     <div className="relative">
                       <div className="absolute -left-[21px] top-2 w-2.5 h-2.5 rounded-full bg-green-500"></div>
                       <span className={`text-sm font-semibold uppercase tracking-wide ${theme === 'light' ? 'text-green-700' : 'text-green-400'}`}>Now</span>
-                      <div className="font-semibold text-[var(--foreground)]">Building CareLink — care coordination for aging parents in India</div>
+                      <div className="font-semibold text-[var(--foreground)]" itemProp="description">Building CareLink — care coordination for aging parents in India</div>
                       <div className="mt-1 text-sm text-[var(--foreground)]/70 font-mono">
                         Exploring NLP and benchmarking discrete text diffusion pipelines
                       </div>

@@ -58,7 +58,7 @@ const Blog = ({ isRudraMode, theme }) => {
   };
 
   return (
-    <section id="blog" className="px-6 py-12 sm:py-16 relative border-t border-[var(--border)] transition-colors duration-300">
+    <section id="blog" className="px-6 py-12 sm:py-16 relative border-t border-[var(--border)] transition-colors duration-300" itemScope itemType="https://schema.org/Blog" data-section="blog">
       <div className="max-w-5xl mx-auto">
         <h2 className="text-[var(--foreground)] text-4xl font-bold font-serif">Blog</h2>
         <p className="mt-2 text-lg sm:text-xl text-[var(--foreground)]/70">
@@ -83,15 +83,15 @@ const Blog = ({ isRudraMode, theme }) => {
                   theme === 'light'
                     ? 'bg-violet-100 text-violet-800'
                     : 'bg-violet-950/60 text-violet-300 border border-violet-800/30'
-                }`}>
+                }`} itemProp="datePublished">
                   {blog.date} • {blog.tag}
                 </span>
                 <h3 className={`text-xl sm:text-2xl font-semibold font-serif leading-tight mt-2.5 group-hover:underline underline-offset-4 decoration-violet-400 transition-colors ${
                   theme === 'light' ? 'text-stone-900' : 'text-stone-100'
-                }`}>
+                }`} itemProp="headline">
                   {blog.title}
                 </h3>
-                <p className="text-xs text-[var(--foreground)]/60 line-clamp-2 mt-2 leading-relaxed font-sans">
+                <p className="text-xs text-[var(--foreground)]/60 line-clamp-2 mt-2 leading-relaxed font-sans" itemProp="description">
                   {blog.subtitle}
                 </p>
               </div>

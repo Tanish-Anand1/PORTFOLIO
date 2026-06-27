@@ -1,0 +1,3 @@
+Contact: mailto:atanish920@gmail.com
+Preferred-Languages: en
+Canonical: https://tanish.gg/.well-known/security.txt

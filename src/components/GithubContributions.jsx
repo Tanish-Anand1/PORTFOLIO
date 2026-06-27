@@ -28,7 +28,7 @@ const GithubContributions = ({ isRudraMode, theme }) => {
   };
 
   return (
-    <section className="px-6 py-12 sm:py-16 relative border-t border-[var(--border)] transition-colors duration-300">
+    <section className="px-6 py-12 sm:py-16 relative border-t border-[var(--border)] transition-colors duration-300" data-section="github-contributions" data-github-user="Tanish-Anand1">
       <div className="max-w-5xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-baseline justify-between mb-6 gap-2">
           <h2 className="text-[var(--foreground)] text-3xl font-bold font-serif">Github Contributions</h2>

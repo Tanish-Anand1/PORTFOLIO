@@ -25,7 +25,10 @@ const Hero = ({ isRudraMode, onRudraClose }) => {
               </div>
 
               {/* Name */}
-              <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-[1.1] text-emerald-400 text-shadow-emerald font-mono">
+              <h1
+                className="text-4xl sm:text-5xl font-semibold tracking-tight leading-[1.1] text-emerald-400 text-shadow-emerald font-mono"
+                itemProp="name"
+              >
                 Tanish Anand
               </h1>
 
@@ -52,13 +55,19 @@ const Hero = ({ isRudraMode, onRudraClose }) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
           >
-            <section className="relative px-6 sm:px-12 pt-32 pb-24 text-white bg-stone-950 overflow-hidden">
+            <section
+              className="relative px-6 sm:px-12 pt-32 pb-24 text-white bg-stone-950 overflow-hidden"
+              itemScope
+              itemType="https://schema.org/Person"
+              data-person="Tanish Anand"
+            >
               <div className="max-w-5xl mx-auto pt-12 relative z-10">
                 <motion.h1
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.6, delay: 0.1 }}
                   className="font-bold text-5xl md:text-6xl font-serif text-white tracking-tight"
+                  itemProp="name"
                 >
                   Tanish Anand
                 </motion.h1>
@@ -67,9 +76,37 @@ const Hero = ({ isRudraMode, onRudraClose }) => {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                   className="mt-4 text-xl sm:text-2xl leading-snug font-mono text-gray-300"
+                  itemProp="jobTitle"
                 >
                   developer • builder • researcher @ IIT Kanpur
                 </motion.h2>
+                {/* Hidden microdata for crawlers — visible only to bots */}
+                <div className="sr-only" aria-hidden="true">
+                  <span itemProp="description">Tanish Anand is a developer, founder, and researcher building at the intersection of AI, hardware, and the web. Founder of CareLink, creator of Project Rudra, Research Fellow at IIT Kanpur.</span>
+                  <span itemProp="email">atanish920@gmail.com</span>
+                  <span itemProp="url">https://tanish.gg</span>
+                  <a itemProp="sameAs" href="https://github.com/Tanish-Anand1">GitHub</a>
+                  <a itemProp="sameAs" href="https://www.linkedin.com/in/tanish-anand24/">LinkedIn</a>
+                  <a itemProp="sameAs" href="https://x.com/sullaxive">X</a>
+                  <a itemProp="sameAs" href="https://twitter.com/sullaxive">Twitter</a>
+                  <span itemProp="nationality">India</span>
+                  <span itemProp="knowsAbout">Artificial Intelligence</span>
+                  <span itemProp="knowsAbout">Machine Learning</span>
+                  <span itemProp="knowsAbout">Natural Language Processing</span>
+                  <span itemProp="knowsAbout">Cybersecurity</span>
+                  <span itemProp="knowsAbout">WebGL</span>
+                  <span itemProp="knowsAbout">React</span>
+                  <span itemProp="knowsAbout">OSINT</span>
+                  <div itemProp="alumniOf" itemScope itemType="https://schema.org/EducationalOrganization">
+                    <span itemProp="name">IIT Kanpur</span>
+                  </div>
+                  <div itemProp="alumniOf" itemScope itemType="https://schema.org/EducationalOrganization">
+                    <span itemProp="name">Delhi Public School Azaad Nagar</span>
+                  </div>
+                  <div itemProp="worksFor" itemScope itemType="https://schema.org/Organization">
+                    <span itemProp="name">CareLink</span>
+                  </div>
+                </div>
               </div>
 
               {/* Black overlay gradient */}

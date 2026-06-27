@@ -1,0 +1,16 @@
+/* TEAM */
+Name: Tanish Anand
+Role: Founder, Developer, Researcher
+Site: https://tanish.gg
+Email: atanish920@gmail.com
+GitHub: https://github.com/Tanish-Anand1
+LinkedIn: https://www.linkedin.com/in/tanish-anand24/
+X (Twitter): https://x.com/sullaxive
+Location: India
+
+/* SITE */
+Standards: HTML5, CSS3, JavaScript ES2024
+Framework: React 19, Vite 8
+Components: Framer Motion, Tailwind CSS v4
+Last Updated: 2026-06-28
+Language: English

@@ -207,6 +207,9 @@ const Projects = ({ isRudraMode, theme, onRudraSimOpen }) => {
             transition={{ duration: 0.4 }}
             id="projects"
             className="px-6 py-12 sm:py-16 relative border-t border-[var(--border)] transition-colors duration-300"
+            itemScope
+            itemType="https://schema.org/ItemList"
+            data-section="projects"
           >
             <div className="max-w-5xl mx-auto">
               <h1 className="text-[var(--foreground)] text-5xl font-bold font-serif">Projects</h1>
@@ -223,6 +226,12 @@ const Projects = ({ isRudraMode, theme, onRudraSimOpen }) => {
                     rel={project.link !== '#' ? 'noopener noreferrer' : undefined}
                     whileHover={{ y: -4 }}
                     transition={{ duration: 0.2 }}
+                    itemScope
+                    itemType="https://schema.org/SoftwareApplication"
+                    itemProp="itemListElement"
+                    data-project={project.title}
+                    data-status={project.status}
+                    data-year={project.year}
                     className={`rounded-xl relative group shadow-md hover:shadow-xl h-64 sm:h-72 border flex flex-col justify-between overflow-hidden cursor-pointer transition-all duration-300 ${
                       theme === 'light'
                         ? 'border-stone-200 bg-stone-50'
@@ -265,12 +274,12 @@ const Projects = ({ isRudraMode, theme, onRudraSimOpen }) => {
                     }`}>
                       <h3 className={`text-lg sm:text-xl font-bold font-serif leading-tight transition-colors ${
                         theme === 'light' ? 'text-stone-900 group-hover:text-indigo-600' : 'text-stone-100 group-hover:text-indigo-400'
-                      }`}>
+                      }`} itemProp="name">
                         {project.title}
                       </h3>
                       <p className={`text-xs mt-1.5 line-clamp-2 leading-relaxed transition-colors ${
                         theme === 'light' ? 'text-stone-600' : 'text-stone-400'
-                      }`}>
+                      }`} itemProp="description">
                         {project.description}
                       </p>
                       

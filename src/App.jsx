@@ -11,6 +11,7 @@ import CommandPalette from './components/CommandPalette';
 import SecurityAdvisories from './components/SecurityAdvisories';
 import RudraSimulatorModal from './components/RudraSimulatorModal';
 import ResumeModal from './components/ResumeModal';
+import SEOMetadata from './components/SEOMetadata';
 
 const SunIcon = () => (
   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -127,7 +128,13 @@ function App() {
   }, []);
 
   return (
-    <div className={`min-h-screen ${isRudraMode ? 'bg-[#020603] text-emerald-400 font-mono' : 'bg-[var(--bg)] text-[var(--foreground)] font-sans'} relative transition-colors duration-500`}>
+    <div
+      className={`min-h-screen ${isRudraMode ? 'bg-[#020603] text-emerald-400 font-mono' : 'bg-[var(--bg)] text-[var(--foreground)] font-sans'} relative transition-colors duration-500`}
+      itemScope
+      itemType="https://schema.org/ProfilePage"
+    >
+      {/* SEO Metadata — injects structured data into <head> at runtime */}
+      <SEOMetadata />
       {/* ── Nav ─────────────────────────────── */}
       <motion.nav
         layout

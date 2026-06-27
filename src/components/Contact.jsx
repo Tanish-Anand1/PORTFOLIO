@@ -27,6 +27,9 @@ const Contact = ({ isRudraMode, theme }) => {
               <a href="https://www.linkedin.com/in/tanish-anand24/" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-300 hover:underline">
                 LINKEDIN
               </a>
+              <a href="https://x.com/sullaxive" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-300 hover:underline">
+                X
+              </a>
             </div>
           </motion.footer>
         ) : (
@@ -38,6 +41,9 @@ const Contact = ({ isRudraMode, theme }) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
             className="pb-12 pt-8 relative border-t border-[var(--border)] transition-colors duration-300"
+            itemScope
+            itemType="https://schema.org/Person"
+            data-section="contact"
           >
             <div className="mx-5">
               <div className={`max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 border-t ${theme === 'light' ? 'border-stone-200/80' : 'border-stone-850'} pt-8`}>
@@ -56,7 +62,8 @@ const Contact = ({ isRudraMode, theme }) => {
                   <a
                     href="https://github.com/Tanish-Anand1"
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="me noopener noreferrer"
+                    itemProp="sameAs"
                     className={`hover:underline transition-colors ${
                       theme === 'light' ? 'hover:text-indigo-600' : 'hover:text-indigo-400'
                     }`}
@@ -66,12 +73,24 @@ const Contact = ({ isRudraMode, theme }) => {
                   <a
                     href="https://www.linkedin.com/in/tanish-anand24/"
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="me noopener noreferrer"
+                    itemProp="sameAs"
                     className={`hover:underline transition-colors ${
                       theme === 'light' ? 'hover:text-indigo-600' : 'hover:text-indigo-400'
                     }`}
                   >
                     LinkedIn
+                  </a>
+                  <a
+                    href="https://x.com/sullaxive"
+                    target="_blank"
+                    rel="me noopener noreferrer"
+                    itemProp="sameAs"
+                    className={`hover:underline transition-colors ${
+                      theme === 'light' ? 'hover:text-indigo-600' : 'hover:text-indigo-400'
+                    }`}
+                  >
+                    X
                   </a>
                 </div>
               </div>

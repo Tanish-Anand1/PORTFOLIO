@@ -45,7 +45,7 @@ const SecurityAdvisories = ({ theme }) => {
   };
 
   return (
-    <section id="security" className="px-6 py-12 relative border-t border-[var(--border)] transition-colors duration-300">
+    <section id="security" className="px-6 py-12 relative border-t border-[var(--border)] transition-colors duration-300" data-section="security-advisories" itemScope itemType="https://schema.org/ItemList">
       <div className="max-w-5xl mx-auto">
         <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-2 gap-2">
           <h2 className="text-[var(--foreground)] text-3xl font-bold font-serif">Security Advisories</h2>
