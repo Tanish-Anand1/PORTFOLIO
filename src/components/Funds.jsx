@@ -89,7 +89,7 @@ const Funds = ({ isRudraMode, theme }) => {
               className="px-6 py-12 sm:py-16 relative border-t border-[var(--border)] transition-colors duration-300"
             >
               <div className="max-w-5xl mx-auto">
-                <h1 className="text-[var(--foreground)] text-3xl font-bold font-serif mb-2">Capital Raised</h1>
+                <h2 className="text-[var(--foreground)] text-3xl font-bold font-serif mb-2">Capital Raised</h2>
                 <div className={`w-16 h-0.5 ${theme === 'light' ? 'bg-stone-200' : 'bg-stone-850'} mb-8`}></div>
                 
                 <button 

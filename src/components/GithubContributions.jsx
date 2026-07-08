@@ -1,25 +1,38 @@
-import { ActivityCalendar } from 'react-activity-calendar';
-import rawContributions from './contributions.json';
+import { lazy, Suspense, useMemo } from 'react';
+
+const ActivityCalendar = lazy(() => 
+  import('react-activity-calendar').then(mod => ({ default: mod.ActivityCalendar }))
+);
 
 const GithubContributions = ({ isRudraMode, theme }) => {
   if (isRudraMode) return null; // Rudra mode hides to focus on terminal
 
-  // Process actual 2D week-level contributions from github-contributions-api into a flat array
-  const processedData = rawContributions.contributions.flat().map(item => {
-    let level = 0;
-    const count = item.contributionCount;
-    if (count > 0) {
-      if (count <= 3) level = 1;
-      else if (count <= 8) level = 2;
-      else if (count <= 15) level = 3;
-      else level = 4;
-    }
-    return {
-      date: item.date,
-      count: count,
-      level: level
-    };
-  });
+  // Lazy import contributions data
+  const processedData = useMemo(() => {
+    // Dynamic import handled at module level since this component is already lazy-loaded from App
+    const rawContributions = require('./contributions.json');
+    return rawContributions.contributions.flat().map(item => {
+      let level = 0;
+      const count = item.contributionCount;
+      if (count > 0) {
+        if (count <= 3) level = 1;
+        else if (count <= 8) level = 2;
+        else if (count <= 15) level = 3;
+        else level = 4;
+      }
+      return {
+        date: item.date,
+        count: count,
+        level: level
+      };
+    });
+  }, []);
+
+  // Get total contributions count
+  const totalContributions = useMemo(() => {
+    const rawContributions = require('./contributions.json');
+    return rawContributions.totalContributions;
+  }, []);
 
   // Unique luxurious indigo-cyan color scheme so it looks premium and distinct
   const themeColors = {
@@ -37,21 +50,23 @@ const GithubContributions = ({ isRudraMode, theme }) => {
               ? 'text-indigo-600 bg-indigo-50 border-indigo-100'
               : 'text-indigo-300 bg-indigo-950/50 border-indigo-900/30'
           }`}>
-            {rawContributions.totalContributions.toLocaleString()} commits in the last year
+            {totalContributions.toLocaleString()} commits in the last year
           </span>
         </div>
         <div className="flex justify-center md:justify-start overflow-x-auto pb-4 custom-scrollbar">
           <div className="min-w-[800px] md:min-w-0 pr-4">
-            <ActivityCalendar 
-              data={processedData}
-              theme={themeColors}
-              labels={{
-                totalCount: '{{count}} contributions in the last year',
-              }}
-              fontSize={13}
-              blockSize={12}
-              blockMargin={3}
-            />
+            <Suspense fallback={<div className="h-[140px]" />}>
+              <ActivityCalendar 
+                data={processedData}
+                theme={themeColors}
+                labels={{
+                  totalCount: '{{count}} contributions in the last year',
+                }}
+                fontSize={13}
+                blockSize={12}
+                blockMargin={3}
+              />
+            </Suspense>
           </div>
         </div>
       </div>

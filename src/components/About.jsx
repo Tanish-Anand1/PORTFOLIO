@@ -84,7 +84,7 @@ const About = ({ isRudraMode, theme }) => {
           >
             <section id="about" className="px-6 py-12 sm:py-16 relative transition-colors duration-300" data-section="about" itemScope itemType="https://schema.org/Person">
               <div className="max-w-5xl mx-auto">
-                <h1 className="text-4xl font-bold font-serif text-[var(--foreground)]">Hey there!</h1>
+                <h2 className="text-4xl font-bold font-serif text-[var(--foreground)]">Hey there!</h2>
                 <div className="mt-5 text-xl text-[var(--foreground)]/90 space-y-4 leading-relaxed">
                   <p>
                     I'm <span className="font-serif font-semibold text-[var(--foreground)]" itemProp="name">Tanish Anand</span>, a builder,{' '}
@@ -95,7 +95,7 @@ const About = ({ isRudraMode, theme }) => {
                       className="inline-flex items-center gap-1 hover:underline transition-all hover:-translate-y-0.5 text-[var(--foreground)]"
                     >
                       <span className="font-normal">wannabe</span>
-                      <img src="/block-s-right.avif" alt="Stanford S Logo" className="h-7 w-auto inline-block align-middle animate-pulse duration-1000" />
+                      <img src="/block-s-right.avif" alt="Stanford S Logo" width="28" height="28" className="h-7 w-auto inline-block align-middle animate-pulse duration-1000" />
                       <span className="text-[#8C1515] font-serif font-bold">Stanford</span>
                       <span className="font-normal">guy</span>
                     </a>
@@ -106,7 +106,7 @@ const About = ({ isRudraMode, theme }) => {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1 hover:underline transition-all hover:-translate-y-0.5 text-[var(--foreground)]"
                     >
-                      <img src="/dps-logo.webp" alt="DPS Logo" className="h-5 w-auto inline-block align-middle rounded-sm" />
+                      <img src="/dps-logo.webp" alt="DPS Logo" width="20" height="20" loading="lazy" decoding="async" className="h-5 w-auto inline-block align-middle rounded-sm" />
                       <span className="text-green-600 font-serif font-bold">DPS</span>
                     </a>
                     .
@@ -292,7 +292,7 @@ const About = ({ isRudraMode, theme }) => {
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 w-6 h-6 flex-shrink-0 flex items-center justify-center text-xl">
-                      <img src="/vibecon-logo.png" alt="VibeCon Logo" className="h-6 w-auto object-contain rounded-sm" />
+                      <img src="/vibecon-logo.png" alt="VibeCon Logo" width="24" height="24" loading="lazy" decoding="async" className="h-6 w-auto object-contain rounded-sm" />
                     </span>
                     <span>
                       Ranked in the top 20 builders across India out of 20,000+ applicants at{' '}

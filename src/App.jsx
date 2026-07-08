@@ -1,17 +1,19 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Hero from './components/Hero';
 import About from './components/About';
-import Funds from './components/Funds';
-import Blog from './components/Blog';
 import Projects from './components/Projects';
-import GithubContributions from './components/GithubContributions';
 import Contact from './components/Contact';
-import CommandPalette from './components/CommandPalette';
-import SecurityAdvisories from './components/SecurityAdvisories';
-import RudraSimulatorModal from './components/RudraSimulatorModal';
-import ResumeModal from './components/ResumeModal';
 import SEOMetadata from './components/SEOMetadata';
+
+// Lazy-load below-fold and modal components to reduce initial bundle
+const Funds = lazy(() => import('./components/Funds'));
+const Blog = lazy(() => import('./components/Blog'));
+const GithubContributions = lazy(() => import('./components/GithubContributions'));
+const CommandPalette = lazy(() => import('./components/CommandPalette'));
+const SecurityAdvisories = lazy(() => import('./components/SecurityAdvisories'));
+const RudraSimulatorModal = lazy(() => import('./components/RudraSimulatorModal'));
+const ResumeModal = lazy(() => import('./components/ResumeModal'));
 
 const SunIcon = () => (
   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -154,7 +156,7 @@ function App() {
         {/* Header Row */}
         <div className="flex items-center justify-between w-full h-9">
           <a 
-            href="#" 
+            href="/" 
             className={`text-base font-bold tracking-tighter hover:opacity-80 transition-opacity flex items-center gap-1.5 ${
               isRudraMode ? 'text-emerald-400 font-mono' : theme === 'light' ? 'text-stone-900 font-serif' : 'text-white font-serif'
             }`}
@@ -337,34 +339,38 @@ function App() {
       />
 
       {/* ── Main Content ───────────────────── */}
-      {isRudraMode ? (
-        <main className="w-full max-w-[1024px] mx-auto px-6 pt-14 relative z-10">
-          <Hero isRudraMode={isRudraMode} onRudraClose={() => setIsRudraMode(false)} theme={theme} />
-          <About isRudraMode={isRudraMode} theme={theme} />
-          <Blog isRudraMode={isRudraMode} theme={theme} />
-          <Projects isRudraMode={isRudraMode} theme={theme} />
-          <GithubContributions isRudraMode={isRudraMode} theme={theme} />
-          <Funds isRudraMode={isRudraMode} theme={theme} />
-          <Contact isRudraMode={isRudraMode} theme={theme} />
-        </main>
-      ) : (
-        <main className="w-full max-w-[1024px] mx-auto pt-20 pb-16 px-4 sm:px-6 relative z-10 transition-all duration-300">
-          <div className="w-full bg-[var(--surface)] border border-[var(--border)] rounded-2xl shadow-xl overflow-hidden transition-colors duration-300">
+      <Suspense fallback={null}>
+        {isRudraMode ? (
+          <main className="w-full max-w-[1024px] mx-auto px-6 pt-14 relative z-10">
             <Hero isRudraMode={isRudraMode} onRudraClose={() => setIsRudraMode(false)} theme={theme} />
             <About isRudraMode={isRudraMode} theme={theme} />
             <Blog isRudraMode={isRudraMode} theme={theme} />
-            <Projects isRudraMode={isRudraMode} theme={theme} onRudraSimOpen={() => setIsRudraSimOpen(true)} />
-            <SecurityAdvisories theme={theme} />
+            <Projects isRudraMode={isRudraMode} theme={theme} />
             <GithubContributions isRudraMode={isRudraMode} theme={theme} />
             <Funds isRudraMode={isRudraMode} theme={theme} />
             <Contact isRudraMode={isRudraMode} theme={theme} />
-          </div>
-        </main>
-      )}
+          </main>
+        ) : (
+          <main className="w-full max-w-[1024px] mx-auto pt-20 pb-16 px-4 sm:px-6 relative z-10 transition-all duration-300">
+            <div className="w-full bg-[var(--surface)] border border-[var(--border)] rounded-2xl shadow-xl overflow-hidden transition-colors duration-300">
+              <Hero isRudraMode={isRudraMode} onRudraClose={() => setIsRudraMode(false)} theme={theme} />
+              <About isRudraMode={isRudraMode} theme={theme} />
+              <Blog isRudraMode={isRudraMode} theme={theme} />
+              <Projects isRudraMode={isRudraMode} theme={theme} onRudraSimOpen={() => setIsRudraSimOpen(true)} />
+              <SecurityAdvisories theme={theme} />
+              <GithubContributions isRudraMode={isRudraMode} theme={theme} />
+              <Funds isRudraMode={isRudraMode} theme={theme} />
+              <Contact isRudraMode={isRudraMode} theme={theme} />
+            </div>
+          </main>
+        )}
+      </Suspense>
 
       {/* Modals & Simulation Overlays */}
-      <RudraSimulatorModal isOpen={isRudraSimOpen} onClose={() => setIsRudraSimOpen(false)} />
-      <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} theme={theme} />
+      <Suspense fallback={null}>
+        <RudraSimulatorModal isOpen={isRudraSimOpen} onClose={() => setIsRudraSimOpen(false)} />
+        <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} theme={theme} />
+      </Suspense>
     </div>
   );
 }

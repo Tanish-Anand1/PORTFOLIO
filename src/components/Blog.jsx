@@ -188,7 +188,7 @@ const Blog = ({ isRudraMode, theme }) => {
               <div className="p-6 sm:p-8 overflow-y-auto max-h-[70vh] flex flex-col gap-5">
                 <div className="border-b border-[var(--border)] pb-4">
                   <span className="text-xs font-mono text-[var(--foreground)]/40 font-bold">{selectedBlog.date}</span>
-                  <h1 className="text-2xl sm:text-3xl font-bold font-serif text-[var(--foreground)] tracking-tight mt-1 leading-tight">{selectedBlog.title}</h1>
+                  <h3 className="text-2xl sm:text-3xl font-bold font-serif text-[var(--foreground)] tracking-tight mt-1 leading-tight">{selectedBlog.title}</h3>
                 </div>
 
                 <div className="space-y-4 text-[15px] sm:text-base leading-relaxed text-[var(--foreground)]/80 font-sans">

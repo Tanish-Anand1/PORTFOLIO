@@ -75,6 +75,11 @@ const SecurityAdvisories = ({ theme }) => {
                 {/* Header row */}
                 <div 
                   onClick={() => toggleExpand(adv.id)}
+                  role="button"
+                  tabIndex={0}
+                  aria-expanded={isExpanded}
+                  aria-label={`${adv.title} — ${adv.severity} ${adv.score}`}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleExpand(adv.id); } }}
                   className="p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer select-none"
                 >
                   <div className="flex-1">

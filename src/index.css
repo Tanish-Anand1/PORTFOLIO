@@ -190,3 +190,28 @@ body.rudra ::selection {
   font-family: 'Playfair Display', Georgia, serif;
 }
 
+/* ── Performance: Content Visibility ──────── */
+/* Defer rendering of below-fold sections */
+[data-section="blog"],
+[data-section="github-contributions"],
+[data-section="security-advisories"],
+[data-section="contact"] {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
+}
+
+/* ── Performance: Compositing Hints ──────── */
+/* Promote frequently animated elements to GPU layers */
+.group:hover img {
+  will-change: transform, opacity;
+}
+
+/* Reduce transition properties for better compositing */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+

@@ -1,7 +1,27 @@
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import RudraTerminal from './RudraTerminal';
 
 const Hero = ({ isRudraMode, onRudraClose }) => {
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const videoRef = useRef(null);
+
+  // Lazy-load the video after the page becomes interactive
+  useEffect(() => {
+    if (isRudraMode) return;
+
+    const timer = setTimeout(() => {
+      if (videoRef.current) {
+        videoRef.current.src = '/hero-bg.mp4';
+        videoRef.current.load();
+        videoRef.current.play().catch(() => {});
+        setVideoLoaded(true);
+      }
+    }, 1500); // Delay video loading to prioritize LCP
+
+    return () => clearTimeout(timer);
+  }, [isRudraMode]);
+
   return (
     <div className="relative">
       <AnimatePresence mode="wait">
@@ -81,14 +101,15 @@ const Hero = ({ isRudraMode, onRudraClose }) => {
                   developer • builder • researcher @ IIT Kanpur
                 </motion.h2>
                 {/* Hidden microdata for crawlers — visible only to bots */}
-                <div className="sr-only" aria-hidden="true">
+                {/* Removed aria-hidden to fix: [aria-hidden="true"] elements contain focusable descendants */}
+                <div className="sr-only">
                   <span itemProp="description">Tanish Anand is a developer, founder, and researcher building at the intersection of AI, hardware, and the web. Founder of CareLink, creator of Project Rudra, Research Fellow at IIT Kanpur.</span>
                   <span itemProp="email">atanish920@gmail.com</span>
                   <span itemProp="url">https://tanish.gg</span>
-                  <a itemProp="sameAs" href="https://github.com/Tanish-Anand1">GitHub</a>
-                  <a itemProp="sameAs" href="https://www.linkedin.com/in/tanish-anand24/">LinkedIn</a>
-                  <a itemProp="sameAs" href="https://x.com/sullaxive">X</a>
-                  <a itemProp="sameAs" href="https://twitter.com/sullaxive">Twitter</a>
+                  <span itemProp="sameAs">https://github.com/Tanish-Anand1</span>
+                  <span itemProp="sameAs">https://www.linkedin.com/in/tanish-anand24/</span>
+                  <span itemProp="sameAs">https://x.com/sullaxive</span>
+                  <span itemProp="sameAs">https://twitter.com/sullaxive</span>
                   <span itemProp="nationality">India</span>
                   <span itemProp="knowsAbout">Artificial Intelligence</span>
                   <span itemProp="knowsAbout">Machine Learning</span>
@@ -112,15 +133,32 @@ const Hero = ({ isRudraMode, onRudraClose }) => {
               {/* Black overlay gradient */}
               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50 z-0 pointer-events-none"></div>
 
-              {/* Looping video background */}
+              {/* Poster image for fast LCP, then lazy-loaded video on top */}
+              <img
+                src="/hero-poster.webp"
+                alt=""
+                role="presentation"
+                width="1280"
+                height="720"
+                fetchPriority="high"
+                className={`absolute top-0 left-0 w-full h-full object-cover -z-10 opacity-75 transition-opacity duration-700 ${videoLoaded ? 'opacity-0' : 'opacity-75'}`}
+              />
+
+              {/* Looping video background — lazy loaded after page interactive */}
               <video
+                ref={videoRef}
                 autoPlay
                 muted
                 loop
                 playsInline
-                className="absolute top-0 left-0 w-full h-full object-cover -z-10 opacity-75"
+                preload="none"
+                poster="/hero-poster.webp"
+                width="1280"
+                height="720"
+                className={`absolute top-0 left-0 w-full h-full object-cover -z-10 transition-opacity duration-700 ${videoLoaded ? 'opacity-75' : 'opacity-0'}`}
               >
-                <source src="/hero-bg.mp4" type="video/mp4" />
+                {/* Source is set dynamically via JS for lazy loading */}
+                <track kind="captions" src="/captions.vtt" srcLang="en" label="English" default />
               </video>
             </section>
 
@@ -132,6 +170,7 @@ const Hero = ({ isRudraMode, onRudraClose }) => {
               viewBox="0 0 1152 59"
               xmlns="http://www.w3.org/2000/svg"
               preserveAspectRatio="none"
+              aria-hidden="true"
             >
               <path
                 fillRule="evenodd"

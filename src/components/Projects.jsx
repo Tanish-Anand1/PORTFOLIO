@@ -113,6 +113,10 @@ const RudraProjectCard = ({ project, index }) => {
             <img 
               src={project.image} 
               alt={project.title} 
+              width="320"
+              height="256"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover opacity-50 group-hover:opacity-85 group-hover:scale-105 transition-all duration-300"
             />
           </div>
@@ -212,18 +216,25 @@ const Projects = ({ isRudraMode, theme, onRudraSimOpen }) => {
             data-section="projects"
           >
             <div className="max-w-5xl mx-auto">
-              <h1 className="text-[var(--foreground)] text-5xl font-bold font-serif">Projects</h1>
+              <h2 className="text-[var(--foreground)] text-5xl font-bold font-serif">Projects</h2>
               <p className="mt-2 text-2xl text-[var(--foreground)]/80 leading-normal">
                 Here's a collection of some of my favorite work!
               </p>
 
               <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {projects.map((project, index) => (
-                  <motion.a
+                {projects.map((project, index) => {
+                  const isExternalLink = project.link !== '#';
+                  const TagName = isExternalLink ? 'a' : 'div';
+                  const linkProps = isExternalLink ? {
+                    href: project.link,
+                    target: '_blank',
+                    rel: 'noopener noreferrer',
+                  } : {
+                    role: 'article',
+                  };
+                  return (
+                  <motion.div
                     key={project.title}
-                    href={project.link}
-                    target={project.link !== '#' ? '_blank' : undefined}
-                    rel={project.link !== '#' ? 'noopener noreferrer' : undefined}
                     whileHover={{ y: -4 }}
                     transition={{ duration: 0.2 }}
                     itemScope
@@ -232,7 +243,10 @@ const Projects = ({ isRudraMode, theme, onRudraSimOpen }) => {
                     data-project={project.title}
                     data-status={project.status}
                     data-year={project.year}
-                    className={`rounded-xl relative group shadow-md hover:shadow-xl h-64 sm:h-72 border flex flex-col justify-between overflow-hidden cursor-pointer transition-all duration-300 ${
+                  >
+                  <TagName
+                    {...linkProps}
+                    className={`rounded-xl relative group shadow-md hover:shadow-xl h-64 sm:h-72 border flex flex-col justify-between overflow-hidden cursor-pointer transition-all duration-300 block ${
                       theme === 'light'
                         ? 'border-stone-200 bg-stone-50'
                         : 'border-stone-850 bg-stone-900/40 hover:bg-stone-900/60'
@@ -242,7 +256,11 @@ const Projects = ({ isRudraMode, theme, onRudraSimOpen }) => {
                       <div className="absolute inset-0 z-0 overflow-hidden">
                         <img 
                           src={project.image} 
-                          alt={project.title} 
+                          alt={project.title}
+                          width="400"
+                          height="288"
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-full object-cover opacity-65 group-hover:opacity-85 group-hover:scale-105 transition-all duration-500" 
                         />
                         <div className={`absolute inset-0 bg-gradient-to-b transition-colors duration-300 ${
@@ -315,8 +333,10 @@ const Projects = ({ isRudraMode, theme, onRudraSimOpen }) => {
                         ? 'from-stone-200/40 to-stone-50/20'
                         : 'from-stone-900/40 to-stone-950/20'
                     } ${project.image ? 'hidden' : ''}`}></div>
-                  </motion.a>
-                ))}
+                  </TagName>
+                  </motion.div>
+                  );
+                })}
               </div>
             </div>
           </motion.section>
