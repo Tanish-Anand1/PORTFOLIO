@@ -67,7 +67,7 @@ const EssayHome = ({ onResumeOpen, onOpenWriting }) => {
             anand
           </h1>
           <p className="studio-lede">
-            engineer at prolearn. research at iit kanpur. founder of carelink. builds across ai, hardware, and the web.
+            engineer at prolearn. researcher at iit kanpur. founder of carelink. builds across ai, hardware, and the web.
           </p>
           <div className="studio-hero-actions">
             <button type="button" className="studio-cta studio-cta-solid" onClick={onOpenWriting}>
@@ -98,7 +98,7 @@ const EssayHome = ({ onResumeOpen, onOpenWriting }) => {
                 <img src="/dps-logo.webp" alt="" width="16" height="16" className="studio-inline-icon" />
                 DPS
               </a>
-              . research at{' '}
+              . researcher at{' '}
               <a href="https://www.iitk.ac.in/" target="_blank" rel="noopener noreferrer">
                 IIT Kanpur
               </a>{' '}
