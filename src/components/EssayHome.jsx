@@ -60,11 +60,11 @@ const EssayHome = ({ onResumeOpen, onOpenWriting }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
-          <p className="studio-kicker">tanish anand</p>
+          <p className="studio-kicker">kanpur · bangalore · web</p>
           <h1 className="studio-title">
-            systems that
+            tanish
             <br />
-            survive reality
+            anand
           </h1>
           <p className="studio-lede">
             engineer at prolearn. research at iit kanpur. founder of carelink. builds across ai, hardware, and the web.

@@ -1,0 +1,60 @@
+TANISH ANAND
+Engineer, Founder, Research Fellow
+Kanpur, India
+Email: atanish920@gmail.com
+GitHub: https://github.com/Tanish-Anand1
+LinkedIn: https://linkedin.com/in/tanish-anand24
+Website: https://tanish.gg
+
+SUMMARY
+Engineer and founder working across AI, video systems, and web software. Currently an engineer on the video pipeline at Prolearn, a Bangalore edtech company with $3.2M in pre-seed funding. Research Fellow at IIT Kanpur focused on discrete text diffusion for Hindi NLP. Founder of CareLink. Background includes WebGL and OSINT systems, edge AI, and responsible security disclosure.
+
+EXPERIENCE
+
+Prolearn | Engineer, Video Pipeline
+2026 to Present | Bangalore, India
+- Build and maintain video pipeline infrastructure for educational content generation and delivery.
+- Collaborate with Ravneet Singh (Founder of Prolearn and FC.one, former CTO of Vedantu) on production video systems.
+
+CareLink | Founder
+2026 to Present
+- Founded CareLink to help families coordinate care for aging parents in tier-2 Indian cities.
+- Shipped a zero-code MVP using WhatsApp workflows, spreadsheet automation, and alert routing.
+
+IIT Kanpur | Research Fellow, Computer Science
+2026 to Present | Advisor: Prof. Adithya Vadapalli
+- Research discrete text diffusion models (SEDD, LLaDA) against autoregressive baselines for Hindi NLP.
+- Study tokenization, noise schedules, and morphological agreement for Devanagari text.
+
+PROJECTS
+
+Project Rudra | https://osirisai.live
+- Built a GPU-accelerated OSINT interface that combines live RTSP camera feeds, ADS-B flight data, and AIS marine tracking in a WebGL and MapLibre view.
+- Designed reconnecting ingest workers, fragmented MP4 remuxing, and typed-array buffer reuse to reduce Chrome garbage-collection stutter on live feeds.
+
+EduCore
+- Built a solar-powered offline learning device that runs quantized local models on a Raspberry Pi for low-connectivity settings.
+
+Additional projects: PhysicsGPT, ComplianceGuard, Anti-Sleep Pilot
+- Built an offline physics tutor, a dual-LLM compliance auditor, and a real-time computer vision drowsiness detector for hackathons and field demos.
+
+SECURITY RESEARCH
+- Independently found and responsibly disclosed a prompt-injection sandbox escape on a major AI inference platform. Received a five-figure bounty. CVSS 9.8.
+- Found and disclosed a cart valuation and pricing API bypass on a major quick-commerce platform. Received a six-figure bounty. CVSS 8.4. Both issues were patched.
+
+EDUCATION
+
+Delhi Public School (DPS) Azaad Nagar | Class XII
+Expected 2026 | Kanpur, India
+
+AWARDS AND HONORS
+- Ranked #1 out of 3,500+ at Uniform2Unicorn. Named India Top Young Founder of the Year 2026. Awarded Rs. 1,00,000 cash and Rs. 10,00,000 in credits, plus dinner with Iqlipse Nova. Team: Aditya Bhatia and Pavitra Kushwaha.
+- Selected for Y Combinator Startup School India (6% acceptance rate).
+- Ranked in the top 20 builders in India out of 20,000+ at VIBECON.
+- Won 15+ hackathons in a two-month period, including events from Google, OpenAI, and Cursor.
+- Won International Robowars (8kg) at Techfest 2025, IIT Bombay.
+
+SKILLS
+Languages and frameworks: Python, JavaScript, TypeScript, React, Next.js, PyTorch, Node.js
+AI and ML: Discrete text diffusion (SEDD, LLaDA), NLP, model quantization (llama.cpp), computer vision (OpenCV), multi-agent LLM systems
+Systems: WebGL, MapLibre, RTSP and video ingest, WebRTC, Raspberry Pi edge deployment, API security
