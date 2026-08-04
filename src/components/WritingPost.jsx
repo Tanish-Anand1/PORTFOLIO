@@ -5,40 +5,54 @@ const WritingPost = ({ slug, onBack, onWriting }) => {
 
   if (!post) {
     return (
-      <main className="essay writing-page">
-        <nav className="essay-nav">
-          <button type="button" className="essay-nav-btn" onClick={onWriting}>
+      <main className="studio writing-page">
+        <div className="studio-top">
+          <button
+            type="button"
+            className="studio-mark"
+            onClick={onWriting}
+            style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+          >
             ← writing
           </button>
-        </nav>
-        <article className="essay-body">
-          <h1>not found.</h1>
-          <p>that post doesn't exist.</p>
-        </article>
+        </div>
+        <h1 className="studio-page-title">not found</h1>
+        <p className="studio-prose">that post doesn't exist.</p>
       </main>
     );
   }
 
   return (
-    <main className="essay writing-page">
-      <nav className="essay-nav" aria-label="Primary">
-        <button type="button" className="essay-nav-btn" onClick={onWriting}>
+    <main className="studio writing-page">
+      <div className="studio-top">
+        <button
+          type="button"
+          className="studio-mark"
+          onClick={onWriting}
+          style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+        >
           ← writing
         </button>
-      </nav>
+        <nav className="studio-nav" aria-label="Primary">
+          <button type="button" onClick={onBack}>
+            home
+          </button>
+        </nav>
+      </div>
 
-      <article className="essay-body writing-post">
-        <h1>{post.title.toLowerCase()}</h1>
+      <article className="writing-post">
+        <h1 className="studio-page-title">{post.title}</h1>
         <p className="writing-post-date">
           <time dateTime={post.dateISO}>{post.dateLabel}</time>
         </p>
-
-        {post.body.map((paragraph) => (
-          <p key={paragraph.slice(0, 40)}>{paragraph}</p>
-        ))}
+        <div className="studio-prose">
+          {post.body.map((paragraph) => (
+            <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+          ))}
+        </div>
       </article>
 
-      <footer className="essay-footer">
+      <footer className="studio-footer">
         <button type="button" onClick={onBack}>
           ← home
         </button>

@@ -102,7 +102,7 @@ function App() {
       className={
         isRudraMode
           ? 'min-h-screen bg-[#020603] text-emerald-400 font-mono relative'
-          : 'min-h-screen bg-white text-[#111] relative'
+          : 'min-h-screen bg-transparent text-[#14181c] relative'
       }
       itemScope
       itemType="https://schema.org/ProfilePage"

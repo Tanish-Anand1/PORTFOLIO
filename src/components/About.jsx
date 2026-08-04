@@ -23,7 +23,7 @@ const About = ({ isRudraMode, theme }) => {
 
             <div className="flex flex-col gap-4 text-sm text-emerald-400/70">
               <p>
-                <span className="text-emerald-300 font-medium">IDENT:</span> Tanish Anand — Agent of craft. Operating across AI mainframe interfaces, quantized diffusion architectures, and localized Edge compute deployments.
+                <span className="text-emerald-300 font-medium">IDENT:</span> Tanish Anand. Agent of craft. Operating across AI mainframe interfaces, quantized diffusion architectures, and localized Edge compute deployments.
               </p>
               <p>
                 <span className="text-emerald-300 font-medium">SECTORS:</span> Distributed neural inference pipelines (Hindi NLP models), 60fps WebGL command grids (Project Rudra), and autonomous dual-LLM audit systems.
@@ -36,7 +36,7 @@ const About = ({ isRudraMode, theme }) => {
                 <div className="absolute -left-[22px] top-[7px] w-2 h-2 rounded-full bg-emerald-400 ring-4 ring-[#020603] pulse-soft" />
                 <span className="text-xs font-semibold uppercase tracking-widest text-emerald-400">ACTIVE_PROJECTS</span>
                 <p className="text-xs mt-1 leading-relaxed text-emerald-400/60 font-mono">
-                  CareLink // Coordinating hardware+WhatsApp orchestrations for tier-2 regions.
+                  Prolearn // Video pipeline engineer ($3.2M pre-seed Bangalore edtech) with Ravneet Singh.
                   <br />
                   NLP // Benchmarking discrete text diffusion (SEDD/LLaDA) vs Auto-regressive backbones.
                 </p>
@@ -89,7 +89,7 @@ const About = ({ isRudraMode, theme }) => {
                     .
                   </p>
                   <p>
-                    I'm obsessed with understanding intelligence — how to build it, accelerate it, and eventually define it.
+                    I'm obsessed with understanding intelligence: how to build it, accelerate it, and eventually define it.
                   </p>
                   <p>
                     Founder of{' '}
@@ -97,7 +97,9 @@ const About = ({ isRudraMode, theme }) => {
                     and developer of{' '}
                     <span className="font-serif font-semibold text-[var(--foreground)]">Project Rudra</span>
                     <span className="text-[#39FF14] font-black font-serif select-none">.</span>{' '}
-                    I build systems that have to work in the real world — offline, messy, and useful.
+                    Right now I'm building the video pipeline at{' '}
+                    <span className="font-serif font-semibold text-[var(--foreground)]">Prolearn</span>
+                    . I build systems that have to work in the real world: offline, messy, and useful.
                   </p>
                   <p>
                     For fun, I break APIs, win hackathons, reverse engineer android, do research on the{' '}
@@ -116,9 +118,9 @@ const About = ({ isRudraMode, theme }) => {
                     <div className="relative">
                       <div className="absolute -left-[23px] top-2 w-2.5 h-2.5 rounded-full bg-green-500"></div>
                       <span className={`text-xs font-semibold uppercase tracking-wider ${theme === 'light' ? 'text-green-700' : 'text-green-400'}`}>Now</span>
-                      <div className="font-medium text-[var(--foreground)] mt-1" itemProp="description">Building CareLink — care coordination for aging parents in India</div>
+                      <div className="font-medium text-[var(--foreground)] mt-1" itemProp="description">Building the video pipeline at Prolearn</div>
                       <div className="mt-1 text-sm text-[var(--foreground)]/65 font-mono">
-                        Exploring NLP and benchmarking discrete text diffusion pipelines
+                        Bangalore edtech · research on discrete text diffusion at IIT Kanpur
                       </div>
                     </div>
                     <div className="relative">
@@ -142,9 +144,9 @@ const About = ({ isRudraMode, theme }) => {
                 </p>
                 <ul className="list-disc pl-5 space-y-4 text-[1.05rem] sm:text-lg text-[var(--foreground)]/90 leading-[1.7] max-w-[42rem] marker:text-[var(--foreground)]/35">
                   <li>
-                    currently building{' '}
-                    <span className="font-semibold text-[var(--foreground)]">CareLink</span>
-                    {' '}— care coordination for aging parents in tier-2 Indian cities — and shipping systems across AI, hardware, and the web
+                    currently building the video pipeline at{' '}
+                    <span className="font-semibold text-[var(--foreground)]">Prolearn</span>
+                    {' '}($3.2M pre-seed, Bangalore edtech) as an engineer, working with Ravneet Singh (founder of Prolearn and FC.one, former CTO of Vedantu)
                   </li>
                   <li>
                     research fellow at{' '}
@@ -217,7 +219,7 @@ const About = ({ isRudraMode, theme }) => {
                     </AnimatePresence>
                   </li>
                   <li>
-                    built Project Rudra, EduCore, PhysicsGPT, ComplianceGuard, and Anti-Sleep Pilot — from OSINT grids to offline edge AI
+                    built Project Rudra, EduCore, PhysicsGPT, ComplianceGuard, and Anti-Sleep Pilot: from OSINT grids to offline edge AI
                   </li>
                 </ul>
               </div>
