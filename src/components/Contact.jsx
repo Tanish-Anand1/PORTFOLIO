@@ -40,6 +40,7 @@ const Contact = ({ isRudraMode, theme }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
+            id="contact"
             className="pb-12 pt-8 relative border-t border-[var(--border)] transition-colors duration-300"
             itemScope
             itemType="https://schema.org/Person"

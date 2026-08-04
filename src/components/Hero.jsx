@@ -86,7 +86,7 @@ const Hero = ({ isRudraMode, onRudraClose }) => {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.6, delay: 0.1 }}
-                  className="font-bold text-5xl md:text-6xl font-serif text-white tracking-tight"
+                  className="font-semibold text-5xl md:text-6xl font-serif text-white tracking-tight leading-[1.05]"
                   itemProp="name"
                 >
                   Tanish Anand
@@ -95,7 +95,7 @@ const Hero = ({ isRudraMode, onRudraClose }) => {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
-                  className="mt-4 text-xl sm:text-2xl leading-snug font-mono text-gray-300"
+                  className="mt-5 text-lg sm:text-xl leading-snug font-mono text-gray-300 tracking-tight"
                   itemProp="jobTitle"
                 >
                   developer • builder • researcher @ IIT Kanpur

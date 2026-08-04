@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Lora', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-  --font-serif: 'Fraunces', Georgia, serif;
-  --font-playfair: 'Playfair Display', Georgia, serif;
+  --font-serif: 'Lora', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --font-playfair: 'Lora', Georgia, serif;
 
   --breakpoint-xs: 400px;
 
@@ -16,29 +16,27 @@
   --color-dark-border-hover: var(--border-hover);
 }
 
-/* ── System CSS Variables ───────────────────── */
 :root {
-  --accent: #4f46e5;
-  --accent-hover: #6366f1;
-  --bg: #0c0a09; /* Deep stone-950 dark background */
-  --surface: #1c1917; /* stone-900 surface */
-  --border: rgba(255, 255, 255, 0.08);
-  --border-hover: rgba(255, 255, 255, 0.15);
-  --foreground: #f5f5f4; /* stone-100 foreground */
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --border: rgba(0, 0, 0, 0.1);
+  --border-hover: rgba(0, 0, 0, 0.18);
+  --foreground: #111111;
 }
 
-/* ── Light Mode Customization ──────────────── */
-body.light {
-  --accent: #3b82f6;
-  --accent-hover: #60a5fa;
-  --bg: #f5f5f4; /* Elegant warm stone-100 background */
-  --surface: #ffffff; /* pure white cards */
-  --border: rgba(0, 0, 0, 0.08);
-  --border-hover: rgba(0, 0, 0, 0.15);
-  --foreground: #1c1917; /* stone-900 foreground */
+body.light,
+body.essay-mode {
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --border: rgba(0, 0, 0, 0.1);
+  --border-hover: rgba(0, 0, 0, 0.18);
+  --foreground: #111111;
 }
 
-/* ── Arch Linux Cyan Rudra Mode Customization ── */
 body.rudra {
   --accent: #1793d1;
   --accent-hover: #5ce1e6;
@@ -48,7 +46,6 @@ body.rudra {
   --border-hover: rgba(23, 147, 209, 0.45);
   --foreground: #d8dee9;
 
-  /* Redefine Tailwind's emerald colors to map to Arch Linux Cyan */
   --color-emerald-50: #e6f7ff;
   --color-emerald-100: #bae7ff;
   --color-emerald-200: #91d5ff;
@@ -61,7 +58,6 @@ body.rudra {
   --color-emerald-950: #030a0f;
 }
 
-/* ── Base ──────────────────────────────────── */
 html {
   overflow-x: hidden;
   scroll-behavior: smooth;
@@ -74,16 +70,375 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
   overflow-x: hidden;
-  transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-              color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-*, *::before, *::after {
+body.essay-mode {
+  background: #ffffff;
+  color: #111111;
+}
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-/* ── Scanline & CRT Effect ─────────────────── */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ── Essay layout (pavitrakushwaha.dev-inspired) ── */
+.essay {
+  max-width: 660px;
+  margin: 0 auto;
+  padding: 140px 28px 120px;
+}
+
+.essay-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 28px;
+  font-family: var(--font-mono);
+  font-size: 14.4px;
+  line-height: 1.7;
+  color: #aaa;
+  text-transform: lowercase;
+}
+
+.essay-nav a,
+.essay-nav-btn {
+  color: #aaa;
+  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.essay-nav a:hover,
+.essay-nav-btn:hover {
+  color: #111;
+}
+
+.essay-nav-sep {
+  color: #ccc;
+}
+
+.essay-body {
+  font-size: 20px;
+  line-height: 34px;
+  text-transform: lowercase;
+}
+
+.essay-body h1 {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 34px;
+  margin: 0 0 28px;
+  color: #111;
+}
+
+.essay-body p {
+  margin: 0 0 28px;
+  color: #111;
+}
+
+.essay-body a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 0, 0, 0.22);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+.essay-body a:hover {
+  text-decoration-color: rgba(0, 0, 0, 0.55);
+}
+
+.essay-body strong {
+  font-weight: 600;
+}
+
+.essay-inline-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  vertical-align: -2px;
+  border-radius: 2px;
+}
+
+.essay-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+  padding: 18px 0;
+  margin: 8px 0 36px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: #888;
+  text-transform: lowercase;
+}
+
+.essay-social a {
+  color: #888;
+  text-decoration: none;
+}
+
+.essay-social a:hover {
+  color: #111;
+}
+
+.essay-section-label {
+  margin-bottom: 16px !important;
+}
+
+.essay-list {
+  margin: 0 0 36px;
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+
+.essay-list li {
+  margin-bottom: 18px;
+  padding-left: 4px;
+}
+
+.essay-list li::marker {
+  color: #bbb;
+}
+
+.essay-muted {
+  color: #888;
+}
+
+.essay-bounty {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: #2563eb;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: none;
+}
+
+.essay-bounty:hover {
+  color: #1d4ed8;
+}
+
+.essay-bounty-detail {
+  display: block;
+  margin-top: 10px;
+  color: #555;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.essay-text-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 0, 0, 0.22);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  text-transform: lowercase;
+}
+
+.essay-text-btn:hover {
+  text-decoration-color: rgba(0, 0, 0, 0.55);
+}
+
+/* Writing index + post (pavitrakushwaha.dev style) */
+.writing-page .essay-body h1 {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 20px;
+}
+
+.writing-list {
+  list-style: none;
+  padding: 0;
+  margin: 36px 0 40px;
+}
+
+.writing-item {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 16px;
+  padding: 22px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.writing-item:last-child {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.writing-year {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #aaa;
+  padding-top: 4px;
+  text-transform: none;
+}
+
+.writing-title {
+  display: inline;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  font-weight: 600;
+  color: #111;
+  cursor: pointer;
+  text-align: left;
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 0, 0, 0.25);
+  text-underline-offset: 3px;
+  text-transform: none;
+}
+
+.writing-title:hover {
+  text-decoration-color: rgba(0, 0, 0, 0.6);
+}
+
+.writing-summary {
+  margin: 8px 0 0 !important;
+  color: #777 !important;
+  font-size: 18px !important;
+  line-height: 1.6 !important;
+}
+
+.writing-notify-label {
+  margin-bottom: 14px !important;
+}
+
+.writing-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.writing-form input {
+  flex: 1 1 220px;
+  min-width: 0;
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  border-radius: 4px;
+  background: #fff;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: #111;
+  text-transform: lowercase;
+}
+
+.writing-form input::placeholder {
+  color: #aaa;
+}
+
+.writing-form button {
+  height: 42px;
+  padding: 0 16px;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  border-radius: 4px;
+  background: #fff;
+  font-family: var(--font-serif);
+  font-size: 16px;
+  color: #111;
+  cursor: pointer;
+  text-transform: lowercase;
+}
+
+.writing-form button:hover {
+  border-color: rgba(0, 0, 0, 0.4);
+}
+
+.writing-subscribed {
+  color: #666 !important;
+}
+
+.writing-post h1 {
+  font-size: 28px !important;
+  font-weight: 600 !important;
+  line-height: 1.35 !important;
+  margin: 0 0 12px !important;
+  text-transform: lowercase;
+}
+
+.writing-post-date {
+  color: #888 !important;
+  margin-bottom: 36px !important;
+}
+
+.essay-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 64px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #aaa;
+  text-transform: lowercase;
+}
+
+.essay-footer button {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.essay-footer button:hover,
+.essay-footer a:hover {
+  color: #111;
+}
+
+@media (max-width: 640px) {
+  .essay {
+    padding: 96px 20px 80px;
+  }
+
+  .essay-body,
+  .essay-body h1 {
+    font-size: 18px;
+    line-height: 30px;
+  }
+
+  .writing-page .essay-body h1,
+  .writing-post h1 {
+    font-size: 24px !important;
+  }
+
+  .writing-item {
+    grid-template-columns: 44px 1fr;
+    gap: 12px;
+  }
+
+  .writing-summary {
+    font-size: 16px !important;
+  }
+}
+
+/* Rudra leftovers */
 @keyframes scanline {
   0% { transform: translateY(-100%); }
   100% { transform: translateY(100%); }
@@ -93,10 +448,10 @@ body {
   animation: scanline 8s linear infinite;
 }
 
-/* ── Tactical Glow Border ─────────────────── */
 .rudra-glow {
   box-shadow: 0 0 15px rgba(57, 255, 20, 0.05);
 }
+
 .rudra-glow:hover {
   box-shadow: 0 0 25px rgba(57, 255, 20, 0.15);
 }
@@ -104,43 +459,51 @@ body {
 body.rudra .rudra-glow {
   box-shadow: 0 0 15px rgba(23, 147, 209, 0.08);
 }
+
 body.rudra .rudra-glow:hover {
   box-shadow: 0 0 25px rgba(23, 147, 209, 0.22);
 }
 
-/* ── Focus States ──────────────────────────── */
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-  border-radius: 4px;
+.pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
 }
 
-/* ── Scrollbars ────────────────────────────── */
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+
+.text-shadow-emerald {
+  text-shadow: 0 0 12px rgba(57, 255, 20, 0.15);
+}
+
+body.rudra .text-shadow-emerald {
+  text-shadow: 0 0 12px rgba(23, 147, 209, 0.2);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 99px;
-  border: 2px solid transparent;
-  background-clip: padding-box;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.25);
-  border: 2px solid transparent;
-  background-clip: padding-box;
-}
 
-body.light ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.12);
-  border: 2px solid transparent;
-  background-clip: padding-box;
-}
-body.light ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.25);
+  border-radius: 99px;
   border: 2px solid transparent;
   background-clip: padding-box;
 }
@@ -150,68 +513,3 @@ body.rudra ::-webkit-scrollbar-thumb {
   border: 2px solid transparent;
   background-clip: padding-box;
 }
-body.rudra ::-webkit-scrollbar-thumb:hover {
-  background: rgba(23, 147, 209, 0.5);
-  border: 2px solid transparent;
-  background-clip: padding-box;
-}
-
-/* ── Selection ─────────────────────────────── */
-::selection {
-  background: #fbcfe8; /* pink-200 */
-  color: #831843; /* pink-900 */
-}
-body.rudra ::selection {
-  background: #1793d1;
-  color: #0a0e14;
-}
-
-/* ── Section Separator ─────────────────────── */
-.section-divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border), transparent);
-}
-
-/* ── Availability Dot Pulse ────────────────── */
-@keyframes pulse-soft {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
-.pulse-soft {
-  animation: pulse-soft 2s ease-in-out infinite;
-}
-
-/* Custom classes for the redesigned theme */
-.font-serif {
-  font-family: 'Fraunces', Georgia, serif;
-}
-
-.font-playfair {
-  font-family: 'Playfair Display', Georgia, serif;
-}
-
-/* ── Performance: Content Visibility ──────── */
-/* Defer rendering of below-fold sections */
-[data-section="blog"],
-[data-section="github-contributions"],
-[data-section="security-advisories"],
-[data-section="contact"] {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 500px;
-}
-
-/* ── Performance: Compositing Hints ──────── */
-/* Promote frequently animated elements to GPU layers */
-.group:hover img {
-  will-change: transform, opacity;
-}
-
-/* Reduce transition properties for better compositing */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-

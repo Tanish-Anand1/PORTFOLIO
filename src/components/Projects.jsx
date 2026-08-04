@@ -216,12 +216,12 @@ const Projects = ({ isRudraMode, theme, onRudraSimOpen }) => {
             data-section="projects"
           >
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-[var(--foreground)] text-5xl font-bold font-serif">Projects</h2>
-              <p className="mt-2 text-2xl text-[var(--foreground)]/80 leading-normal">
-                Here's a collection of some of my favorite work!
+              <h2 className="text-[var(--foreground)] text-[2.5rem] sm:text-5xl font-semibold font-serif tracking-tight">Selected work</h2>
+              <p className="mt-3 text-lg sm:text-xl text-[var(--foreground)]/70 leading-relaxed max-w-[36rem]">
+                Things I've built — products, research, and systems that had to work outside a demo.
               </p>
 
-              <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {projects.map((project, index) => {
                   const isExternalLink = project.link !== '#';
                   const TagName = isExternalLink ? 'a' : 'div';
