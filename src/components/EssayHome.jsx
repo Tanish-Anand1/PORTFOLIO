@@ -2,13 +2,13 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const projects = [
+  { name: 'ORCA', href: null, note: null },
+  { name: 'D2AR', href: null, note: null },
+  { name: 'ORBIS 2045', href: null, note: null },
+  { name: 'LumenSeed', href: null, note: null },
+  { name: 'ClusterOrch-Gym', href: null, note: null },
   { name: 'CareLink', href: null, note: 'founded' },
   { name: 'Project Rudra', href: 'https://osirisai.live', note: 'live' },
-  { name: 'Text Diffusion', href: null, note: 'iitk' },
-  { name: 'EduCore', href: null, note: null },
-  { name: 'PhysicsGPT', href: null, note: null },
-  { name: 'ComplianceGuard', href: null, note: null },
-  { name: 'Anti-Sleep Pilot', href: null, note: null },
 ];
 
 const fade = {
@@ -83,7 +83,7 @@ const EssayHome = ({ onResumeOpen, onOpenWriting }) => {
       <div className="studio-shell">
         <motion.p className="studio-now" {...fade}>
           <span>now</span>
-          building the video pipeline at <strong>Prolearn</strong> · discrete text diffusion at{' '}
+          building the video pipeline at <strong>Prolearn</strong> · mpc and cryptography research at{' '}
           <a href="https://www.iitk.ac.in/" target="_blank" rel="noopener noreferrer">
             IIT Kanpur
           </a>
@@ -110,7 +110,7 @@ const EssayHome = ({ onResumeOpen, onOpenWriting }) => {
               >
                 Prof. Adithya Vadapalli
               </a>
-              : discrete text diffusion and hindi nlp. mostly reading sedd / llada papers and trying to get them to work on a language nobody benchmarks.
+              : mpc and cryptography under the cse dept. mostly the kind of research that looks quiet until you realize what it's testing.
             </p>
             <p>
               founded <strong>CareLink</strong>. learned more from debugging it at 2am than from any class.
@@ -177,7 +177,7 @@ const EssayHome = ({ onResumeOpen, onOpenWriting }) => {
                 <a href="https://www.iitk.ac.in/" target="_blank" rel="noopener noreferrer">
                   IIT Kanpur
                 </a>
-                , working on discrete text diffusion and hindi nlp under Prof. Adithya Vadapalli (cse dept.)
+                , working on mpc and cryptography under Prof. Adithya Vadapalli (cse dept.)
               </p>
             </li>
             <li>
@@ -219,16 +219,19 @@ const EssayHome = ({ onResumeOpen, onOpenWriting }) => {
                 <a href="https://vibecon.com" target="_blank" rel="noopener noreferrer">
                   VIBECON
                 </a>
+                , where i also interviewed Mukund Jha (Emergent Labs) and Jared Friedman (YC partner)
               </p>
             </li>
             <li>
               <span className="studio-idx">06</span>
-              <p>won 15+ hackathons in the last 2 months, including ones from google, openai, and cursor</p>
+              <p>
+                won 15+ hackathons in the last 2 months, including ones from google, openai, and cursor
+              </p>
             </li>
             <li>
               <span className="studio-idx">07</span>
               <p>
-                won international robowars 8kg at techfest '25 (iit bombay)
+                keynoted SparkX at techfest '25 (iit bombay) and won international robowars 8kg
                 <span className="studio-muted"> (shoutout pavitra)</span>
               </p>
             </li>
@@ -262,8 +265,12 @@ const EssayHome = ({ onResumeOpen, onOpenWriting }) => {
             <li>
               <span className="studio-idx">09</span>
               <p>
-                built Project Rudra, EduCore, PhysicsGPT, ComplianceGuard, and Anti-Sleep Pilot. most of these broke at least once before they worked.
+                founded <strong>byteforge</strong>, one of north india's largest independent tech communities, 4,500+ members
               </p>
+            </li>
+            <li>
+              <span className="studio-idx">10</span>
+              <p>published a research paper on synthetic intelligence at 16</p>
             </li>
           </ol>
         </motion.section>
@@ -299,7 +306,13 @@ const EssayHome = ({ onResumeOpen, onOpenWriting }) => {
         <motion.section className="studio-section studio-contact" id="contact" {...fade}>
           <h2 className="studio-h2">contact</h2>
           <p className="studio-prose">
-            if you want to talk video pipelines, text diffusion, or why your rtsp stream keeps dropping frames, email is fastest.
+            if you want to talk product, research, or something you're building, book time or email.
+          </p>
+          <p className="studio-prose studio-cal">
+            30 minutes. direct with founder.{' '}
+            <a href="https://cal.com/tanishanand" target="_blank" rel="noopener noreferrer">
+              cal.com/tanishanand
+            </a>
           </p>
           <p className="studio-contact-line">
             <a href="mailto:atanish920@gmail.com">atanish920@gmail.com</a>

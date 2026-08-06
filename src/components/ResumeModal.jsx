@@ -111,8 +111,8 @@ const ResumeModal = ({ isOpen, onClose }) => {
               <p className="text-[10.5pt] m-0">
                 Engineer and founder working across AI, video systems, and web software. Currently an
                 engineer on the video pipeline at Prolearn, a Bangalore edtech company with $3.2M in
-                pre-seed funding. Research Fellow at IIT Kanpur focused on discrete text diffusion for
-                Hindi NLP. Founder of CareLink. Background includes WebGL and OSINT systems, edge AI, and
+                pre-seed funding. Research Fellow at IIT Kanpur focused on MPC and cryptography.
+                Founder of CareLink. Background includes WebGL and OSINT systems, edge AI, and
                 responsible security disclosure.
               </p>
             </section>
@@ -165,11 +165,7 @@ const ResumeModal = ({ isOpen, onClose }) => {
                 <p className="m-0 text-[10pt] italic">Advisor: Prof. Adithya Vadapalli</p>
                 <ul className="mt-1 mb-0 pl-5 text-[10.5pt] list-disc">
                   <li>
-                    Research discrete text diffusion models (SEDD, LLaDA) against autoregressive baselines
-                    for Hindi NLP.
-                  </li>
-                  <li>
-                    Study tokenization, noise schedules, and morphological agreement for Devanagari text.
+                    Research MPC and cryptography under Prof. Adithya Vadapalli in the CSE department.
                   </li>
                 </ul>
               </div>
@@ -179,6 +175,18 @@ const ResumeModal = ({ isOpen, onClose }) => {
               <h2 className="text-[11pt] font-bold uppercase border-b border-black pb-0.5 mb-2 tracking-wide">
                 Projects
               </h2>
+
+              <div className="mb-2.5">
+                <p className="m-0 text-[10.5pt] font-bold">
+                  ORCA, D2AR, ORBIS 2045, LumenSeed, ClusterOrch-Gym
+                </p>
+                <ul className="mt-1 mb-0 pl-5 text-[10.5pt] list-disc">
+                  <li>
+                    Built agentic systems, simulation, and orchestration projects across AI and systems
+                    software.
+                  </li>
+                </ul>
+              </div>
 
               <div className="mb-2.5">
                 <p className="m-0 text-[10.5pt] font-bold">
@@ -192,31 +200,14 @@ const ResumeModal = ({ isOpen, onClose }) => {
                     Built a GPU-accelerated OSINT interface that combines live RTSP camera feeds, ADS-B
                     flight data, and AIS marine tracking in a WebGL and MapLibre view.
                   </li>
-                  <li>
-                    Designed reconnecting ingest workers, fragmented MP4 remuxing, and typed-array buffer
-                    reuse to reduce Chrome garbage-collection stutter on live feeds.
-                  </li>
-                </ul>
-              </div>
-
-              <div className="mb-2.5">
-                <p className="m-0 text-[10.5pt] font-bold">EduCore</p>
-                <ul className="mt-1 mb-0 pl-5 text-[10.5pt] list-disc">
-                  <li>
-                    Built a solar-powered offline learning device that runs quantized local models on a
-                    Raspberry Pi for low-connectivity settings.
-                  </li>
                 </ul>
               </div>
 
               <div className="mb-1">
-                <p className="m-0 text-[10.5pt] font-bold">
-                  Additional projects: PhysicsGPT, ComplianceGuard, Anti-Sleep Pilot
-                </p>
+                <p className="m-0 text-[10.5pt] font-bold">CareLink</p>
                 <ul className="mt-1 mb-0 pl-5 text-[10.5pt] list-disc">
                   <li>
-                    Built an offline physics tutor, a dual-LLM compliance auditor, and a real-time
-                    computer vision drowsiness detector for hackathons and field demos.
+                    Care coordination MVP for aging parents in tier-2 Indian cities.
                   </li>
                 </ul>
               </div>
@@ -260,12 +251,14 @@ const ResumeModal = ({ isOpen, onClose }) => {
                   Nova. Team: Aditya Bhatia and Pavitra Kushwaha.
                 </li>
                 <li>Selected for Y Combinator Startup School India (6% acceptance rate).</li>
-                <li>Ranked in the top 20 builders in India out of 20,000+ at VIBECON.</li>
+                <li>Ranked in the top 20 builders in India out of 20,000+ at VIBECON. Interviewed Mukund Jha (Emergent Labs) and Jared Friedman (YC partner).</li>
                 <li>
                   Won 15+ hackathons in a two-month period, including events from Google, OpenAI, and
                   Cursor.
                 </li>
-                <li>Won International Robowars (8kg) at Techfest 2025, IIT Bombay.</li>
+                <li>Keynoted SparkX at Techfest 2025, IIT Bombay. Won International Robowars (8kg).</li>
+                <li>Founded byteforge, an independent tech community with 4,500+ members.</li>
+                <li>Published a research paper on Synthetic Intelligence at 16.</li>
               </ul>
             </section>
 
@@ -278,7 +271,7 @@ const ResumeModal = ({ isOpen, onClose }) => {
                 TypeScript, React, Next.js, PyTorch, Node.js
               </p>
               <p className="m-0 text-[10.5pt] mt-1">
-                <span className="font-bold">AI and ML:</span> Discrete text diffusion (SEDD, LLaDA), NLP,
+                <span className="font-bold">AI and ML:</span> MPC, cryptography, NLP,
                 model quantization (llama.cpp), computer vision (OpenCV), multi-agent LLM systems
               </p>
               <p className="m-0 text-[10.5pt] mt-1">

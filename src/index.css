@@ -497,14 +497,8 @@ body.essay-mode {
   text-transform: lowercase;
 }
 
-.studio-contact-line {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 18px 0 0;
-  font-family: var(--font-mono);
-  font-size: 14px;
-  text-transform: lowercase;
+.studio-cal {
+  margin-top: -8px;
 }
 
 .studio-footer {

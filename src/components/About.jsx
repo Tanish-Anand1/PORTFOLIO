@@ -38,7 +38,7 @@ const About = ({ isRudraMode, theme }) => {
                 <p className="text-xs mt-1 leading-relaxed text-emerald-400/60 font-mono">
                   Prolearn // Video pipeline engineer ($3.2M pre-seed Bangalore edtech) with Ravneet Singh.
                   <br />
-                  NLP // Benchmarking discrete text diffusion (SEDD/LLaDA) vs Auto-regressive backbones.
+                  Crypto // MPC and cryptography research under Prof. Adithya Vadapalli.
                 </p>
               </div>
               <div className="relative">
@@ -120,7 +120,7 @@ const About = ({ isRudraMode, theme }) => {
                       <span className={`text-xs font-semibold uppercase tracking-wider ${theme === 'light' ? 'text-green-700' : 'text-green-400'}`}>Now</span>
                       <div className="font-medium text-[var(--foreground)] mt-1" itemProp="description">Building the video pipeline at Prolearn</div>
                       <div className="mt-1 text-sm text-[var(--foreground)]/65 font-mono">
-                        Bangalore edtech · research on discrete text diffusion at IIT Kanpur
+                        Bangalore edtech · MPC and cryptography research at IIT Kanpur
                       </div>
                     </div>
                     <div className="relative">
@@ -153,7 +153,7 @@ const About = ({ isRudraMode, theme }) => {
                     <a href="https://www.iitk.ac.in/" target="_blank" rel="noopener noreferrer" className="font-semibold underline underline-offset-2 decoration-[var(--foreground)]/25 hover:decoration-[var(--foreground)]/60">
                       IIT Kanpur
                     </a>
-                    , working on discrete text diffusion and Hindi NLP under{' '}
+                    , working on MPC and cryptography under{' '}
                     <a href="http://scholar.google.com/citations?user=jeOME6wAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="font-semibold underline underline-offset-2 decoration-[var(--foreground)]/25 hover:decoration-[var(--foreground)]/60">
                       Prof. Adithya Vadapalli
                     </a>
@@ -183,12 +183,13 @@ const About = ({ isRudraMode, theme }) => {
                     <a href="https://vibecon.com" target="_blank" rel="noopener noreferrer" className="font-semibold underline underline-offset-2 decoration-[var(--foreground)]/25 hover:decoration-[var(--foreground)]/60">
                       VIBECON
                     </a>
+                    , where I also interviewed Mukund Jha (Emergent Labs) and Jared Friedman (YC partner)
                   </li>
                   <li>
                     won 15+ hackathons in the last 2 months, including ones from Google, OpenAI, and Cursor
                   </li>
                   <li>
-                    won international robowars 8kg at Techfest '25 (IIT Bombay)
+                    keynoted SparkX at Techfest '25 (IIT Bombay) and won international robowars 8kg
                     <span className="text-[var(--foreground)]/55"> (shoutout pavitra)</span>
                   </li>
                   <li>
@@ -219,7 +220,13 @@ const About = ({ isRudraMode, theme }) => {
                     </AnimatePresence>
                   </li>
                   <li>
-                    built Project Rudra, EduCore, PhysicsGPT, ComplianceGuard, and Anti-Sleep Pilot: from OSINT grids to offline edge AI
+                    founded <span className="font-semibold text-[var(--foreground)]">byteforge</span>, one of north India's largest independent tech communities, 4,500+ members
+                  </li>
+                  <li>
+                    published a research paper on Synthetic Intelligence at 16
+                  </li>
+                  <li>
+                    built ORCA, D2AR, ORBIS 2045, LumenSeed, ClusterOrch-Gym, CareLink, Project Rudra, and more
                   </li>
                 </ul>
               </div>
