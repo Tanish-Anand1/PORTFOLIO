@@ -103,9 +103,9 @@ const Hero = ({ isRudraMode, onRudraClose }) => {
                 {/* Hidden microdata for crawlers — visible only to bots */}
                 {/* Removed aria-hidden to fix: [aria-hidden="true"] elements contain focusable descendants */}
                 <div className="sr-only">
-                  <span itemProp="description">Tanish Anand is a developer, founder, and researcher building at the intersection of AI, hardware, and the web. Founder of CareLink, creator of Project Rudra, Research Fellow at IIT Kanpur.</span>
+                  <span itemProp="description">Tanish Anand is a developer, founder, and researcher building at the intersection of AI, hardware, and the web. Co-founder and CTO of Vivacity, creator of Project Rudra, Research Fellow at IIT Kanpur.</span>
                   <span itemProp="email">atanish920@gmail.com</span>
-                  <span itemProp="url">https://tanish.gg</span>
+                  <span itemProp="url">https://tanishanand.com</span>
                   <span itemProp="sameAs">https://github.com/Tanish-Anand1</span>
                   <span itemProp="sameAs">https://www.linkedin.com/in/tanish-anand24/</span>
                   <span itemProp="sameAs">https://x.com/sullaxive</span>
@@ -125,7 +125,7 @@ const Hero = ({ isRudraMode, onRudraClose }) => {
                     <span itemProp="name">Delhi Public School Azaad Nagar</span>
                   </div>
                   <div itemProp="worksFor" itemScope itemType="https://schema.org/Organization">
-                    <span itemProp="name">CareLink</span>
+                    <span itemProp="name">Vivacity</span>
                   </div>
                 </div>
               </div>

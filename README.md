@@ -1,63 +1,46 @@
-# 🌌 Cyber-Fusion Portfolio
+# Tanish Anand
 
-![Portfolio Banner](C:/Users/Tanish%20Anand/.gemini/antigravity/brain/6440605e-7a11-47cc-86eb-e5134dd5ea52/portfolio_thumbnail_1778158157046.png)
+A black, multipage portfolio for research, AI systems, and robotics. Built with React and Vite, prerendered to static HTML, with self-hosted Geist fonts and a local orbital simulation.
 
-[![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)](https://vitejs.dev/)
-[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Three.js](https://img.shields.io/badge/Three.js-black?style=for-the-badge&logo=three.js&logoColor=white)](https://threejs.org/)
-[![GSAP](https://img.shields.io/badge/GSAP-88CE02?style=for-the-badge&logo=greensock&logoColor=white)](https://greensock.com/gsap/)
+## Development
 
-A high-performance, immersive 3D developer portfolio built with the modern web stack. Featuring a cyberpunk aesthetic, interactive terminal, and smooth cinematic transitions.
+```sh
+npm install
+npm run dev -- --host 127.0.0.1 --port 5173
+```
 
-## ✨ Key Features
+## Verification
 
-- **🚀 Interactive OS Terminal**: A fully functional command-line interface integrated into the UI.
-- **🎨 Glitch & Hacker Mode**: Secret "Hacker Red" mode triggered by environmental interactions.
-- **🌐 3D Immersion**: Procedural canvas backgrounds powered by Three.js and React Three Fiber.
-- **🔊 Audio Integration**: Embedded synthesizers providing tactile feedback on hover and navigation.
-- **🌑 Dynamic Theming**: Advanced theme transitions using the `View Transition API`.
-- **📜 Smooth Motion**: Ultra-smooth scrolling experience via Lenis and GSAP ScrollTrigger.
+```sh
+npm run lint:portfolio
+npm run test:portfolio
+npm run build
+npm run preview -- --host 127.0.0.1 --port 4280
+node scripts/verify-site.mjs
+```
 
-## 🛠️ Tech Stack
+## Source
 
-- **Framework**: [React 19](https://react.dev/)
-- **Bundler**: [Vite 8](https://vitejs.dev/)
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
-- **Animation**: [GSAP](https://greensock.com/gsap/), [Framer Motion](https://www.framer.com/motion/)
-- **3D Engine**: [Three.js](https://threejs.org/) / [React Three Fiber](https://docs.pmnd.rs/react-three-fiber)
-- **Utilities**: [Lenis](https://lenis.darkroom.engineering/), [Lucide React](https://lucide.dev/)
+- `src/portfolio/PortfolioApp.jsx`: homepage, indexes, case studies, research, work, and writing.
+- `src/portfolio/content.js`: project descriptions, route metadata, and preserved writing.
+- `src/portfolio/OrbitSimulation.jsx`: interactive fork, verify, commit, rollback workflow.
+- `src/portfolio/OrbitViewport.jsx`: trajectory playback, camera projections, live telemetry, and residual chart.
+- `src/portfolio/SimulationRange.jsx`: synchronized pointer and keyboard scrubbing.
+- `src/portfolio/TraceArtifact.jsx`: inspectable, copyable simulation JSON.
+- `src/portfolio/Brand.jsx`: consistent local company marks in headings, links, and prose.
+- `scripts/vivacity_blender_render.py`: optional Blender render script for the lightweight Vivacity experiment plate.
+- `src/portfolio/orbit.js`: two-body model and verification rules.
+- `src/portfolio/portfolio.css`: responsive design and accessibility states.
+- `scripts/prerender.mjs`: generates 19 HTML pages, metadata, sitemap, and 404 document.
 
-## 🚀 Getting Started
+The earlier portfolio components remain in the repository but are not imported by the active site.
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/Tanish-Anand1/PORTFOLIO.git
-   ```
+## Notes
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+- [Run and deployment details](docs/portfolio-overhaul.md)
+- [Content sources and asset provenance](docs/portfolio-content-sources.md)
+- [Verification results and limits](docs/portfolio-qa.md)
 
-3. **Run the development server**
-   ```bash
-   npm run dev
-   ```
+The simulation runs locally in the browser. It illustrates Vivacity's runtime loop and does not connect to the production API. The live domain has not been updated by this redesign task.
 
-4. **Build for production**
-   ```bash
-   npm run build
-   ```
-
-## ⌨️ Terminal Commands
-
-Try these inside the interactive terminal:
-- `help` - List available commands
-- `about` - Learn more about the developer
-- `clear` - Reset the terminal buffer
-- `hack` - Trigger the system glitch
-
----
-
-Built with ❤️ by [Tanish Anand](https://github.com/Tanish-Anand1)
+Blender is optional. To create the compressed render plate, install Blender 4.5 LTS and run `blender --background --python scripts/vivacity_blender_render.py` from the repository root. The current workbench remains fully usable without this asset.

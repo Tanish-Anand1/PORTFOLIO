@@ -1,61 +1,38 @@
 TANISH ANAND
-Engineer, Founder, Research Fellow
-Kanpur, India
-Email: atanish920@gmail.com
+16. Founder & CTO of Vivacity. Research Fellow at IIT Kanpur.
+Website: https://tanishanand.com/
+Email: tanishanand@paxus.in
 GitHub: https://github.com/Tanish-Anand1
-LinkedIn: https://linkedin.com/in/tanish-anand24
-Website: https://tanish.gg
 
-SUMMARY
-Engineer and founder working across AI, video systems, and web software. Currently an engineer on the video pipeline at Prolearn, a Bangalore edtech company with $3.2M in pre-seed funding. Research Fellow at IIT Kanpur focused on MPC and cryptography. Founder of CareLink. Background includes WebGL and OSINT systems, edge AI, and responsible security disclosure.
+CURRENT
+Vivacity | Co-founder & CTO
+Simulation runtime for AI agents. Research and simulation infrastructure across persistent state, branching, backend routing, and verification.
 
-EXPERIENCE
+IIT Kanpur | Research Fellow
+MPC and cryptography under Prof. Adithya Vadapalli. Work also includes discrete text diffusion and Hindi NLP.
 
-Prolearn | Engineer, Video Pipeline
-2026 to Present | Bangalore, India
-- Build and maintain video pipeline infrastructure for educational content generation and delivery.
-- Collaborate with Ravneet Singh (Founder of Prolearn and FC.one, former CTO of Vedantu) on production video systems.
-
-CareLink | Founder
-2026 to Present
-- Founded CareLink to help families coordinate care for aging parents in tier-2 Indian cities.
-- Shipped a zero-code MVP using WhatsApp workflows, spreadsheet automation, and alert routing.
-
-IIT Kanpur | Research Fellow, Computer Science
-2026 to Present | Advisor: Prof. Adithya Vadapalli
-- Research MPC and cryptography under Prof. Adithya Vadapalli in the CSE department.
+SELECTED WORK
+Google DeepMind | Robotics work
+xAI | Grok open-source work
+Anduril | Bare-metal firmware project, details redacted
+Inflection | Grant recipient
+IIT Bombay | International Robowars 2025, 8 kg category winner
+Prolearn | Video pipeline engineering
 
 PROJECTS
-
-ORCA, D2AR, ORBIS 2045, LumenSeed, ClusterOrch-Gym
-- Built agentic systems, simulation, and orchestration projects across AI and systems software.
-
-Project Rudra | https://osirisai.live
-- Built a GPU-accelerated OSINT interface that combines live RTSP camera feeds, ADS-B flight data, and AIS marine tracking in a WebGL and MapLibre view.
-- Designed reconnecting ingest workers, fragmented MP4 remuxing, and typed-array buffer reuse to reduce Chrome garbage-collection stutter on live feeds.
-
-CareLink
-- Care coordination MVP for aging parents in tier-2 Indian cities.
-
-SECURITY RESEARCH
-- Independently found and responsibly disclosed a prompt-injection sandbox escape on a major AI inference platform. Received a five-figure bounty. CVSS 9.8.
-- Found and disclosed a cart valuation and pricing API bypass on a major quick-commerce platform. Received a six-figure bounty. CVSS 8.4. Both issues were patched.
-
-EDUCATION
-
-Delhi Public School (DPS) Azaad Nagar | Class XII
-Expected 2026 | Kanpur, India
-
-AWARDS AND HONORS
-- Ranked #1 out of 3,500+ at Uniform2Unicorn. Named India Top Young Founder of the Year 2026. Awarded Rs. 1,00,000 cash and Rs. 10,00,000 in credits, plus dinner with Iqlipse Nova. Team: Aditya Bhatia and Pavitra Kushwaha.
-- Selected for Y Combinator Startup School India (6% acceptance rate).
-- Ranked in the top 20 builders in India out of 20,000+ at VIBECON. Interviewed Mukund Jha (Emergent Labs) and Jared Friedman (YC partner).
-- Won 15+ hackathons in a two-month period, including events from Google, OpenAI, and Cursor.
-- Keynoted SparkX at Techfest 2025, IIT Bombay. Won International Robowars (8kg).
-- Founded byteforge, an independent tech community with 4,500+ members.
-- Published a research paper on Synthetic Intelligence at 16.
+OSIRIS: WebGL geospatial interface and live-data ingestion.
+AIRIS: STM32F405 firmware and sensor-driver integration; hardware build in progress.
+AEGIS: Terminal interface for an AIP control plane.
+EduCore: Offline learning-device project using quantized Phi-3 Mini on Raspberry Pi.
+PhysicsGPT: Offline physics tutor focused on the CBSE curriculum.
+ComplianceGuard: Grok/Claude assisted review prototype.
+Anti-Sleep Pilot: Computer-vision hackathon prototype.
+ByteForge: Hardware and AI community, co-founded with Pavitra Kushwaha.
+Earlier experiments: ORCA, D2AR, ORBIS 2045, LumenSeed, ClusterOrch-Gym.
 
 SKILLS
-Languages and frameworks: Python, JavaScript, TypeScript, React, Next.js, PyTorch, Node.js
-AI and ML: MPC, cryptography, NLP, model quantization (llama.cpp), computer vision (OpenCV), multi-agent LLM systems
-Systems: WebGL, MapLibre, RTSP and video ingest, WebRTC, Raspberry Pi edge deployment, API security
+Python, TypeScript, React, Next.js, PyTorch, WebGL, MapLibre, OpenCV, Raspberry Pi, STM32, embedded systems, model quantization, simulation, and data pipelines.
+
+Book a call: https://cal.com/tanishanand
+X: https://x.com/sullaxive
+LinkedIn: https://linkedin.com/in/tanish-anand24

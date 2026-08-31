@@ -9,7 +9,8 @@ const disclosures = [
     score: '9.8',
     status: 'RESOLVED',
     date: 'Feb 2026',
-    bounty: 'CONFIDENTIAL',
+    disclosure: 'CONFIDENTIAL',
+    outcome: 'NOT DISCLOSED',
     summary: 'Identified a prompt injection flaw that bypassed the host executor sandbox. This allowed escaping localized python runtime cages and accessing private environment tokens on the parent host.',
     poc: 'SYSTEM_COMMANDS_EXECUTE // bypass_agent_rules=true'
   },
@@ -20,7 +21,8 @@ const disclosures = [
     score: '8.4',
     status: 'RESOLVED',
     date: 'Dec 2025',
-    bounty: 'AWARDED',
+    disclosure: 'PUBLIC',
+    outcome: 'AWARDED',
     summary: 'Discovered a state mutation flow where cart totals could be arbitrarily manipulated by injecting negative float values into secondary item arrays on final payment checkout webhooks.',
     poc: 'POST /checkout { payload: [{ item_id: "X", price: -500.00 }] }'
   },
@@ -31,7 +33,8 @@ const disclosures = [
     score: '6.1',
     status: 'PATCHED',
     date: 'Oct 2025',
-    bounty: 'COMMUNITY',
+    disclosure: 'PUBLIC',
+    outcome: 'COMMUNITY',
     summary: 'Bypassed face boundary state tracker metrics by injecting rapid sequence frames which crashed sleep detection algorithms, resetting internal alert state parameters.',
     poc: 'FRAME_REFRESH_RATE_BURST // boundary_reset=1'
   }
@@ -73,14 +76,13 @@ const SecurityAdvisories = ({ theme }) => {
                 }`}
               >
                 {/* Header row */}
-                <div 
+                <button
+                  type="button"
                   onClick={() => toggleExpand(adv.id)}
-                  role="button"
-                  tabIndex={0}
                   aria-expanded={isExpanded}
-                  aria-label={`${adv.title} — ${adv.severity} ${adv.score}`}
-                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleExpand(adv.id); } }}
-                  className="p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer select-none"
+                  aria-controls={`advisory-${adv.id}`}
+                  aria-label={`${adv.title}: ${adv.severity} ${adv.score}`}
+                  className="w-full min-h-[44px] text-left p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer select-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
                 >
                   <div className="flex-1">
                     <div className="flex flex-wrap items-center gap-2 mb-2">
@@ -101,8 +103,12 @@ const SecurityAdvisories = ({ theme }) => {
 
                   <div className="flex items-center justify-between md:justify-end gap-6 shrink-0">
                     <div className="text-right font-mono text-xs">
-                      <div className="text-[var(--foreground)]/40">BOUNTY</div>
-                      <div className="font-semibold text-emerald-500">{adv.bounty}</div>
+                      <div className="text-[var(--foreground)]/40">OUTCOME</div>
+                      <div className="font-semibold text-emerald-500">{adv.outcome}</div>
+                    </div>
+                    <div className="text-right font-mono text-xs">
+                      <div className="text-[var(--foreground)]/40">DISCLOSURE</div>
+                      <div className="text-[var(--foreground)]">{adv.disclosure}</div>
                     </div>
                     <div className="text-right font-mono text-xs">
                       <div className="text-[var(--foreground)]/40">DISCLOSED</div>
@@ -114,7 +120,7 @@ const SecurityAdvisories = ({ theme }) => {
                       </svg>
                     </div>
                   </div>
-                </div>
+                </button>
 
                 {/* Expanded content */}
                 <AnimatePresence initial={false}>
@@ -124,6 +130,7 @@ const SecurityAdvisories = ({ theme }) => {
                       animate={{ height: 'auto' }}
                       exit={{ height: 0 }}
                       transition={{ duration: 0.3 }}
+                      id={`advisory-${adv.id}`}
                       className="overflow-hidden border-t border-[var(--border)] bg-[var(--bg)]/30"
                     >
                       <div className="p-5 font-mono text-xs space-y-4">

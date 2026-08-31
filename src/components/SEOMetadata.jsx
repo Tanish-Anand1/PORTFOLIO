@@ -24,7 +24,7 @@ const SEOMetadata = () => {
       { name: 'DC.title', content: 'Tanish Anand — Founder, Developer, Researcher' },
       { name: 'DC.creator', content: 'Tanish Anand' },
       { name: 'DC.subject', content: 'AI, Machine Learning, Cybersecurity, Web Development, NLP, OSINT, Edge Computing' },
-      { name: 'DC.description', content: 'Personal portfolio of Tanish Anand — founder of CareLink, creator of Project Rudra, Research Fellow at IIT Kanpur, Y Combinator Startup School alum.' },
+      { name: 'DC.description', content: 'Personal portfolio of Tanish Anand — co-founder and CTO of Vivacity, creator of Project Rudra, Research Fellow at IIT Kanpur, Y Combinator Startup School alum.' },
       { name: 'DC.type', content: 'PersonalSite' },
       { name: 'DC.format', content: 'text/html' },
       { name: 'DC.language', content: 'en' },
@@ -72,7 +72,7 @@ const SEOMetadata = () => {
           "name": "Who is Tanish Anand?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Tanish Anand is a developer, founder, and researcher building at the intersection of AI, hardware, and the web. He is the founder of CareLink (care coordination for aging parents in India), creator of Project Rudra (GPU-accelerated OSINT command grid), and a Research Fellow at IIT Kanpur under Prof. Adithya Vadapalli. He was named India's Top Young Founder of the Year 2026 at Uniform2Unicorn."
+            "text": "Tanish Anand is a developer, founder, and researcher building at the intersection of AI, hardware, and the web. He is the co-founder and CTO of Vivacity, creator of Project Rudra (GPU-accelerated OSINT command grid), and a Research Fellow at IIT Kanpur under Prof. Adithya Vadapalli. He was named India's Top Young Founder of the Year 2026 at Uniform2Unicorn."
           }
         },
         {
@@ -101,10 +101,10 @@ const SEOMetadata = () => {
         },
         {
           "@type": "Question",
-          "name": "What is CareLink?",
+          "name": "What is Vivacity?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "CareLink is a care coordination platform for aging parents in tier-2 Indian cities, founded by Tanish Anand. It uses WhatsApp + Google Sheets as a zero-code MVP to coordinate caregiving."
+            "text": "Vivacity is an API-first video infrastructure platform for LLMs, co-founded by Tanish Anand (CTO). It turns prompts, documents, and AI answers into mathematically exact, narrated explainer videos in near-real-time."
           }
         },
         {

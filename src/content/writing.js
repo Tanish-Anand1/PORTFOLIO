@@ -1,5 +1,63 @@
 export const writingPosts = [
   {
+    slug: 'the-first-thing-i-built',
+    year: '2026',
+    title: 'the first thing i built was a contra game',
+    summary:
+      'a laptop in lockdown, a scratch game, a python book, robot arenas, and the long route into ai.',
+    dateLabel: 'Aug 2026',
+    dateISO: '2026-08-25',
+    body: [
+      'i got my first laptop in class 3, right in the middle of covid. the first thing i built was a scratch game inspired by contra, followed by a car racing game. then i was invited to become a scratchster. lockdown had given me a new identity: someone who could make things.',
+      'my brother showed me a codewithharry video about jarvis, then opened pycharm and built a calculator in python. by class 6, i had finished a class 11 python book. python led to web development, and i became the first student from my school to win a hackathon for it.',
+      'a fellow teacher introduced me to robotics. that moved building off the screen and into motors, batteries, friction, bad connections, and consequences. i entered robowars and won multiple competitions, including international events at iit bombay and iit kanpur.',
+      'the robots were never perfect. they were repaired between rounds, redesigned after losses, and carried into arenas with a mixture of confidence and panic. that was where i learned to love the messy version of engineering: the kind that has to survive contact with reality.',
+      'eventually i moved into ai and machine learning. the medium changed, but the instinct stayed the same: learn the system, build the thing, test it in public, and make it useful. that thread runs through vivacity, OSIRIS, my research at iit kanpur, and the systems i am building at prolearn.',
+      'the story is not really about choosing between games, web development, robotics, and ai. it is about finding the next medium that lets me build something more ambitious. the laptop was the beginning. everything since then has been an attempt to see what else i can make.',
+    ],
+    media: {
+      images: [
+        {
+          src: '/story/robot-concept.jpg',
+          alt: 'early combat robot concept design',
+          caption: 'an early combat-robot design',
+        },
+        {
+          src: '/story/robot-build.jpg',
+          alt: 'early robot build on a workshop floor',
+          caption: 'one of the early builds',
+        },
+        {
+          src: '/story/robowar-arena.jpg',
+          alt: 'two robots meeting in a robowar arena',
+          caption: 'the arena is where every design gets honest',
+        },
+        {
+          src: '/story/robowar-team.jpg',
+          alt: 'robotics team standing beside a competition arena',
+          caption: 'robotics, in person',
+        },
+        {
+          src: '/story/robot-later-build.jpg',
+          alt: 'later combat robot build on a concrete floor',
+          caption: 'a later build, after a few hard lessons',
+        },
+      ],
+      videos: [
+        {
+          src: '/story/robotics-footage-01.mp4',
+          poster: '/story/robowar-arena.jpg',
+          caption: 'robotics footage from the build archive',
+        },
+        {
+          src: '/story/robotics-footage-02.mp4',
+          poster: '/story/robot-later-build.jpg',
+          caption: 'another day of testing, repairing, and trying again',
+        },
+      ],
+    },
+  },
+  {
     slug: 'bangalore-trip',
     year: '2026',
     title:
@@ -57,15 +115,15 @@ export const writingPosts = [
     ],
   },
   {
-    slug: 'rudra-camera-ingest',
+    slug: 'osiris-camera-ingest',
     year: '2025',
-    title: "building rudra's camera ingest pipeline",
+    title: "building OSIRIS's camera ingest pipeline",
     summary:
-      'project rudra pulls in rtsp feeds, ads-b, and ais data and renders it live in webgl. the ingest side alone took longer than the renderer.',
+      'OSIRIS pulls in rtsp feeds, ads-b, and ais data and renders it live in webgl. the ingest side alone took longer than the renderer.',
     dateLabel: 'Aug 2025',
     dateISO: '2025-08-01',
     body: [
-      "rudra (osirisai.live) fuses live camera feeds with ads-b flight data and ais ship tracking into one webgl view. the idea is simple on a whiteboard. the actual ingest pipeline is where all the time went.",
+      "OSIRIS (osirisai.live) fuses live camera feeds with ads-b flight data and ais ship tracking into one webgl view. the idea is simple on a whiteboard. the actual ingest pipeline is where all the time went.",
       "rtsp streams from real cameras are inconsistent. some send h264, some send weird proprietary mp4 fragments, some just drop frames when the network hiccups. i wrote a worker that reconnects on failure and re-muxes whatever comes in into something the browser can actually decode, instead of trusting the stream to behave.",
       "ads-b and ais are the opposite problem: not video, just a firehose of small packets from planes and ships. easy to parse, hard to keep in sync with the video timestamp so a plane doesn't appear five seconds after it flew through frame.",
       "chrome gc was the sneaky bottleneck. every frame decode was allocating new buffers, and after a few minutes of a live feed the garbage collector would pause long enough to visibly stutter the render. switched to reusing typed arrays instead of allocating per frame and the stutter went away.",

@@ -98,7 +98,7 @@ const RudraTerminal = ({ onClose }) => {
           { text: 'PROJECT MAIN-GRID RECORDS:', type: 'header' },
           { text: '1. Project Rudra [OSIRIS] - GPU Global OSINT Command Dashboard (Next.js, MapLibre GL, WebGL)', type: 'system' },
           { text: '2. Text Diffusion vs AR - PhD Research bench-marking SEDD/LLaDA (Python, PyTorch, NLP)', type: 'system' },
-          { text: '3. CareLink - Care coordination system for aging parents (WhatsApp + Google Sheets)', type: 'system' },
+          { text: '3. Vivacity - Animated JEE and NEET explanations generated with AI + Manim', type: 'system' },
           { text: '4. EduCore - Quantized Phi-3 Mini solar offline learning device (Raspberry Pi, llama.cpp)', type: 'system' },
           { text: 'Type "project <num>" (e.g. "project 1") for specialized dossier.', type: 'info' }
         ]);
@@ -121,8 +121,8 @@ const RudraTerminal = ({ onClose }) => {
         } else if (num === 3) {
           setHistory([
             ...newHistory,
-            { text: 'DOSSIER: CARELINK', type: 'header' },
-            { text: 'A zero-code platform engineered for elderly parent care coordination in tier-2 Indian cities, leveraging simple interfaces like WhatsApp and Google Sheets to drive immediate usability and low technical friction.', type: 'info' }
+            { text: 'DOSSIER: VIVACITY', type: 'header' },
+            { text: 'Near-real-time video infrastructure for LLMs, turning prompts, documents, and AI answers into mathematically exact, narrated explainer videos through an API-first pipeline.', type: 'info' }
           ]);
         } else if (num === 4) {
           setHistory([

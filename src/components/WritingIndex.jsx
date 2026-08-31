@@ -27,7 +27,7 @@ const WritingIndex = ({ onBack, onOpenPost }) => {
 
       <h1 className="studio-page-title">writing</h1>
       <p className="studio-prose" style={{ marginBottom: 8 }}>
-        notes from whatever i was debugging that week. mostly video, diffusion models, and things that broke at 3am. drop your email if you want a ping when something new goes up.
+        notes from whatever i was building or debugging that week. mostly video, diffusion models, origin stories, and things that broke at 3am. drop your email if you want a ping when something new goes up.
       </p>
 
       <ul className="writing-list">

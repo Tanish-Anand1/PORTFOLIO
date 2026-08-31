@@ -1,16 +1,18 @@
 /* TEAM */
 Name: Tanish Anand
-Role: Founder, Developer, Researcher
-Site: https://tanish.gg
-Email: atanish920@gmail.com
+Role: Co-founder & CTO of Vivacity, Research Fellow
+Site: https://tanishanand.com/
+Email: tanishanand@paxus.in
 GitHub: https://github.com/Tanish-Anand1
-LinkedIn: https://www.linkedin.com/in/tanish-anand24/
-X (Twitter): https://x.com/sullaxive
-Location: India
 
 /* SITE */
-Standards: HTML5, CSS3, JavaScript ES2024
 Framework: React 19, Vite 8
-Components: Framer Motion, Tailwind CSS v4
-Last Updated: 2026-06-28
+Rendering: Static HTML with React hydration
+Typography: Geist and Geist Mono, self-hosted
+Simulation: Local two-body model, velocity Verlet
+Updated: 2026-08-31
 Language: English
+
+Book a call: https://cal.com/tanishanand
+X: https://x.com/sullaxive
+LinkedIn: https://linkedin.com/in/tanish-anand24

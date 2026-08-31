@@ -1,43 +1,211 @@
-import { useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
+import InvestorProjectCard from './InvestorProjectCard';
+import SecurityAdvisories from './SecurityAdvisories';
+import TractionBar from './TractionBar';
 
-const projects = [
-  { name: 'ORCA', href: null, note: null },
-  { name: 'D2AR', href: null, note: null },
-  { name: 'ORBIS 2045', href: null, note: null },
-  { name: 'LumenSeed', href: null, note: null },
-  { name: 'ClusterOrch-Gym', href: null, note: null },
-  { name: 'CareLink', href: null, note: 'founded' },
-  { name: 'Project Rudra', href: 'https://osirisai.live', note: 'live' },
+const investorProjects = [
+  {
+    title: 'Vivacity',
+    role: 'Co-founder & CTO',
+    dateRange: '2026 to present',
+    description:
+      'Near-real-time video infrastructure for LLMs. Vivacity turns prompts, documents, and AI answers into mathematically exact, narrated explainer videos through an API-first pipeline for EdTech platforms, AI agents, and creator pipelines. The Scene IR pipeline supports English, Hindi, and Hinglish narration, with short renders around ₹7 (~$0.08) so chatbots can call it at volume.',
+    stats: [
+      { value: '$95K', label: 'raised to date' },
+      { value: 'six-figure', label: 'partnership signed' },
+      { value: '₹2L', label: "founders' capital committed" },
+    ],
+    partners: ['JEE Simplified'],
+    press: [{ label: 'try Vivacity', href: 'https://tryvivacity.com/' }],
+  },
+  {
+    title: 'AEGIS',
+    role: 'Builder · AIP control plane',
+    dateRange: '2026',
+    description:
+      'Built AEGIS, a terminal user interface for Palantir’s AIP control plane. The project led to an offer of unmetered access to frontier models and a role, which I could not accept because defense contracts cannot clear minors.',
+    stats: [
+      { value: 'AIP', label: 'control plane' },
+      { value: 'TUI', label: 'terminal interface' },
+    ],
+    partners: ['Palantir'],
+  },
+  {
+    title: 'ByteForge',
+    role: 'Co-founder & VP',
+    dateRange: '2021 to present',
+    description:
+      'A hardware and AI builder community co-founded with Pavitra Kushwaha in Class 9. It now connects students across North India through workshops, project sprints, and peer-led builds spanning embedded systems, robotics, and applied AI.',
+    stats: [{ value: '4,500+', label: 'students connected' }],
+  },
+  {
+    title: 'AIRIS',
+    role: 'Builder · Hybrid rocket avionics',
+    dateRange: '2026',
+    description:
+      'Designed and wrote bare-metal STM32F405 flight-computer firmware from scratch for a paraffin/N2O hybrid rocket, including IMU and barometer driver integration. Flashed and verified via DFU; the hardware build is in progress.',
+    stats: [
+      { value: 'STM32F405', label: 'flight computer' },
+      { value: 'DFU', label: 'flashed and verified' },
+      { value: 'in progress', label: 'hardware build' },
+    ],
+  },
+  {
+    title: 'Project Rudra',
+    role: 'Builder · OSINT command grid',
+    dateRange: '2026',
+    description:
+      'A GPU-accelerated global OSINT command grid integrating flight tracking, marine channels, CCTV networks, seismic activity, and live broadcasts in a 60fps WebGL interface.',
+    press: [{ label: 'open live system', href: 'https://osirisai.live' }],
+    media: [{ src: '/artifacts/rudra-live.png', alt: 'Project Rudra OSIRIS live interface' }],
+  },
+  {
+    title: 'EduCore',
+    role: 'Builder · Edge AI hardware',
+    dateRange: '2025',
+    description:
+      'A solar-powered offline adaptive AI learning device for rural Indian students, running a quantized Phi-3 Mini locally on Raspberry Pi hardware.',
+  },
+  {
+    title: 'PhysicsGPT',
+    role: 'Builder · Offline AI tutor',
+    dateRange: '2025',
+    description:
+      'An offline AI tutor fine-tuned on the CBSE Physics curriculum and designed for deployment on edge hardware.',
+  },
+  {
+    title: 'ComplianceGuard',
+    role: 'Builder · Autonomous compliance agent',
+    dateRange: '2025',
+    description:
+      'A dual-LLM compliance agent where Grok handles fast scanning and Claude performs deep audit reasoning across SOC 2, HIPAA, GDPR, and ISO 27001 workflows.',
+  },
+  {
+    title: 'Anti-Sleep Pilot',
+    role: 'Builder · Computer vision',
+    dateRange: '2026',
+    description:
+      'A real-time drowsiness detection system using computer vision, built and pitched at HACKSHODH 2026.',
+  },
 ];
 
 const fade = {
-  initial: { opacity: 0, y: 18 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: '-40px' },
-  transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+  // Scroll reveal opacity was causing stale ghost text during fast jumps and anchor navigation.
+  // Sections are now stable on first paint; the hero keeps the only entrance motion.
+  initial: false,
+  animate: { opacity: 1, y: 0 },
 };
 
 const EssayHome = ({ onResumeOpen, onOpenWriting }) => {
-  const [bountyOpen, setBountyOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const mobileMenuTriggerRef = useRef(null);
+
+  useEffect(() => {
+    const updateProgress = () => {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollable > 0 ? window.scrollY / scrollable : 0;
+      document.documentElement.style.setProperty('--studio-progress', Math.min(progress, 1));
+    };
+
+    updateProgress();
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress);
+    return () => {
+      window.removeEventListener('scroll', updateProgress);
+      window.removeEventListener('resize', updateProgress);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return undefined;
+
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') {
+        setMobileMenuOpen(false);
+        mobileMenuTriggerRef.current?.focus();
+      }
+    };
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', closeOnEscape);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', closeOnEscape);
+    };
+  }, [mobileMenuOpen]);
+
+  const closeMobileMenu = () => setMobileMenuOpen(false);
+
+  const navigateToSection = (event, sectionId) => {
+    event.preventDefault();
+    const target = document.getElementById(sectionId);
+    if (!target) return;
+
+    closeMobileMenu();
+    window.history.pushState(null, '', `#${sectionId}`);
+    window.requestAnimationFrame(() => {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  };
+
+  const navigateToTop = (event) => {
+    event.preventDefault();
+    closeMobileMenu();
+    window.history.pushState(null, '', '#top');
+    window.requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  };
 
   return (
     <main className="studio">
+      <div className="studio-progress" aria-hidden="true">
+        <span />
+      </div>
       <header className="studio-top">
-        <a href="#top" className="studio-mark" id="top">
+        <a href="#top" className="studio-mark" id="top" onClick={navigateToTop}>
           tanish
         </a>
-        <nav className="studio-nav" aria-label="Primary">
-          <button type="button" onClick={onOpenWriting}>
+        <button
+          ref={mobileMenuTriggerRef}
+          type="button"
+          className="studio-mobile-trigger"
+          aria-expanded={mobileMenuOpen}
+          aria-controls="studio-mobile-navigation"
+          onClick={() => setMobileMenuOpen((isOpen) => !isOpen)}
+        >
+          <span>{mobileMenuOpen ? 'close' : 'menu'}</span>
+          <svg aria-hidden="true" viewBox="0 0 20 20" fill="none">
+            <path d={mobileMenuOpen ? 'M5 5l10 10M15 5L5 15' : 'M3 6h14M3 10h14M3 14h14'} />
+          </svg>
+        </button>
+        <nav
+          id="studio-mobile-navigation"
+          className={`studio-nav${mobileMenuOpen ? ' is-open' : ''}`}
+          aria-label="Primary"
+        >
+          <button type="button" onClick={() => { closeMobileMenu(); onOpenWriting(); }}>
             writing
           </button>
-          <a href="#proof">proof</a>
-          <a href="#built">builds</a>
-          <button type="button" className="studio-cta" onClick={onResumeOpen}>
+          <a href="#traction" onClick={(event) => navigateToSection(event, 'traction')}>traction</a>
+          <a href="#projects" onClick={(event) => navigateToSection(event, 'projects')}>projects</a>
+          <a href="#research" onClick={(event) => navigateToSection(event, 'research')}>research</a>
+          <a href="#origin" onClick={(event) => navigateToSection(event, 'origin')}>origin</a>
+          <button type="button" className="studio-cta" onClick={() => { closeMobileMenu(); onResumeOpen(); }}>
             resume
           </button>
         </nav>
       </header>
+      <button
+        type="button"
+        className={`studio-nav-scrim${mobileMenuOpen ? ' is-open' : ''}`}
+        aria-label="Close navigation"
+        tabIndex={mobileMenuOpen ? 0 : -1}
+        onClick={closeMobileMenu}
+      />
 
       <section className="studio-hero" aria-label="Intro">
         <div className="studio-hero-media" aria-hidden="true">
@@ -67,7 +235,7 @@ const EssayHome = ({ onResumeOpen, onOpenWriting }) => {
             anand
           </h1>
           <p className="studio-lede">
-            engineer at prolearn. researcher at iit kanpur. founder of carelink. builds across ai, hardware, and the web.
+            founder of vivacity. builder of ai, hardware, and systems that have to work outside a demo.
           </p>
           <div className="studio-hero-actions">
             <button type="button" className="studio-cta studio-cta-solid" onClick={onOpenWriting}>
@@ -80,25 +248,27 @@ const EssayHome = ({ onResumeOpen, onOpenWriting }) => {
         </motion.div>
       </section>
 
+      <TractionBar />
+
       <div className="studio-shell">
         <motion.p className="studio-now" {...fade}>
           <span>now</span>
-          building the video pipeline at <strong>Prolearn</strong> · mpc and cryptography research at{' '}
+          building the video pipeline at <strong>Prolearn</strong> · building <strong>Vivacity</strong> for LLM video infrastructure · mpc and cryptography at{' '}
           <a href="https://www.iitk.ac.in/" target="_blank" rel="noopener noreferrer">
             IIT Kanpur
           </a>
         </motion.p>
 
-        <motion.section className="studio-section" {...fade}>
-          <h2 className="studio-h2">who</h2>
+        <motion.section className="studio-section" id="about" {...fade}>
+          <h2 className="studio-h2">about</h2>
           <div className="studio-prose">
             <p>
-              high school at{' '}
+              I'm Tanish Anand, a builder, developer, and researcher currently at{' '}
               <a href="https://dpsazaadnagar.com/" target="_blank" rel="noopener noreferrer">
                 <img src="/dps-logo.webp" alt="" width="16" height="16" className="studio-inline-icon" />
-                DPS
+                Delhi Public School (DPS) Azaad Nagar
               </a>
-              . researcher at{' '}
+              . I'm the founder of <strong>Vivacity</strong>, which has raised $95K and signed a six-figure partnership with JEE Simplified. I also co-founded <strong>ByteForge</strong>, a hardware and AI builder community now connecting 4,500+ students across North India, and I'm a Research Fellow at{' '}
               <a href="https://www.iitk.ac.in/" target="_blank" rel="noopener noreferrer">
                 IIT Kanpur
               </a>{' '}
@@ -110,25 +280,13 @@ const EssayHome = ({ onResumeOpen, onOpenWriting }) => {
               >
                 Prof. Adithya Vadapalli
               </a>
-              : mpc and cryptography under the cse dept. mostly the kind of research that looks quiet until you realize what it's testing.
+              , working on discrete text diffusion models and Hindi NLP.
             </p>
             <p>
-              founded <strong>CareLink</strong>. learned more from debugging it at 2am than from any class.
+              Right now I'm an engineer at <strong>Prolearn</strong>, building its video pipeline in Bangalore. I build systems that have to work in the real world: offline, messy, and useful.
             </p>
             <p>
-              right now i'm an engineer at <strong>Prolearn</strong>, a bangalore edtech that raised $3.2m pre-seed. building the video pipeline with{' '}
-              <a
-                href="https://www.google.com/search?q=Ravneet+Singh+Prolearn"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Ravneet Singh
-              </a>
-              , who also runs FC.one and was cto at Vedantu before this. also built{' '}
-              <a href="https://osirisai.live" target="_blank" rel="noopener noreferrer">
-                Project Rudra
-              </a>
-              .
+              My current technical focus spans AI/ML, applied education, embedded systems, and cryptography. It is the same through-line that started with a Scratch game in lockdown and moved through web development, robotics, and research.
             </p>
             <p>
               outside of work: tennis, breaking apis on purpose, reverse-engineering android apps i shouldn't be looking at, and occasionally arguing that we're in a{' '}
@@ -161,17 +319,33 @@ const EssayHome = ({ onResumeOpen, onOpenWriting }) => {
           </div>
         </motion.section>
 
+        <motion.section className="studio-section" id="origin" {...fade}>
+          <h2 className="studio-h2">origin</h2>
+          <div className="studio-prose">
+            <p>
+              i started building during covid, when a laptop in class 3 turned lockdown into a sandbox. first came a scratch game inspired by contra, then a racing game, then an invitation to become a scratchster.
+            </p>
+            <p>
+              my brother showed me python in pycharm; by class 6 i had finished a class 11 python book, moved into web development, and became the first student from my school to win a hackathon for it. robotics came next: robots, robowars, iit bombay, iit kanpur, and the kind of engineering that only works when hardware survives contact with reality.
+            </p>
+            <p>
+              ai/ml is the current medium. the through-line is simple: learn the system, build the thing, test it in public. that's what i bring to vivacity, rudra, iit kanpur research, and prolearn.
+            </p>
+          </div>
+          <button type="button" className="studio-text-link" onClick={onOpenWriting}>
+            read the full story →
+          </button>
+        </motion.section>
+
         <motion.section className="studio-section" id="proof" {...fade}>
           <h2 className="studio-h2">proof</h2>
           <ol className="studio-proof">
             <li>
-              <span className="studio-idx">01</span>
               <p>
                 currently building the video pipeline at <strong>Prolearn</strong> ($3.2M pre-seed, bangalore edtech) as an engineer, working with Ravneet Singh (founder of Prolearn and FC.one, former CTO of Vedantu)
               </p>
             </li>
             <li>
-              <span className="studio-idx">02</span>
               <p>
                 research fellow at{' '}
                 <a href="https://www.iitk.ac.in/" target="_blank" rel="noopener noreferrer">
@@ -180,123 +354,75 @@ const EssayHome = ({ onResumeOpen, onOpenWriting }) => {
                 , working on mpc and cryptography under Prof. Adithya Vadapalli (cse dept.)
               </p>
             </li>
-            <li>
-              <span className="studio-idx">03</span>
-              <p>
-                ranked <strong>#1</strong> across 3,500+ at{' '}
-                <a
-                  href="https://uniform2unicorn.polariscampus.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Uniform2Unicorn
-                </a>
-                , india's top young founder of the year '26. won ₹1,00,000 cash, ₹10,00,000 in credits, and an exclusive dinner with{' '}
-                <a
-                  href="https://www.google.com/search?q=iqlipse+nova"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Iqlipse Nova
-                </a>{' '}
-                <span className="studio-muted">(team: aditya bhatia &amp; pavitra kushwaha)</span>
-              </p>
-            </li>
-            <li>
-              <span className="studio-idx">04</span>
-              <p>
-                selected for{' '}
-                <a href="https://www.ycombinator.com" target="_blank" rel="noopener noreferrer">
-                  Y Combinator
-                </a>{' '}
-                startup school india, 6% acceptance rate
-              </p>
-            </li>
-            <li>
-              <span className="studio-idx">05</span>
-              <p>
-                top 20 builder in india out of 20,000+ at{' '}
-                <a href="https://vibecon.com" target="_blank" rel="noopener noreferrer">
-                  VIBECON
-                </a>
-                , where i also interviewed Mukund Jha (Emergent Labs) and Jared Friedman (YC partner)
-              </p>
-            </li>
-            <li>
-              <span className="studio-idx">06</span>
-              <p>
-                won 15+ hackathons in the last 2 months, including ones from google, openai, and cursor
-              </p>
-            </li>
-            <li>
-              <span className="studio-idx">07</span>
-              <p>
-                keynoted SparkX at techfest '25 (iit bombay) and won international robowars 8kg
-                <span className="studio-muted"> (shoutout pavitra)</span>
-              </p>
-            </li>
-            <li>
-              <span className="studio-idx">08</span>
-              <p>
-                independently found two significant security vulnerabilities: one in a major ai platform, one in a major quick-commerce platform's pricing api{' '}
-                <button
-                  type="button"
-                  className="studio-bounty"
-                  onClick={() => setBountyOpen((v) => !v)}
-                >
-                  [$]
-                </button>{' '}
-                a 5-figure and a 6-figure bounty, respectively.
-                <AnimatePresence>
-                  {bountyOpen && (
-                    <motion.span
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      className="studio-bounty-detail"
-                    >
-                      {' '}
-                      responsible disclosures submitted and patched. prompt-injection sandbox escape on an ai inference platform; cart valuation logic bypass in a quick-commerce checkout api. their engineering teams had mixed feelings.
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </p>
-            </li>
-            <li>
-              <span className="studio-idx">09</span>
-              <p>
-                founded <strong>byteforge</strong>, one of north india's largest independent tech communities, 4,500+ members
-              </p>
-            </li>
-            <li>
-              <span className="studio-idx">10</span>
-              <p>published a research paper on synthetic intelligence at 16</p>
-            </li>
           </ol>
         </motion.section>
 
-        <motion.section className="studio-section" id="built" {...fade}>
-          <h2 className="studio-h2">builds</h2>
-          <ul className="studio-builds">
-            {projects.map((project) => (
-              <li key={project.name}>
-                {project.href ? (
-                  <a href={project.href} target="_blank" rel="noopener noreferrer">
-                    {project.name}
-                  </a>
-                ) : (
-                  <span>{project.name}</span>
-                )}
-                {project.note ? <em>{project.note}</em> : null}
-              </li>
+        <motion.section className="studio-section" id="projects" {...fade}>
+          <h2 className="studio-h2">projects</h2>
+          <p className="studio-builds-intro">
+            products, research, and systems that had to work outside a demo. investor context first; the archive follows.
+          </p>
+          <div className="studio-projects">
+            {investorProjects.map((project) => (
+              <InvestorProjectCard key={project.title} {...project} />
             ))}
+          </div>
+        </motion.section>
+
+        <motion.section className="studio-section" id="research" {...fade}>
+          <h2 className="studio-h2">research</h2>
+          <div className="studio-research-grid">
+            <div className="studio-prose">
+              <p>
+                at <a href="https://www.iitk.ac.in/" target="_blank" rel="noopener noreferrer">IIT Kanpur</a>, I work on discrete text diffusion models and Hindi NLP under Prof. Adithya Vadapalli. The work benchmarks SEDD and LLaDA-style architectures against auto-regressive language models and asks where the assumptions break outside English.
+              </p>
+            </div>
+            <div className="studio-research-meta">
+              <span>focus</span>
+              <strong>text diffusion · Hindi NLP · MPC · cryptography</strong>
+            </div>
+          </div>
+        </motion.section>
+
+        <motion.section className="studio-section" id="skills" {...fade}>
+          <h2 className="studio-h2">skills</h2>
+          <div className="studio-skills-grid">
+            <div>
+              <h3>AI &amp; ML</h3>
+              <p>PyTorch · LLMs · text diffusion · Manim · computer vision · Celery/Redis job orchestration</p>
+            </div>
+            <div>
+              <h3>Web &amp; systems</h3>
+              <p>React · Next.js · FastAPI · WebGL · Raspberry Pi · Render · Vercel</p>
+            </div>
+            <div>
+              <h3>Hardware</h3>
+              <p>STM32 · embedded systems · robotics · Raspberry Pi</p>
+            </div>
+            <div>
+              <h3>Security</h3>
+              <p>OSINT · API security · reverse engineering · responsible disclosure</p>
+            </div>
+          </div>
+        </motion.section>
+
+        <motion.section className="studio-section" id="recognition" {...fade}>
+          <h2 className="studio-h2">recognition</h2>
+          <ul className="studio-recognition">
+            <li><strong>2026</strong> · #1 across 3,500+ at Uniform2Unicorn: India&apos;s Top Young Founder of the Year</li>
+            <li><strong>2026</strong> · Selected for <a href="https://www.ycombinator.com/" target="_blank" rel="noopener noreferrer">Y Combinator</a> Startup School</li>
+            <li><strong>2026</strong> · Top 20 builder at VIBECON out of 20,000+ applicants</li>
+            <li><strong>2026</strong> · 15+ hackathon wins across North India</li>
+            <li><strong>2025</strong> · International RoboWars wins at IIT Bombay and IIT Kanpur</li>
           </ul>
         </motion.section>
+
+        <SecurityAdvisories theme="light" />
 
         <motion.section className="studio-section" id="writing" {...fade}>
           <h2 className="studio-h2">writing</h2>
           <p className="studio-prose">
-            i write build logs when something breaks in an interesting way.
+            i write build logs and origin stories from whatever i was building that week.
           </p>
           <button type="button" className="studio-text-link" onClick={onOpenWriting}>
             all writing →
@@ -306,14 +432,17 @@ const EssayHome = ({ onResumeOpen, onOpenWriting }) => {
         <motion.section className="studio-section studio-contact" id="contact" {...fade}>
           <h2 className="studio-h2">contact</h2>
           <p className="studio-prose">
-            if you want to talk product, research, or something you're building, book time or email.
+            if you're building something ambitious, let's talk. i'll bring the demos, the failures, and the next thing i'm trying to make work.
           </p>
-          <p className="studio-prose studio-cal">
-            30 minutes. direct with founder.{' '}
-            <a href="https://cal.com/tanishanand" target="_blank" rel="noopener noreferrer">
-              cal.com/tanishanand
+          <div className="studio-contact-actions">
+            <a className="studio-cta studio-cta-solid" href="https://cal.com/tanishanand" target="_blank" rel="noopener noreferrer">
+              book a conversation
             </a>
-          </p>
+            <a className="studio-cta studio-contact-ghost" href="mailto:atanish920@gmail.com">
+              email me
+            </a>
+          </div>
+          <p className="studio-contact-note">30 minutes. direct with founder.</p>
           <p className="studio-contact-line">
             <a href="mailto:atanish920@gmail.com">atanish920@gmail.com</a>
             <span aria-hidden="true">·</span>

@@ -91,28 +91,12 @@ const ResumeModal = ({ isOpen, onClose }) => {
               <p className="text-[10pt] mt-1.5 mb-0">
                 Kanpur, India · atanish920@gmail.com ·{' '}
                 <a href="https://github.com/Tanish-Anand1" className="text-black underline">
-                  github.com/Tanish-Anand1
-                </a>{' '}
-                ·{' '}
-                <a href="https://linkedin.com/in/tanish-anand24" className="text-black underline">
-                  linkedin.com/in/tanish-anand24
-                </a>{' '}
-                ·{' '}
-                <a href="https://tanish.gg" className="text-black underline">
-                  tanish.gg
-                </a>
-              </p>
-            </header>
-
-            <section className="mb-4">
-              <h2 className="text-[11pt] font-bold uppercase border-b border-black pb-0.5 mb-2 tracking-wide">
-                Summary
               </h2>
               <p className="text-[10.5pt] m-0">
                 Engineer and founder working across AI, video systems, and web software. Currently an
                 engineer on the video pipeline at Prolearn, a Bangalore edtech company with $3.2M in
                 pre-seed funding. Research Fellow at IIT Kanpur focused on MPC and cryptography.
-                Founder of CareLink. Background includes WebGL and OSINT systems, edge AI, and
+                Founder of Vivacity. Background includes WebGL and OSINT systems, edge AI, and
                 responsible security disclosure.
               </p>
             </section>
@@ -142,17 +126,17 @@ const ResumeModal = ({ isOpen, onClose }) => {
 
               <div className="mb-3">
                 <div className="flex flex-wrap justify-between gap-x-3 text-[10.5pt]">
-                  <p className="m-0 font-bold">CareLink | Founder</p>
+                  <p className="m-0 font-bold">Vivacity | Co-founder &amp; CTO</p>
                   <p className="m-0 whitespace-nowrap">2026 to Present</p>
                 </div>
                 <ul className="mt-1 mb-0 pl-5 text-[10.5pt] list-disc">
                   <li>
-                    Founded CareLink to help families coordinate care for aging parents in tier-2 Indian
-                    cities.
+                    Building near-real-time video infrastructure for LLMs: an API-first pipeline that
+                    turns prompts, documents, and AI answers into mathematically exact, narrated explainer videos.
                   </li>
                   <li>
-                    Shipped a zero-code MVP using WhatsApp workflows, spreadsheet automation, and alert
-                    routing.
+                    Supporting English, Hindi, and Hinglish narration with short renders around ₹7 (~$0.08),
+                    designed for EdTech platforms, AI agents, and creator pipelines.
                   </li>
                 </ul>
               </div>
@@ -204,10 +188,11 @@ const ResumeModal = ({ isOpen, onClose }) => {
               </div>
 
               <div className="mb-1">
-                <p className="m-0 text-[10.5pt] font-bold">CareLink</p>
+                <p className="m-0 text-[10.5pt] font-bold">Vivacity</p>
                 <ul className="mt-1 mb-0 pl-5 text-[10.5pt] list-disc">
                   <li>
-                    Care coordination MVP for aging parents in tier-2 Indian cities.
+                    Near-real-time video infrastructure for LLMs, turning prompts, documents, and AI
+                    answers into mathematically exact, narrated explainer videos through an API-first pipeline.
                   </li>
                 </ul>
               </div>

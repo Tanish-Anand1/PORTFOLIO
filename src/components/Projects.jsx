@@ -3,14 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const projects = [
   {
-    title: 'CareLink',
-    description: 'Care coordination platform for aging parents in tier-2 Indian cities. WhatsApp + Google Sheets, zero-code MVP.',
-    tech: ['WhatsApp', 'Google Sheets', 'No-code'],
+    title: 'Vivacity',
+    description: 'Near-real-time video infrastructure for LLMs, turning prompts, documents, and AI answers into mathematically exact, narrated explainer videos through an API-first pipeline.',
+    tech: ['Python', 'Manim', 'AI/ML'],
     status: 'Building',
     year: '2026',
     link: '#',
     glowColor: 'rgba(16, 185, 129, 0.06)',
-    image: '/projects/carelink.png',
   },
   {
     title: 'Project Rudra',
@@ -20,7 +19,7 @@ const projects = [
     year: '2026',
     link: 'https://osirisai.live',
     glowColor: 'rgba(57, 255, 20, 0.08)',
-    image: '/projects/rudra.png',
+    image: '/artifacts/rudra-live.png',
   },
   {
     title: 'Text Diffusion vs. AR Models',
@@ -30,7 +29,6 @@ const projects = [
     year: '2026',
     link: '#',
     glowColor: 'rgba(139, 92, 246, 0.08)',
-    image: '/projects/diffusion.png',
   },
   {
     title: 'EduCore',
@@ -40,7 +38,6 @@ const projects = [
     year: '2025',
     link: '#',
     glowColor: 'rgba(245, 158, 11, 0.06)',
-    image: '/projects/educore.png',
   },
   {
     title: 'PhysicsGPT',
@@ -50,7 +47,6 @@ const projects = [
     year: '2025',
     link: '#',
     glowColor: 'rgba(59, 130, 246, 0.06)',
-    image: '/projects/physicsgpt.png',
   },
   {
     title: 'ComplianceGuard',
@@ -60,7 +56,6 @@ const projects = [
     year: '2025',
     link: '#',
     glowColor: 'rgba(239, 68, 68, 0.06)',
-    image: '/projects/compliance.png',
   },
   {
     title: 'Anti-Sleep Pilot',
@@ -70,7 +65,6 @@ const projects = [
     year: '2026',
     link: '#',
     glowColor: 'rgba(249, 115, 22, 0.06)',
-    image: '/projects/antisleep.png',
   },
 ];
 

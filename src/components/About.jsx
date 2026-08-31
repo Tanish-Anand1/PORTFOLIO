@@ -93,7 +93,7 @@ const About = ({ isRudraMode, theme }) => {
                   </p>
                   <p>
                     Founder of{' '}
-                    <span className="font-serif font-semibold text-[var(--foreground)]">CareLink</span>{' '}
+                    <span className="font-serif font-semibold text-[var(--foreground)]">Vivacity</span>{' '}
                     and developer of{' '}
                     <span className="font-serif font-semibold text-[var(--foreground)]">Project Rudra</span>
                     <span className="text-[#39FF14] font-black font-serif select-none">.</span>{' '}
@@ -226,7 +226,7 @@ const About = ({ isRudraMode, theme }) => {
                     published a research paper on Synthetic Intelligence at 16
                   </li>
                   <li>
-                    built ORCA, D2AR, ORBIS 2045, LumenSeed, ClusterOrch-Gym, CareLink, Project Rudra, and more
+                    built ORCA, D2AR, ORBIS 2045, LumenSeed, ClusterOrch-Gym, Vivacity, Project Rudra, and more
                   </li>
                 </ul>
               </div>
