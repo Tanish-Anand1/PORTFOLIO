@@ -64,6 +64,7 @@ try {
   // Standalone preview hosts also preserve old links without JavaScript.
   const redirects = JSON.parse(await readFile("vercel.json", "utf8")).redirects;
   for (const { source, destination } of redirects) {
+    if (source.includes("(") || source.includes("*")) continue;
     await writeFile(
       resolve("dist", `.${source}.html`),
       `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, follow"><meta http-equiv="refresh" content="0;url=${destination}"><link rel="canonical" href="${site.url}${destination}"><title>OSIRIS | Tanish Anand</title></head><body><a href="${destination}">Continue to OSIRIS</a></body></html>`,

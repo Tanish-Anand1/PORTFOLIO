@@ -62,6 +62,15 @@ for (const route of routeList) {
   }
 }
 const missing = await readFile("dist/404.html", "utf8");
+const vivacity = await readFile("dist/vivacity.html", "utf8");
+assert.ok(
+  vivacity.includes("Inclined") && vivacity.includes("Orbital plane"),
+  "/vivacity: missing simulation camera scenes",
+);
+assert.ok(
+  !vivacity.includes("vivacity-lab.glb"),
+  "/vivacity: obsolete Blender asset reference",
+);
 for (const [oldPath, target] of [
   ["/projects/rudra", "/projects/osiris"],
   ["/writing/rudra-camera-ingest", "/writing/osiris-camera-ingest"],

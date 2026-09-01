@@ -11,6 +11,17 @@
       "source": "/writing/rudra-camera-ingest",
       "destination": "/writing/osiris-camera-ingest",
       "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "tanishanand.dev"
+        }
+      ],
+      "destination": "https://tanishanand.com/$1",
+      "permanent": true
     }
   ],
   "headers": [

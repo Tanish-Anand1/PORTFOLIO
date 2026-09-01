@@ -1870,13 +1870,13 @@ figcaption {
   .orbit-scene .grid-label {
     display: none;
   }
-  .observation-bar {
-    font-size: 10px;
-  }
   .camera-options button {
     padding: 10px 7px;
     font-size: 9px;
     min-height: 40px;
+  }
+  .observation-bar {
+    font-size: 10px;
   }
   .instrument-toolbar {
     font-size: 9px;

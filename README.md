@@ -28,7 +28,6 @@ node scripts/verify-site.mjs
 - `src/portfolio/SimulationRange.jsx`: synchronized pointer and keyboard scrubbing.
 - `src/portfolio/TraceArtifact.jsx`: inspectable, copyable simulation JSON.
 - `src/portfolio/Brand.jsx`: consistent local company marks in headings, links, and prose.
-- `scripts/vivacity_blender_render.py`: optional Blender render script for the lightweight Vivacity experiment plate.
 - `src/portfolio/orbit.js`: two-body model and verification rules.
 - `src/portfolio/portfolio.css`: responsive design and accessibility states.
 - `scripts/prerender.mjs`: generates 19 HTML pages, metadata, sitemap, and 404 document.
@@ -42,5 +41,3 @@ The earlier portfolio components remain in the repository but are not imported b
 - [Verification results and limits](docs/portfolio-qa.md)
 
 The simulation runs locally in the browser. It illustrates Vivacity's runtime loop and does not connect to the production API. The live domain has not been updated by this redesign task.
-
-Blender is optional. To create the compressed render plate, install Blender 4.5 LTS and run `blender --background --python scripts/vivacity_blender_render.py` from the repository root. The current workbench remains fully usable without this asset.

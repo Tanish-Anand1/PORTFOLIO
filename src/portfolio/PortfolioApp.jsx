@@ -1,6 +1,6 @@
 import { useState } from "react";
 import OrbitSimulation from "./OrbitSimulation.jsx";
-import { site, highlights, projects, posts } from "./content.js";
+import { site, highlights, projects, posts, workNotes, routeMeta } from "./content.js";
 import { Brand, CompanyText } from "./Brand.jsx";
 
 function Arrow({ external = false }) {
@@ -28,6 +28,10 @@ function Shell({ path, children }) {
   ];
   return (
     <div className="site-shell">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFor(path)) }}
+      />
       <a className="skip-link" href="#main">
         Skip to content
       </a>
@@ -81,6 +85,46 @@ function Shell({ path, children }) {
   );
 }
 
+function schemaFor(path) {
+  const meta = routeMeta(path);
+  const crumbs = [
+    { "@type": "ListItem", position: 1, name: "Tanish Anand", item: site.url },
+  ];
+  if (path !== "/") crumbs.push({ "@type": "ListItem", position: 2, name: meta.title.split(" | ")[0], item: `${site.url}${path}` });
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: meta.title,
+    description: meta.description,
+    url: `${site.url}${path === "/" ? "/" : path}`,
+    isPartOf: { "@type": "WebSite", name: site.name, url: site.url },
+    breadcrumb: { "@type": "BreadcrumbList", itemListElement: crumbs },
+  };
+  if (path === "/vivacity") {
+    schema.mainEntity = {
+      "@type": "TechArticle",
+      headline: "Vivacity: simulation infrastructure for AI agents",
+      description: meta.description,
+      author: { "@type": "Person", name: site.name, url: site.url },
+      about: ["simulation runtime", "persistent world state", "branching execution", "verification"],
+    };
+  }
+  const post = posts.find((item) => path === `/writing/${item.slug}`);
+  if (post) {
+    schema["@type"] = "BlogPosting";
+    schema.headline = post.title;
+    schema.datePublished = post.dateISO;
+    schema.author = { "@type": "Person", name: site.name, url: site.url };
+  }
+  const project = projects.find((item) => path === `/projects/${item.slug}`);
+  if (project) {
+    schema["@type"] = "CreativeWork";
+    schema.headline = project.title;
+    schema.author = { "@type": "Person", name: site.name, url: site.url };
+  }
+  return schema;
+}
+
 function Home() {
   return (
     <>
@@ -88,6 +132,9 @@ function Home() {
         <h1>
           Tanish Anand<span className="name-period">.</span>
         </h1>
+        <p style={{ fontStyle: "italic", color: "var(--muted)", margin: "-0.5rem 0 1.5rem 0" }}>
+          Against the whole world.
+        </p>
         <p className="intro-lead">
           <CompanyText>
             I’m 16. Founder & CTO of{" "}
@@ -801,6 +848,31 @@ function Work() {
         </p>
       </PageHeader>
       <article className="article-body work-body">
+        <section className="work-opening">
+          <h2>the work has one thread</h2>
+          <p>
+            most of this started where a clean idea runs into something that
+            refuses to behave. in robowars, that was an 8 kg machine meeting an
+            arena wall at IIT Bombay. in research at IIT Kanpur, it was Hindi
+            getting broken apart by tokenizers trained for English. in OSIRIS,
+            it was live video feeds, timestamp drift, and browser garbage
+            collection deciding whether a map could stay smooth.
+          </p>
+          <p>
+            the settings changed, but the work kept pulling in the same
+            direction. robotics with Google DeepMind. Grok open-source work
+            with xAI. bare-metal firmware for an Anduril project that I cannot
+            write much about. an Inflection grant. then back to the less
+            photogenic part: workers, buffers, sensors, power budgets, and
+            things that need to keep working after the demo ends.
+          </p>
+          <p>
+            Vivacity is where those threads meet. I am building it as a system
+            where agents can act on a world, branch what happens next, and
+            check the result. still early. still being built. but it is the
+            closest thing here to the work I want to keep doing.
+          </p>
+        </section>
         <section id="deepmind">
           <h2>
             <Brand name="deepmind">Google DeepMind</Brand>
@@ -811,7 +883,12 @@ function Work() {
           <p>
             <CompanyText>Worked with Google DeepMind on robotics.</CompanyText>
           </p>
-          <External href="https://deepmind.google/">Google DeepMind</External>
+          <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+            <a className="text-link" href="/work/deepmind">
+              read more <Arrow />
+            </a>
+            <External href="https://deepmind.google/">site</External>
+          </div>
         </section>
         <section id="xai">
           <h2>
@@ -823,9 +900,12 @@ function Work() {
           <p>
             <CompanyText>Worked with xAI on Grok open source.</CompanyText>
           </p>
-          <External href="https://github.com/xai-org">
-            xAI’s open-source work
-          </External>
+          <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+            <a className="text-link" href="/work/xai">
+              read more <Arrow />
+            </a>
+            <External href="https://github.com/xai-org">site</External>
+          </div>
         </section>
         <section id="anduril">
           <h2>
@@ -840,9 +920,14 @@ function Work() {
               redacted.
             </CompanyText>
           </p>
-          <div className="redacted-line" aria-label="Project details redacted">
+          <div className="redacted-line" aria-label="Project details redacted" style={{ marginBottom: "16px" }}>
             <span aria-hidden="true">████████ ████████ █████</span>
             <code>REDACTED</code>
+          </div>
+          <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+            <a className="text-link" href="/work/anduril">
+              read more <Arrow />
+            </a>
           </div>
         </section>
         <section id="inflection">
@@ -855,6 +940,11 @@ function Work() {
           <p>
             <CompanyText>Received an Inflection grant.</CompanyText>
           </p>
+          <div style={{ display: "flex", gap: "16px", alignItems: "center", marginTop: "16px" }}>
+            <a className="text-link" href="/work/inflection">
+              read more <Arrow />
+            </a>
+          </div>
         </section>
         <section>
           <h2>
@@ -977,6 +1067,37 @@ function Post({ post }) {
   );
 }
 
+function WorkNote({ note }) {
+  return (
+    <>
+      <PageHeader
+        back="/work"
+        backLabel="Work"
+        title={<span style={{ textTransform: "lowercase", fontFamily: "var(--font-serif)", fontWeight: "normal" }}>{note.title}</span>}
+        meta={`${note.date} · ${note.role}`}
+      >
+        <p style={{ fontStyle: "italic", opacity: 0.8 }}>
+          <CompanyText>{note.subtitle}</CompanyText>
+        </p>
+        <p className="mono" style={{ fontSize: "0.85rem", opacity: 0.6, marginTop: "2rem" }}>
+          {note.views} · <a href={`mailto:${site.email}`} style={{ textDecoration: "underline", color: "inherit" }}>leave a note →</a>
+        </p>
+      </PageHeader>
+      <article className="article-body">
+        {note.body.map((paragraph, i) => (
+          <p key={i}>
+            <CompanyText>{paragraph}</CompanyText>
+          </p>
+        ))}
+        <div className="article-end">
+          <a href="/work">← Back to work</a>
+        </div>
+      </article>
+    </>
+  );
+}
+
+
 export default function PortfolioApp({
   path = typeof window === "undefined"
     ? "/"
@@ -984,6 +1105,7 @@ export default function PortfolioApp({
 }) {
   const project = projects.find((p) => path === `/projects/${p.slug}`);
   const post = posts.find((p) => path === `/writing/${p.slug}`);
+  const workNote = workNotes.find((n) => path === `/work/${n.slug}`);
   const pages = {
     "/": <Home />,
     "/vivacity": <Vivacity />,
@@ -996,6 +1118,8 @@ export default function PortfolioApp({
     <ProjectPage project={project} />
   ) : post ? (
     <Post post={post} />
+  ) : workNote ? (
+    <WorkNote note={workNote} />
   ) : (
     pages[path] || (
       <>

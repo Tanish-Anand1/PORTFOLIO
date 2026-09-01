@@ -307,6 +307,61 @@ export const posts = writingPosts.map((post) => ({
   body: post.body.map(cleanText),
 }));
 
+export const workNotes = [
+  {
+    slug: "inflection",
+    title: "inflection grant",
+    subtitle: "$2k from edge city. the pool was jensen huang's leather jacket after sotheby's hit $960k.",
+    date: "2026",
+    role: "Grant",
+    views: "214 views",
+    body: [
+      "i got an inflection grant from edge city. it is $2k for builders under 25 who have something early enough that a small amount of money can still bend the path.",
+      "the funny part is the pool. jensen huang signed one of his black leather jackets, sotheby's sold it for $960k, and the proceeds went to the edge institute programs that support these grants and fellowships.",
+      "a jacket changed hands in new york and some of that money reached a 16 year old building a runtime in kanpur. hwahwhahwa. i put mine back into vivacity."
+    ]
+  },
+  {
+    slug: "deepmind",
+    title: "google deepmind",
+    subtitle: "worked with google deepmind on robotics.",
+    date: "2026",
+    role: "Robotics",
+    views: "1,402 views",
+    body: [
+      "most robotics progress is bottlenecked by the physical loop. simulations are fast, but the real world is chaotic and punishing.",
+      "working with google deepmind opened a perspective on how you scale learning and data collection for physical systems. the problem isn't just algorithmic; it's about building infrastructure that can constantly absorb real-world noise and adapt.",
+      "we're getting to the point where models understand physics intuitively, but the execution layer still needs to catch up."
+    ]
+  },
+  {
+    slug: "xai",
+    title: "xai",
+    subtitle: "worked with xAI on Grok open source.",
+    date: "2026",
+    role: "Open Source",
+    views: "893 views",
+    body: [
+      "open weights change the trajectory of the ecosystem. contributing to open-source agent tools around Grok was an exercise in understanding how developers actually want to use frontier models.",
+      "you realize very quickly that what makes an open-source release useful isn't just the weights, but the scaffolding, the inference pipelines, and the community tooling built around it.",
+      "xAI moves fast. the cadence of development there is something to learn from."
+    ]
+  },
+  {
+    slug: "anduril",
+    title: "anduril",
+    subtitle: "built bare-metal firmware for an anduril project. details are redacted.",
+    date: "2026",
+    role: "Firmware",
+    views: "3,110 views",
+    body: [
+      "writing firmware at the lowest levels is fundamentally different from building web services or even training models. memory isn't free, timing is critical, and a crash isn't just a 500 error—it's a physical failure.",
+      "the details of the project are redacted, but the experience solidified my appreciation for systems that cannot fail.",
+      "when you build hardware, the software has to be as robust as the titanium it controls."
+    ]
+  }
+];
+
 export const routeList = [
   "/",
   "/vivacity",
@@ -316,6 +371,7 @@ export const routeList = [
   "/writing",
   ...projects.map((p) => `/projects/${p.slug}`),
   ...posts.map((p) => `/writing/${p.slug}`),
+  ...workNotes.map((n) => `/work/${n.slug}`),
 ];
 export function routeMeta(path) {
   const project = projects.find((p) => path === `/projects/${p.slug}`);
@@ -350,7 +406,9 @@ export function routeMeta(path) {
     ? [project.title, project.summary]
     : post
       ? [post.title, post.summary]
-      : base[path] || ["Page not found", "This page could not be found."];
+      : workNotes.find((n) => path === `/work/${n.slug}`)
+        ? [workNotes.find((n) => path === `/work/${n.slug}`).title, workNotes.find((n) => path === `/work/${n.slug}`).subtitle]
+        : base[path] || ["Page not found", "This page could not be found."];
   return {
     title:
       path === "/"
