@@ -355,7 +355,7 @@ export const workNotes = [
     role: "Firmware",
     views: "3,110 views",
     body: [
-      "writing firmware at the lowest levels is fundamentally different from building web services or even training models. memory isn't free, timing is critical, and a crash isn't just a 500 error—it's a physical failure.",
+      "writing firmware at the lowest levels is fundamentally different from building web services or even training models. memory isn't free, timing is critical, and a crash isn't just a 500 error, it's a physical failure.",
       "the details of the project are redacted, but the experience solidified my appreciation for systems that cannot fail.",
       "when you build hardware, the software has to be as robust as the titanium it controls."
     ]

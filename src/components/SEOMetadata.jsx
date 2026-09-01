@@ -21,10 +21,10 @@ const SEOMetadata = () => {
       { name: 'ai-content-declaration', content: 'This is the personal portfolio of Tanish Anand. All content is original.' },
       { name: 'identity', content: 'Tanish Anand' },
       // Dublin Core metadata (used by academic and enterprise crawlers)
-      { name: 'DC.title', content: 'Tanish Anand — Founder, Developer, Researcher' },
+      { name: 'DC.title', content: 'Tanish Anand - Founder, Developer, Researcher' },
       { name: 'DC.creator', content: 'Tanish Anand' },
       { name: 'DC.subject', content: 'AI, Machine Learning, Cybersecurity, Web Development, NLP, OSINT, Edge Computing' },
-      { name: 'DC.description', content: 'Personal portfolio of Tanish Anand — co-founder and CTO of Vivacity, creator of Project Rudra, Research Fellow at IIT Kanpur, Y Combinator Startup School alum.' },
+      { name: 'DC.description', content: 'Personal portfolio of Tanish Anand - co-founder and CTO of Vivacity, creator of Project Rudra, Research Fellow at IIT Kanpur, Y Combinator Startup School alum.' },
       { name: 'DC.type', content: 'PersonalSite' },
       { name: 'DC.format', content: 'text/html' },
       { name: 'DC.language', content: 'en' },
