@@ -46,20 +46,47 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Tanish Anand",
-        "email": "tanishanand@paxus.in",
-        "url": "https://tanishanand.com/",
-        "jobTitle": "Co-founder & CTO",
-        "worksFor": {
-          "@type": "Organization",
-          "name": "Vivacity",
-          "url": "https://www.tryvivacity.com/"
-        },
-        "sameAs": [
-          "https://github.com/Tanish-Anand1",
-          "https://x.com/sullaxive",
-          "https://linkedin.com/in/tanish-anand24"
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://tanishanand.com/#website",
+            "url": "https://tanishanand.com/",
+            "name": "Tanish Anand",
+            "alternateName": [
+              "tanishanand.com",
+              "Tanish Anand Portfolio",
+              "Tanish Anand Website"
+            ],
+            "publisher": {
+              "@id": "https://tanishanand.com/#person"
+            }
+          },
+          {
+            "@type": "Person",
+            "@id": "https://tanishanand.com/#person",
+            "name": "Tanish Anand",
+            "url": "https://tanishanand.com/",
+            "email": "tanishanand@paxus.in",
+            "jobTitle": "Co-founder & CTO",
+            "worksFor": {
+              "@type": "Organization",
+              "name": "Vivacity",
+              "url": "https://www.tryvivacity.com/"
+            },
+            "sameAs": [
+              "https://www.linkedin.com/in/tanish-anand24",
+              "https://github.com/Tanish-Anand1",
+              "https://x.com/sullaxive",
+              "https://cal.com/tanishanand"
+            ],
+            "knowsAbout": [
+              "Artificial Intelligence",
+              "Robotics",
+              "Simulation Infrastructure",
+              "Systems Engineering"
+            ],
+            "mainEntityOfPage": "https://tanishanand.com/"
+          }
         ]
       }
     </script>
