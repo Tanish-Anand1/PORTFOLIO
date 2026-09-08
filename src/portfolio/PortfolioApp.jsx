@@ -1,7 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OrbitSimulation from "./OrbitSimulation.jsx";
 import { site, highlights, projects, posts, workNotes, routeMeta } from "./content.js";
 import { Brand, CompanyText } from "./Brand.jsx";
+
+const emptyWriterContent = { posts: [], deletedSlugs: [], updatedAt: null };
+
+function combinePosts(publishedPosts, writerContent) {
+  const managedPosts = Array.isArray(writerContent.posts) ? writerContent.posts : [];
+  const deletedSlugs = new Set(writerContent.deletedSlugs || []);
+  const managedBySlug = new Map(managedPosts.map((post) => [post.slug, post]));
+  const publishedSlugs = new Set(publishedPosts.map((post) => post.slug));
+  return [
+    ...managedPosts.filter((post) => !publishedSlugs.has(post.slug) && !deletedSlugs.has(post.slug)),
+    ...publishedPosts
+      .filter((post) => !deletedSlugs.has(post.slug))
+      .map((post) => managedBySlug.get(post.slug) || post),
+  ];
+}
+
+function postHref(post) {
+  return posts.some((item) => item.slug === post.slug) ? `/writing/${post.slug}` : `/writing/live/${post.slug}`;
+}
+
+async function writerRequest(url, options = {}, timeoutMs = 30_000) {
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(url, { ...options, signal: controller.signal });
+  } catch (error) {
+    if (controller.signal.aborted) {
+      throw new Error("This is taking too long. Refresh Writing to check whether it published before trying again.");
+    }
+    throw error;
+  } finally {
+    window.clearTimeout(timeout);
+  }
+}
 
 function Arrow({ external = false }) {
   return (
@@ -19,7 +53,7 @@ function External({ href, children, className = "" }) {
   );
 }
 
-function Shell({ path, children }) {
+function Shell({ path, children, activePosts = posts }) {
   const nav = [
     ["/", "Home"],
     ["/projects", "Projects"],
@@ -28,10 +62,12 @@ function Shell({ path, children }) {
   ];
   return (
     <div className="site-shell">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFor(path)) }}
-      />
+      {path !== "/admin" && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFor(path, activePosts)) }}
+        />
+      )}
       <a className="skip-link" href="#main">
         Skip to content
       </a>
@@ -54,7 +90,7 @@ function Shell({ path, children }) {
             </a>
           ))}
         </nav>
-        <a className="header-contact" href={`mailto:${site.email}`}>
+        <a className="header-contact" href={site.emailUrl}>
           Say hello <Arrow external />
         </a>
       </header>
@@ -76,7 +112,7 @@ function Shell({ path, children }) {
           <a href={site.booking} target="_blank" rel="noreferrer">
             <Brand name="cal">Book a call</Brand> <Arrow external />
           </a>
-          <a href={`mailto:${site.email}`}>
+          <a href={site.emailUrl}>
             Email <Arrow external />
           </a>
         </div>
@@ -85,7 +121,7 @@ function Shell({ path, children }) {
   );
 }
 
-function schemaFor(path) {
+function schemaFor(path, activePosts = posts) {
   const meta = routeMeta(path);
   const crumbs = [
     { "@type": "ListItem", position: 1, name: "Tanish Anand", item: site.url },
@@ -98,6 +134,15 @@ function schemaFor(path) {
     description: meta.description,
     url: `${site.url}${path === "/" ? "/" : path}`,
     isPartOf: { "@type": "WebSite", name: site.name, url: site.url },
+    author: {
+      "@type": "Person",
+      "@id": `${site.url}/#person`,
+      name: site.name,
+      url: `${site.url}/`,
+      email: site.email,
+      sameAs: site.sameAs,
+    },
+    relatedLink: site.metadataLinks,
     breadcrumb: { "@type": "BreadcrumbList", itemListElement: crumbs },
   };
   if (path === "/vivacity") {
@@ -109,7 +154,9 @@ function schemaFor(path) {
       about: ["simulation runtime", "persistent world state", "branching execution", "verification"],
     };
   }
-  const post = posts.find((item) => path === `/writing/${item.slug}`);
+  const post = activePosts.find(
+    (item) => path === `/writing/${item.slug}` || path === `/writing/live/${item.slug}`,
+  );
   if (post) {
     schema["@type"] = "BlogPosting";
     schema.headline = post.title;
@@ -205,7 +252,7 @@ function Home() {
                 key={slug}
                 href={`/projects/${slug}`}
               >
-                <div className="project-image">
+                {p.image && <div className="project-image">
                   <img
                     src={p.image}
                     alt={p.alt}
@@ -213,7 +260,7 @@ function Home() {
                     width="720"
                     height="450"
                   />
-                </div>
+                </div>}
                 <div className="project-title">
                   <h3>{p.title}</h3>
                   <Arrow />
@@ -255,11 +302,11 @@ function Home() {
         <CompanyText>
           If you’re working on simulation, embodied intelligence, or something
           difficult in between,{" "}
-          <a href={`mailto:${site.email}`}>I’d like to hear about it.</a>
+          <a href={site.emailUrl}>I’d like to hear about it.</a>
         </CompanyText>
       </p>
       <div className="contact-links">
-        <a href={`mailto:${site.email}`}>{site.email}</a>
+        <a href={site.emailUrl}>{site.email}</a>
         <External href={site.booking}>
           <Brand name="cal">Book a call</Brand>
         </External>
@@ -306,7 +353,7 @@ function Vivacity() {
         </p>
       </PageHeader>
       <div className="page-links">
-        <External href="https://www.tryvivacity.com/">Visit Vivacity</External>
+        <External href={site.vivacity}>Visit Vivacity</External>
         <a href="#playground">
           Try the model <Arrow />
         </a>
@@ -513,7 +560,7 @@ if report.passed:
             </CompanyText>
           </p>
           <External
-            href="https://www.tryvivacity.com/demo"
+            href={site.vivacityDemo}
             className="text-link"
           >
             Talk to the team
@@ -524,7 +571,7 @@ if report.passed:
           <p>
             <CompanyText>
               Product description and interface:{" "}
-              <External href="https://www.tryvivacity.com/">Vivacity</External>.
+              <External href={site.vivacity}>Vivacity</External>.
               The embedded model is an independent browser implementation of the
               branching workflow. Backend categories describe the public
               architecture, without asserting that each named provider is
@@ -669,7 +716,7 @@ function ProjectPage({ project: p }) {
           />
           <figcaption>
             {p.slug === "osiris"
-              ? "OSIRIS interface capture from the project archive."
+              ? "ARGUS interface capture from the project archive."
               : "A combat robot from the build archive."}
           </figcaption>
         </figure>
@@ -854,17 +901,17 @@ function Work() {
             most of this started where a clean idea runs into something that
             refuses to behave. in robowars, that was an 8 kg machine meeting an
             arena wall at IIT Bombay. in research at IIT Kanpur, it was Hindi
-            getting broken apart by tokenizers trained for English. in OSIRIS,
+            getting broken apart by tokenizers trained for English. in ARGUS,
             it was live video feeds, timestamp drift, and browser garbage
             collection deciding whether a map could stay smooth.
           </p>
           <p>
             the settings changed, but the work kept pulling in the same
-            direction. robotics with Google DeepMind. Grok open-source work
-            with xAI. bare-metal firmware for an Anduril project that I cannot
-            write much about. an Inflection grant. then back to the less
-            photogenic part: workers, buffers, sensors, power budgets, and
-            things that need to keep working after the demo ends.
+            direction. robotics with Google DeepMind. bare-metal firmware for
+            an Anduril project that I cannot write much about. an Inflection
+            grant. then back to the less photogenic part: workers, buffers,
+            sensors, power budgets, and things that need to keep working after
+            the demo ends.
           </p>
           <p>
             Vivacity is where those threads meet. I am building it as a system
@@ -888,23 +935,6 @@ function Work() {
               read more <Arrow />
             </a>
             <External href="https://deepmind.google/">site</External>
-          </div>
-        </section>
-        <section id="xai">
-          <h2>
-            <Brand name="xai">xAI</Brand>
-          </h2>
-          <p className="work-role">
-            <CompanyText>Grok / open source</CompanyText>
-          </p>
-          <p>
-            <CompanyText>Worked with xAI on Grok open source.</CompanyText>
-          </p>
-          <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
-            <a className="text-link" href="/work/xai">
-              read more <Arrow />
-            </a>
-            <External href="https://github.com/xai-org">site</External>
           </div>
         </section>
         <section id="anduril">
@@ -999,7 +1029,13 @@ function Work() {
   );
 }
 
-function Writing() {
+function Writing({ activePosts }) {
+  const orderedPosts = [...activePosts].sort((a, b) => {
+    if (a.slug === "byteforge-execron-1") return -1;
+    if (b.slug === "byteforge-execron-1") return 1;
+    return 0;
+  });
+
   return (
     <>
       <PageHeader title="Writing">
@@ -1010,8 +1046,8 @@ function Writing() {
         </p>
       </PageHeader>
       <div className="writing-index">
-        {posts.map((post) => (
-          <a href={`/writing/${post.slug}`} key={post.slug}>
+        {orderedPosts.map((post) => (
+          <a href={postHref(post)} key={post.slug}>
             <time className="mono" dateTime={post.dateISO}>
               {post.dateLabel}
             </time>
@@ -1026,6 +1062,345 @@ function Writing() {
         ))}
       </div>
     </>
+  );
+}
+
+function emptyDraft() {
+  return {
+    slug: "",
+    title: "",
+    summary: "",
+    dateISO: new Date().toISOString().slice(0, 10),
+    body: "",
+    images: [],
+  };
+}
+
+function WriterDesk({ activePosts, onContentChange }) {
+  const [selectedSlug, setSelectedSlug] = useState(null);
+  const [draft, setDraft] = useState(emptyDraft);
+  const [notice, setNotice] = useState("Pick a post, or start a new one.");
+  const [session, setSession] = useState({ checking: true, configured: false, authenticated: false });
+  const [password, setPassword] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [removing, setRemoving] = useState(false);
+  const canSave =
+    draft.slug.trim().length > 0 &&
+    draft.title.trim().length > 0 &&
+    draft.summary.trim().length > 0 &&
+    draft.dateISO.length === 10 &&
+    draft.body.trim().length > 0;
+
+  function pickPost(post) {
+    setSelectedSlug(post.slug);
+    setDraft({
+      slug: post.slug,
+      title: post.title,
+      summary: post.summary,
+      dateISO: post.dateISO,
+      body: post.body.join("\n\n"),
+      images: post.media?.images || [],
+    });
+    setRemoving(false);
+    setNotice(post.managed ? "Editing a post from the live writer desk." : "Editing a site post. Saving replaces it live.");
+  }
+
+  function startNew() {
+    setSelectedSlug(null);
+    setDraft(emptyDraft());
+    setRemoving(false);
+    setNotice("New post. Keep the slug short and lowercase.");
+  }
+
+  function updateDraft(event) {
+    const { name, value } = event.target;
+    setDraft((current) => ({ ...current, [name]: value }));
+  }
+
+  useEffect(() => {
+    let current = true;
+    writerRequest("/api/admin/session", {}, 12_000)
+      .then(async (response) => ({ ok: response.ok, body: await response.json() }))
+      .then(({ ok, body }) => {
+        if (current) setSession({ checking: false, configured: Boolean(body.configured), authenticated: ok && Boolean(body.authenticated) });
+      })
+      .catch(() => {
+        if (current) setSession({ checking: false, configured: false, authenticated: false });
+      });
+    return () => { current = false; };
+  }, []);
+
+  async function signIn(event) {
+    event.preventDefault();
+    setBusy(true);
+    setNotice("Checking the key…");
+    try {
+      const response = await writerRequest("/api/admin/login", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ password }),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || "Could not sign in.");
+      setPassword("");
+      setSession({ checking: false, configured: true, authenticated: true });
+      setNotice("You are in. Changes publish to the live site.");
+    } catch (error) {
+      setNotice(error.message || "Could not sign in.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function signOut() {
+    setBusy(true);
+    try {
+      const response = await writerRequest("/api/admin/session", { method: "DELETE" });
+      if (!response.ok) throw new Error("Could not sign out. Please try again.");
+      setSession({ checking: false, configured: true, authenticated: false });
+      startNew();
+      setNotice("Signed out.");
+    } catch (error) {
+      setNotice(error.message || "Could not sign out. Please try again.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function save(event) {
+    event.preventDefault();
+    if (!canSave) {
+      setNotice("Title, slug, summary, date, and at least one paragraph are required.");
+      return;
+    }
+    const slug = draft.slug
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
+    if (!slug) {
+      setNotice("That slug is not usable. Use letters, numbers, and hyphens.");
+      return;
+    }
+    const body = draft.body
+      .split(/\n\s*\n/)
+      .map((paragraph) => paragraph.trim())
+      .filter(Boolean);
+    const saved = {
+      slug,
+      title: draft.title.trim(),
+      summary: draft.summary.trim(),
+      dateISO: draft.dateISO,
+      body,
+      media: { images: draft.images },
+    };
+    setBusy(true);
+    setNotice("Publishing…");
+    try {
+      const response = await writerRequest("/api/admin/posts", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ ...saved, previousSlug: selectedSlug }),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || "Could not publish this post.");
+      onContentChange(result);
+      const published = result.posts.find((post) => post.slug === slug);
+      setSelectedSlug(slug);
+      setDraft({ ...draft, slug, body: body.join("\n\n") });
+      setNotice(`Published live. Your post is now at ${postHref(published || { slug })}.`);
+    } catch (error) {
+      setNotice(error.message || "Could not publish this post.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function uploadImages(event) {
+    const files = Array.from(event.target.files || []);
+    if (!files.length) return;
+    setBusy(true);
+    setNotice(`Uploading ${files.length} image${files.length === 1 ? "" : "s"}…`);
+    try {
+      const uploaded = [];
+      for (const file of files) {
+        const form = new FormData();
+        form.append("file", file);
+        const response = await writerRequest("/api/admin/upload", { method: "POST", body: form }, 60_000);
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || "An image could not upload.");
+        uploaded.push(result.image);
+      }
+      setDraft((current) => ({ ...current, images: [...current.images, ...uploaded] }));
+      setNotice("Image uploaded. Add useful alt text, then publish when ready.");
+    } catch (error) {
+      setNotice(error.message || "Upload failed.");
+    } finally {
+      event.target.value = "";
+      setBusy(false);
+    }
+  }
+
+  function updateImage(index, field, value) {
+    setDraft((current) => ({
+      ...current,
+      images: current.images.map((image, imageIndex) => imageIndex === index ? { ...image, [field]: value } : image),
+    }));
+  }
+
+  function removeImage(index) {
+    setDraft((current) => ({ ...current, images: current.images.filter((_, imageIndex) => imageIndex !== index) }));
+  }
+
+  async function removePost() {
+    if (!selectedSlug) return;
+    setBusy(true);
+    setNotice("Removing the post…");
+    try {
+      const response = await writerRequest("/api/admin/posts", {
+        method: "DELETE",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          slug: selectedSlug,
+          hideStaticPost: posts.some((post) => post.slug === selectedSlug),
+        }),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || "Could not remove this post.");
+      onContentChange(result);
+      startNew();
+      setNotice("Removed from the live site.");
+    } catch (error) {
+      setNotice(error.message || "Could not remove this post.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <div className="writer-desk">
+      <PageHeader title="Writer desk">
+        <p>
+          A quiet place to edit posts without turning the portfolio into some dumbass dashboard.
+        </p>
+      </PageHeader>
+      <div className="writer-desk-note" role="note">
+        <strong>Live publishing desk.</strong> Posts, edits, deletions, and images are shared with the site after you publish.
+      </div>
+      {session.checking ? (
+        <p className="writer-desk-status" aria-live="polite">Checking the writer desk…</p>
+      ) : !session.configured ? (
+        <section className="writer-desk-gate" aria-labelledby="writer-setup-title">
+          <p className="mono">ONE LAST SETUP STEP</p>
+          <h2 id="writer-setup-title">Set the admin password once.</h2>
+          <p>Add <code>ADMIN_PASSWORD</code> in the Vercel project’s Production environment, then redeploy. The content store is already connected.</p>
+        </section>
+      ) : !session.authenticated ? (
+        <form className="writer-desk-gate writer-desk-login" onSubmit={signIn}>
+          <p className="mono">PRIVATE AREA</p>
+          <h2>Enter the writer desk.</h2>
+          <label>
+            Admin password
+            <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} autoComplete="current-password" required />
+          </label>
+          <button className="writer-desk-save" type="submit" disabled={busy}>{busy ? "Checking…" : "Unlock editor"}</button>
+          <p className="writer-desk-status" aria-live="polite">{notice}</p>
+        </form>
+      ) : (
+      <div className="writer-desk-grid">
+        <aside className="writer-desk-list" aria-label="Writing posts">
+          <button className="writer-desk-new" type="button" onClick={startNew}>
+            + New post
+          </button>
+          <div>
+            {activePosts.map((post) => (
+              <button
+                type="button"
+                key={post.slug}
+                className={selectedSlug === post.slug ? "is-selected" : ""}
+                onClick={() => pickPost(post)}
+                aria-pressed={selectedSlug === post.slug}
+              >
+                <span>{post.title}</span>
+                <small>{post.managed ? "live" : "site post"} · {post.dateLabel}</small>
+              </button>
+            ))}
+          </div>
+        </aside>
+        <form className="writer-desk-form" onSubmit={save}>
+          <div className="writer-desk-toolbar">
+            <span className="mono">LIVE EDITOR</span>
+            <button type="button" onClick={signOut}>Sign out</button>
+          </div>
+          <p className="writer-desk-status" aria-live="polite">
+            {notice}
+          </p>
+          <label>
+            Title
+            <input name="title" value={draft.title} onChange={updateDraft} required />
+          </label>
+          <label>
+            URL slug
+            <input
+              name="slug"
+              value={draft.slug}
+              onChange={updateDraft}
+              spellCheck="false"
+              required
+            />
+          </label>
+          <label>
+            Published date
+            <input name="dateISO" type="date" value={draft.dateISO} onChange={updateDraft} required />
+          </label>
+          <label>
+            Index summary
+            <textarea name="summary" value={draft.summary} onChange={updateDraft} rows="3" required />
+          </label>
+          <label>
+            Body
+            <textarea
+              name="body"
+              value={draft.body}
+              onChange={updateDraft}
+              rows="14"
+              placeholder="Use a blank line between paragraphs."
+              required
+            />
+          </label>
+          <fieldset className="writer-desk-images">
+            <legend>Images</legend>
+            <p>JPG, PNG, WebP, or GIF. Up to 5 MB each. Describe the image for readers who cannot see it.</p>
+            <label className="writer-desk-upload">
+              <span>Upload images</span>
+              <input type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple onChange={uploadImages} disabled={busy} />
+            </label>
+            {draft.images.map((image, index) => (
+              <div className="writer-desk-image" key={image.src}>
+                <img src={image.src} alt="" />
+                <div>
+                  <label>Alt text<input value={image.alt} onChange={(event) => updateImage(index, "alt", event.target.value)} placeholder="What is happening in this image?" /></label>
+                  <label>Caption <em>(optional)</em><input value={image.caption || ""} onChange={(event) => updateImage(index, "caption", event.target.value)} /></label>
+                  <button type="button" onClick={() => removeImage(index)}>Remove image</button>
+                </div>
+              </div>
+            ))}
+          </fieldset>
+          <div className="writer-desk-actions">
+            <button className="writer-desk-save" type="submit" disabled={!canSave || busy}>
+              {busy ? "Working…" : "Publish changes"}
+            </button>
+            {selectedSlug && <a href={postHref({ slug: selectedSlug })} target="_blank" rel="noreferrer">View post <Arrow external /></a>}
+          </div>
+          {selectedSlug && (
+            <div className="writer-desk-danger">
+              {removing ? <><p>Remove <strong>{draft.title || selectedSlug}</strong> from the live site? This hides it immediately.</p><button type="button" onClick={removePost} disabled={busy}>Yes, remove post</button><button type="button" onClick={() => setRemoving(false)} disabled={busy}>Keep it</button></> : <button type="button" onClick={() => setRemoving(true)}>Remove this post</button>}
+            </div>
+          )}
+        </form>
+      </div>
+      )}
+    </div>
   );
 }
 
@@ -1055,6 +1430,7 @@ function Post({ post }) {
                   height="540"
                   loading="lazy"
                 />
+                {item.caption && <figcaption>{item.caption}</figcaption>}
               </figure>
             ))}
           </div>
@@ -1080,7 +1456,7 @@ function WorkNote({ note }) {
           <CompanyText>{note.subtitle}</CompanyText>
         </p>
         <p className="mono" style={{ fontSize: "0.85rem", opacity: 0.6, marginTop: "2rem" }}>
-          {note.views} · <a href={`mailto:${site.email}`} style={{ textDecoration: "underline", color: "inherit" }}>leave a note →</a>
+          {note.views} · <a href={site.emailUrl} style={{ textDecoration: "underline", color: "inherit" }}>leave a note →</a>
         </p>
       </PageHeader>
       <article className="article-body">
@@ -1103,8 +1479,28 @@ export default function PortfolioApp({
     ? "/"
     : window.location.pathname.replace(/\/$/, "") || "/",
 }) {
+  const [writerContent, setWriterContent] = useState(emptyWriterContent);
+  const [writingStatus, setWritingStatus] = useState("loading");
+  const activePosts = combinePosts(posts, writerContent);
+  useEffect(() => {
+    let current = true;
+    writerRequest("/api/posts", {}, 12_000)
+      .then(async (response) => ({ ok: response.ok, body: await response.json() }))
+      .then(({ ok, body }) => {
+        if (!ok || !Array.isArray(body.posts)) throw new Error("Writing unavailable");
+        if (current) {
+          setWriterContent(body);
+          setWritingStatus("ready");
+        }
+      })
+      .catch(() => { if (current) setWritingStatus("error"); });
+    return () => { current = false; };
+  }, []);
+  const isLivePostPath = path.startsWith("/writing/live/");
+  const liveSlug = isLivePostPath ? path.split("/").pop() : null;
+  const livePost = liveSlug ? activePosts.find((p) => p.slug === liveSlug) : null;
   const project = projects.find((p) => path === `/projects/${p.slug}`);
-  const post = posts.find((p) => path === `/writing/${p.slug}`);
+  const post = activePosts.find((p) => path === `/writing/${p.slug}`) || livePost;
   const workNote = workNotes.find((n) => path === `/work/${n.slug}`);
   const pages = {
     "/": <Home />,
@@ -1112,12 +1508,25 @@ export default function PortfolioApp({
     "/projects": <ProjectIndex />,
     "/research": <Research />,
     "/work": <Work />,
-    "/writing": <Writing />,
+    "/writing": <Writing activePosts={activePosts} />,
+    "/admin": (
+      <WriterDesk
+        activePosts={activePosts}
+        onContentChange={setWriterContent}
+      />
+    ),
   };
   const page = project ? (
     <ProjectPage project={project} />
   ) : post ? (
     <Post post={post} />
+  ) : isLivePostPath && writingStatus !== "ready" ? (
+    <>
+      <PageHeader title={writingStatus === "loading" ? "Loading post…" : "Could not load this post"}>
+        <p role="status">{writingStatus === "loading" ? "Fetching the latest published writing." : "Writing is temporarily unavailable. Please try again."}</p>
+      </PageHeader>
+      {writingStatus === "error" && <button type="button" onClick={() => window.location.reload()}>Try again</button>}
+    </>
   ) : workNote ? (
     <WorkNote note={workNote} />
   ) : (
@@ -1134,5 +1543,24 @@ export default function PortfolioApp({
       </>
     )
   );
-  return <Shell path={path}>{page}</Shell>;
+  return (
+    <>
+      {isLivePostPath ? (
+        <>
+          <title>{`${livePost?.title || (writingStatus === "ready" ? "Post not found" : "Writing")} | ${site.name}`}</title>
+          <meta name="description" content={livePost?.summary || "Writing by Tanish Anand."} />
+          <link rel="canonical" href={`${site.url}${livePost ? postHref(livePost) : path}`} />
+          {livePost ? (
+            <>
+              <meta property="og:title" content={livePost.title} />
+              <meta property="og:description" content={livePost.summary} />
+              <meta property="og:type" content="article" />
+              <meta property="og:url" content={`${site.url}${postHref(livePost)}`} />
+            </>
+          ) : <meta name="robots" content="noindex, follow" />}
+        </>
+      ) : null}
+      <Shell path={path} activePosts={activePosts}>{page}</Shell>
+    </>
+  );
 }

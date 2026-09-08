@@ -8,8 +8,6 @@ const organizations = {
   vivacity: "vivacity",
   anduril: "anduril",
   inflection: "inflection",
-  xai: "xai",
-  grok: "xai",
   prolearn: "prolearn",
   palantir: "palantir",
   claude: "claude",

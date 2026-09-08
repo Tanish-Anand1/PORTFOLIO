@@ -20,18 +20,6 @@ const investorProjects = [
     press: [{ label: 'try Vivacity', href: 'https://tryvivacity.com/' }],
   },
   {
-    title: 'AEGIS',
-    role: 'Builder · AIP control plane',
-    dateRange: '2026',
-    description:
-      'Built AEGIS, a terminal user interface for Palantir’s AIP control plane. The project led to an offer of unmetered access to frontier models and a role, which I could not accept because defense contracts cannot clear minors.',
-    stats: [
-      { value: 'AIP', label: 'control plane' },
-      { value: 'TUI', label: 'terminal interface' },
-    ],
-    partners: ['Palantir'],
-  },
-  {
     title: 'ByteForge',
     role: 'Co-founder & VP',
     dateRange: '2021 to present',
@@ -58,7 +46,6 @@ const investorProjects = [
     description:
       'A GPU-accelerated global OSINT command grid integrating flight tracking, marine channels, CCTV networks, seismic activity, and live broadcasts in a 60fps WebGL interface.',
     press: [{ label: 'open live system', href: 'https://osirisai.live' }],
-    media: [{ src: '/artifacts/rudra-live.png', alt: 'Project Rudra OSIRIS live interface' }],
   },
   {
     title: 'EduCore',
@@ -79,7 +66,7 @@ const investorProjects = [
     role: 'Builder · Autonomous compliance agent',
     dateRange: '2025',
     description:
-      'A dual-LLM compliance agent where Grok handles fast scanning and Claude performs deep audit reasoning across SOC 2, HIPAA, GDPR, and ISO 27001 workflows.',
+      'An assisted compliance review workflow where rapid document triage feeds deeper Claude reasoning across SOC 2, HIPAA, GDPR, and ISO 27001.',
   },
   {
     title: 'Anti-Sleep Pilot',

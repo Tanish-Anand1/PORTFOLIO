@@ -1,6 +1,12 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/writing/live/(.*)",
+      "destination": "/index.html"
+    }
+  ],
   "redirects": [
     {
       "source": "/projects/rudra",
@@ -18,6 +24,28 @@
         {
           "type": "host",
           "value": "tanishanand.dev"
+        }
+      ],
+      "destination": "https://tanishanand.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.tanishanand.dev"
+        }
+      ],
+      "destination": "https://tanishanand.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.tanishanand.com"
         }
       ],
       "destination": "https://tanishanand.com/$1",

@@ -4,10 +4,31 @@ export const site = {
   name: "Tanish Anand",
   url: "https://tanishanand.com",
   email: "tanishanand@paxus.in",
+  emailUrl: "mailto:tanishanand@paxus.in",
   booking: "https://cal.com/tanishanand",
   github: "https://github.com/Tanish-Anand1",
   twitter: "https://x.com/sullaxive",
   linkedin: "https://linkedin.com/in/tanish-anand24",
+  vivacity: "https://www.tryvivacity.com/",
+  vivacityDemo: "https://www.tryvivacity.com/demo",
+  argus: "https://osirisai.live",
+  sameAs: [
+    "https://github.com/Tanish-Anand1",
+    "https://linkedin.com/in/tanish-anand24",
+    "https://x.com/sullaxive",
+    "https://cal.com/tanishanand",
+  ],
+  metadataLinks: [
+    "https://tanishanand.com/",
+    "mailto:tanishanand@paxus.in",
+    "https://github.com/Tanish-Anand1",
+    "https://linkedin.com/in/tanish-anand24",
+    "https://x.com/sullaxive",
+    "https://cal.com/tanishanand",
+    "https://www.tryvivacity.com/",
+    "https://www.tryvivacity.com/demo",
+    "https://osirisai.live",
+  ],
 };
 
 // Attribution is kept in docs/portfolio-content-sources.md. Never infer an
@@ -24,12 +45,6 @@ export const highlights = [
     logo: "iitb",
     detail: "International Robowars ’25. 8 kg winner.",
     href: "/projects/robowars",
-  },
-  {
-    name: "xAI",
-    logo: "xai",
-    detail: "Grok open-source work",
-    href: "/work#xai",
   },
   {
     name: "Inflection",
@@ -84,7 +99,7 @@ export const projects = [
   },
   {
     slug: "osiris",
-    title: "OSIRIS",
+    title: "ARGUS",
     category: "Systems",
     year: "2026",
     subtitle: "A world of signals, in one view.",
@@ -93,14 +108,11 @@ export const projects = [
     role: "Builder",
     status: "Public project",
     tech: ["TypeScript", "Next.js", "MapLibre GL", "WebGL"],
-    image: "/portfolio/rudra-live.png",
-    alt: "OSIRIS geospatial interface showing a map and live-data controls",
-    link: "https://osirisai.live",
     sections: [
       {
         title: "The ingest problem",
         body: [
-          "OSIRIS brings ADS-B flight data, AIS maritime positions, camera feeds, seismic events, and live broadcasts into a geographic interface. The work sits across data ingestion, stream handling, and GPU rendering.",
+          "ARGUS brings ADS-B flight data, AIS maritime positions, camera feeds, seismic events, and live broadcasts into a geographic interface. The work sits across data ingestion, stream handling, and GPU rendering.",
           "Different feeds arrive at different rates. Video streams need reconnect logic and browser-compatible formats. Position packets need timestamps that remain meaningful when they are displayed beside a video observation.",
         ],
       },
@@ -108,7 +120,7 @@ export const projects = [
         title: "Keeping the renderer responsive",
         body: [
           "The camera-ingest work uses a worker to reconnect and remux incoming streams. Reusing typed arrays reduces allocation churn during continuous decoding. The map is rendered through WebGL, keeping geographic interaction separate from feed handling.",
-          "A capture of the interface is shown above. Feed availability depends on the upstream providers.",
+          "Feed availability depends on the upstream providers, which is basically the polite way of saying the internet can be a little dubass sometimes.",
         ],
       },
     ],
@@ -137,32 +149,6 @@ export const projects = [
         title: "Current state",
         body: [
           "Firmware and device integration are the completed portion. The hardware build is still in progress.",
-        ],
-      },
-    ],
-  },
-  {
-    slug: "aegis",
-    title: "AEGIS",
-    category: "Systems",
-    year: "2026",
-    subtitle: "An AIP control plane in the terminal.",
-    summary: "A terminal user interface for Palantir’s AIP control plane.",
-    role: "Builder",
-    status: "Project archive",
-    tech: ["Terminal UI", "AIP", "Control planes"],
-    sections: [
-      {
-        title: "The interface",
-        body: [
-          "AEGIS is a terminal user interface I built for Palantir’s AIP control plane. It brings the control-plane workflow into a keyboard-oriented environment.",
-          "The project focuses on the operator’s interface to an AI system: navigating state, invoking operations, and reading their results within a terminal.",
-        ],
-      },
-      {
-        title: "Project scope",
-        body: [
-          "The work focuses on the terminal interface to the control plane.",
         ],
       },
     ],
@@ -228,15 +214,15 @@ export const projects = [
     year: "2025",
     subtitle: "Two models, one review workflow.",
     summary:
-      "An agent workflow that separates fast document scanning with Grok from deeper audit reasoning with Claude.",
+      "An assisted review workflow that separates rapid document triage from deeper audit reasoning.",
     role: "Builder",
     status: "Prototype",
-    tech: ["Grok", "Claude API", "Python", "OpenClaw"],
+    tech: ["Claude API", "Python", "OpenClaw"],
     sections: [
       {
         title: "Review pipeline",
         body: [
-          "ComplianceGuard uses Grok for the initial scanning pass and Claude for deeper reasoning. The project explores document-review workflows around SOC 2, HIPAA, GDPR, and ISO 27001.",
+          "ComplianceGuard separates an initial document-triage pass from deeper reasoning with Claude. The project explores review workflows around SOC 2, HIPAA, GDPR, and ISO 27001.",
           "Splitting the workflow makes the initial pass and the detailed review separately inspectable. Findings still require the source material and a human reviewer to establish what they mean.",
         ],
       },
@@ -324,27 +310,15 @@ export const workNotes = [
   {
     slug: "deepmind",
     title: "google deepmind",
-    subtitle: "worked with google deepmind on robotics.",
+    subtitle: "how I got into the robotics accelerator.",
     date: "2026",
     role: "Robotics",
     views: "1,402 views",
     body: [
-      "most robotics progress is bottlenecked by the physical loop. simulations are fast, but the real world is chaotic and punishing.",
-      "working with google deepmind opened a perspective on how you scale learning and data collection for physical systems. the problem isn't just algorithmic; it's about building infrastructure that can constantly absorb real-world noise and adapt.",
-      "we're getting to the point where models understand physics intuitively, but the execution layer still needs to catch up."
-    ]
-  },
-  {
-    slug: "xai",
-    title: "xai",
-    subtitle: "worked with xAI on Grok open source.",
-    date: "2026",
-    role: "Open Source",
-    views: "893 views",
-    body: [
-      "open weights change the trajectory of the ecosystem. contributing to open-source agent tools around Grok was an exercise in understanding how developers actually want to use frontier models.",
-      "you realize very quickly that what makes an open-source release useful isn't just the weights, but the scaffolding, the inference pipelines, and the community tooling built around it.",
-      "xAI moves fast. the cadence of development there is something to learn from."
+      "getting into the Google DeepMind Robotics Accelerator started with the least glamorous part: making the work impossible to ignore. not a glossy robot render, not a linkedin essay about the future, but actual systems that had to ingest messy signals, survive weird edge cases, and keep moving when the demo gods were being absolute assholes.",
+      "the accelerator is built for early-stage robotics startups working on physical AI. it is three months, equity-free, and very much not a participation trophy: the program looks for a serious technical team, a real AI core, and a product that can move robotics from cool prototype to something people can actually use. that was the lane I was building toward.",
+      "what helped was showing the whole loop. robotics is not just a model that vibes in simulation. it is data collection, sensors, latency, deployment, failure recovery, and the painfully human bit of figuring out what the system should do next. I came in with that mindset, with enough technical work behind it to make the conversation concrete, and with a very clear reason for wanting Google DeepMind in the room.",
+      "the useful lesson is simple: if you want into a program like this, do not cosplay as a robotics company. build the thing, document what broke, show why AI is central, and make it obvious that mentorship will compound the work. the rest is timing, proof, and a frankly unreasonable amount of persistence."
     ]
   },
   {
@@ -373,6 +347,11 @@ export const routeList = [
   ...posts.map((p) => `/writing/${p.slug}`),
   ...workNotes.map((n) => `/work/${n.slug}`),
 ];
+
+// This page is intentionally omitted from navigation and the sitemap. It is a
+// authenticated writing desk backed by the publishing API.
+export const privateRouteList = ["/admin"];
+
 export function routeMeta(path) {
   const project = projects.find((p) => path === `/projects/${p.slug}`);
   const post = posts.find((p) => path === `/writing/${p.slug}`);
@@ -400,6 +379,10 @@ export function routeMeta(path) {
     "/writing": [
       "Writing",
       "Notes on research, systems, robotics, and building Vivacity.",
+    ],
+    "/admin": [
+      "Writer desk",
+      "A private editor for drafting, revising, and publishing writing.",
     ],
   };
   const meta = project

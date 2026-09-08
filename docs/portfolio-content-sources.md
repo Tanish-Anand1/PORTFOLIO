@@ -10,7 +10,9 @@ The user explicitly requested a full overhaul, black backgrounds, multipage tech
 
 ## Sources and attribution
 
-- User brief: age 16; Founder/CTO of Vivacity; Research Fellow at IIT Kanpur; Google DeepMind robotics; IIT Bombay International Robowars 2025 winner in 8 kg; work with xAI on Grok OSS; Inflection grant; bare-metal firmware project for Anduril, details redacted.
+- User brief: age 16; Founder/CTO of Vivacity; Research Fellow at IIT Kanpur; Google DeepMind robotics; IIT Bombay International Robowars 2025 winner in 8 kg; Inflection grant; bare-metal firmware project for Anduril, details redacted.
+- Author-provided Bangalore diary: YC Startup School selection, two Bangalore trips, support from Pavitra Kushwaha, Vibecon conversations, a Grad Capital offer of $60,000 for 10% equity that the team declined, $25,000 in YC credits, Aditya Bhatia joining the founding team, IIT Kanpur research, an SIIC incubation offer, LocalhostHQ and Forge visits, school dropout in July, and the 25-day return trip. The published diary keeps the events as first-person account, removes the age-restricted-event workaround, and does not add funding, employment, or outcome claims beyond the author's supplied narrative.
+- Author-provided ByteForge history, supplied 2026-09-05: started in Kanpur in 2024; Hack Club made the community official and funded its hackathons and workshops; in 2025 it ran a four-day hacker house, received ₹2 lakh from an investor in Hashed Emergent, and gave builders more than $75,000 in credits from OpenAI, Anthropic, Emergent, Lovable, and Supabase, plus $2,000 cash and partner goodies; in 2026 ByteForge gives $50 to $200 to high schoolers building something cool. The published post preserves those amounts and the distinction between credits, cash, and direct builder support.
 - These personal affiliations are author-provided. No employment title, employment dates, merged pull request, publication, or endorsement has been inferred. Organization links are context links, not evidence of the personal affiliation.
 - [Vivacity](https://www.tryvivacity.com/): inspected live with browser on 2026-08-31. Current positioning: simulation runtime for AI agents, persistent state, observations, actions, forks, rollback, simulation routing, verification, commit, rendering. CTO/research role appears in the public team section. The original portfolio's video-generation positioning is superseded.
 - Vivacity's Docs link was observed redirecting to its homepage. The portfolio uses the accessible public product contract, not invented SDK endpoints or backend integration claims.
@@ -29,7 +31,7 @@ Brand assets are local files under `public/brands`, fetched 2026-08-31:
 - Anduril: https://www.anduril.com/assets/favicon/favicon.xxQR7xb3fo.svg
 - IIT Kanpur: https://www.iitk.ac.in/main/themes/iitk/favicon.ico
 - Inflection: https://cdn.prod.website-files.com/6282ecb3cd9bb02c968283ff/62acbf4a8b13235aa3e574fc_favicon.png
-- xAI and IIT Bombay: Google's favicon cache for x.ai and iitb.ac.in respectively. Their direct sites blocked access or had certificate trouble; no certificate checks were disabled.
+- IIT Bombay: Google's favicon cache for iitb.ac.in. Its direct site had certificate trouble; no certificate checks were disabled.
 - Robot photographs: existing `public/story` archive. Captions do not assert that every photograph depicts the 2025 IIT Bombay event.
 - OSIRIS screenshot: existing `public/artifacts/rudra-live.png`, copied to tracked `public/portfolio/rudra-live.png` because the old artifacts directory is ignored by Git.
 
@@ -39,7 +41,7 @@ Independent client-side explainer, not a production Vivacity API integration. Di
 
 ## Deliberately excluded
 
-Unverified funding/traction metrics from the old hero, NDA details, implied paper authorship, imagined DeepMind model contributions, guessed Grok PRs, flight-readiness claims, and NVIDIA affiliation. Further detail can be added when the author supplies it.
+Unverified funding/traction metrics from the old hero, NDA details, implied paper authorship, imagined DeepMind model contributions, flight-readiness claims, and NVIDIA affiliation. Further detail can be added when the author supplies it.
 
 ## Follow-up: OSIRIS and the simulation workbench
 

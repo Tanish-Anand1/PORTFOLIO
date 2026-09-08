@@ -12,14 +12,12 @@ const projects = [
     glowColor: 'rgba(16, 185, 129, 0.06)',
   },
   {
-    title: 'Project Rudra',
+    title: 'ARGUS',
     description: 'GPU-accelerated global OSINT command grid. Integrates real-time flight tracking, marine channels, active CCTV networks, seismic activity, and live global broadcasts in a 60fps WebGL interface.',
     tech: ['Next.js', 'MapLibre GL', 'WebGL', 'TypeScript', 'TailwindCSS'],
     status: 'Completed',
     year: '2026',
-    link: 'https://osirisai.live',
     glowColor: 'rgba(57, 255, 20, 0.08)',
-    image: '/artifacts/rudra-live.png',
   },
   {
     title: 'Text Diffusion vs. AR Models',
@@ -50,8 +48,8 @@ const projects = [
   },
   {
     title: 'ComplianceGuard',
-    description: 'Dual-LLM autonomous compliance agent. Grok handles fast scanning, Claude performs deep audit reasoning for SOC 2, HIPAA, GDPR, ISO 27001.',
-    tech: ['Grok', 'Claude API', 'OpenClaw', 'Python'],
+    description: 'Assisted compliance review workflow. A rapid document-triage pass feeds deeper Claude reasoning for SOC 2, HIPAA, GDPR, and ISO 27001.',
+    tech: ['Claude API', 'OpenClaw', 'Python'],
     status: 'Completed',
     year: '2025',
     link: '#',

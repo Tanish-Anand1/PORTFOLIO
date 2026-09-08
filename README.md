@@ -14,6 +14,7 @@ npm run dev -- --host 127.0.0.1 --port 5173
 ```sh
 npm run lint:portfolio
 npm run test:portfolio
+npm run test:writer
 npm run build
 npm run preview -- --host 127.0.0.1 --port 4280
 node scripts/verify-site.mjs
@@ -30,7 +31,7 @@ node scripts/verify-site.mjs
 - `src/portfolio/Brand.jsx`: consistent local company marks in headings, links, and prose.
 - `src/portfolio/orbit.js`: two-body model and verification rules.
 - `src/portfolio/portfolio.css`: responsive design and accessibility states.
-- `scripts/prerender.mjs`: generates 19 HTML pages, metadata, sitemap, and 404 document.
+- `scripts/prerender.mjs`: generates public HTML pages, the private admin page, metadata, sitemap, and a 404 document.
 
 The earlier portfolio components remain in the repository but are not imported by the active site.
 
@@ -40,4 +41,22 @@ The earlier portfolio components remain in the repository but are not imported b
 - [Content sources and asset provenance](docs/portfolio-content-sources.md)
 - [Verification results and limits](docs/portfolio-qa.md)
 
-The simulation runs locally in the browser. It illustrates Vivacity's runtime loop and does not connect to the production API. The live domain has not been updated by this redesign task.
+The simulation runs locally in the browser. It illustrates Vivacity's runtime loop and does not connect to the production API.
+
+## Production release
+
+The existing Vercel project is `portfolio`, served at https://tanishanand.com.
+Run the checks above, then deploy and verify the actual production host:
+
+```sh
+npx vercel --prod --yes
+node scripts/verify-site.mjs https://tanishanand.com
+```
+
+The checker accepts a URL argument or `PORTFOLIO_PREVIEW_URL` and prints the host it checks.
+Writer Desk requires production `ADMIN_PASSWORD` and `BLOB_READ_WRITE_TOKEN` environment variables.
+`/admin` is password protected and excluded from the sitemap. Publishing tests use isolated
+test credentials and a Blob double; they never modify production content.
+Node 24 or later is required for the publishing test command's module mocking support.
+The broad `npm run lint` also checks retained legacy components; use
+`npx eslint src/portfolio src/main.jsx src/content/writing.js api scripts tests` for the deployed code.

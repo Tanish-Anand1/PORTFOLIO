@@ -13,11 +13,11 @@ const escape = (value) =>
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;");
 try {
-  const { render, routeList, routeMeta, site } = await server.ssrLoadModule(
+  const { render, routeList, privateRouteList, routeMeta, site } = await server.ssrLoadModule(
     "/src/portfolio/entry-server.jsx",
   );
   const template = await readFile(resolve("dist/index.html"), "utf8");
-  for (const path of [...routeList, "/404"]) {
+  for (const path of [...routeList, ...privateRouteList, "/404"]) {
     const { title, description } = routeMeta(path);
     const url = `${site.url}${path === "/" ? "/" : path}`;
     const html = template
@@ -54,7 +54,7 @@ try {
     await mkdir(resolve(destination, ".."), { recursive: true });
     await writeFile(
       destination,
-      path === "/404"
+      path === "/404" || privateRouteList.includes(path)
         ? html.replace('content="index, follow"', 'content="noindex, follow"')
         : html,
     );
@@ -70,7 +70,7 @@ try {
       `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, follow"><meta http-equiv="refresh" content="0;url=${destination}"><link rel="canonical" href="${site.url}${destination}"><title>OSIRIS | Tanish Anand</title></head><body><a href="${destination}">Continue to OSIRIS</a></body></html>`,
     );
   }
-  console.log(`Prerendered ${routeList.length} pages and a 404 page.`);
+  console.log(`Prerendered ${routeList.length} public pages, ${privateRouteList.length} private page, and a 404 page.`);
 } finally {
   await server.close();
 }

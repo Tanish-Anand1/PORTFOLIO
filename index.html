@@ -21,6 +21,12 @@
     <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/favicon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <link rel="me" href="mailto:tanishanand@paxus.in" />
+    <link rel="me" href="https://github.com/Tanish-Anand1" />
+    <link rel="me" href="https://linkedin.com/in/tanish-anand24" />
+    <link rel="me" href="https://x.com/sullaxive" />
+    <link rel="me" href="https://cal.com/tanishanand" />
     <meta property="og:site_name" content="Tanish Anand" />
     <meta
       property="og:title"
@@ -59,26 +65,54 @@
             ],
             "publisher": {
               "@id": "https://tanishanand.com/#person"
+            },
+            "creator": {
+              "@id": "https://tanishanand.com/#person"
             }
+          },
+          {
+            "@type": "ProfilePage",
+            "@id": "https://tanishanand.com/#profile",
+            "url": "https://tanishanand.com/",
+            "name": "Tanish Anand",
+            "mainEntity": {
+              "@id": "https://tanishanand.com/#person"
+            },
+            "relatedLink": [
+              "https://tanishanand.com/",
+              "mailto:tanishanand@paxus.in",
+              "https://github.com/Tanish-Anand1",
+              "https://linkedin.com/in/tanish-anand24",
+              "https://x.com/sullaxive",
+              "https://cal.com/tanishanand",
+              "https://www.tryvivacity.com/",
+              "https://www.tryvivacity.com/demo",
+              "https://osirisai.live"
+            ]
           },
           {
             "@type": "Person",
             "@id": "https://tanishanand.com/#person",
             "name": "Tanish Anand",
+            "alternateName": ["sullaxive", "Tanish-Anand1"],
             "url": "https://tanishanand.com/",
             "email": "tanishanand@paxus.in",
             "jobTitle": "Co-founder & CTO",
             "worksFor": {
-              "@type": "Organization",
-              "name": "Vivacity",
-              "url": "https://www.tryvivacity.com/"
+              "@id": "https://tanishanand.com/#vivacity"
             },
             "sameAs": [
-              "https://www.linkedin.com/in/tanish-anand24",
               "https://github.com/Tanish-Anand1",
+              "https://linkedin.com/in/tanish-anand24",
               "https://x.com/sullaxive",
               "https://cal.com/tanishanand"
             ],
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "email": "tanishanand@paxus.in",
+              "url": "https://cal.com/tanishanand",
+              "contactType": "professional inquiries"
+            },
             "knowsAbout": [
               "Artificial Intelligence",
               "Robotics",
@@ -86,6 +120,26 @@
               "Systems Engineering"
             ],
             "mainEntityOfPage": "https://tanishanand.com/"
+          },
+          {
+            "@type": "Organization",
+            "@id": "https://tanishanand.com/#vivacity",
+            "name": "Vivacity",
+            "url": "https://www.tryvivacity.com/",
+            "sameAs": "https://www.tryvivacity.com/",
+            "founder": {
+              "@id": "https://tanishanand.com/#person"
+            }
+          },
+          {
+            "@type": "SoftwareApplication",
+            "@id": "https://tanishanand.com/#argus",
+            "name": "ARGUS",
+            "url": "https://osirisai.live",
+            "description": "A WebGL interface for flight, maritime, camera, seismic, and broadcast data.",
+            "creator": {
+              "@id": "https://tanishanand.com/#person"
+            }
           }
         ]
       }

@@ -3,7 +3,8 @@ import { readFile, access } from "node:fs/promises";
 import { resolve } from "node:path";
 import { routeList, routeMeta, site } from "../src/portfolio/content.js";
 
-const base = process.env.PORTFOLIO_PREVIEW_URL || "http://127.0.0.1:4280";
+const base = (process.argv[2] || process.env.PORTFOLIO_PREVIEW_URL || "http://127.0.0.1:4280").replace(/\/$/, "");
+console.log(`Verifying ${base}`);
 const titles = new Set();
 const escape = (value) =>
   value
@@ -38,10 +39,15 @@ for (const route of routeList) {
   const content = html
     .replace(/<script[\s\S]*?<\/script>/g, "")
     .replace(/<[^>]+>/g, "");
+  for (const [image] of html.matchAll(/<img\b[^>]*>/g)) {
+    assert.match(image, /\bsrc="[^"]+"/, `${route}: image has no source`);
+    assert.match(image, /\balt="[^"]*"/, `${route}: image has no alternative text`);
+  }
   assert.ok(!/\brudra\b/i.test(content), `${route}: obsolete project name`);
   for (const href of [
-    `mailto:${site.email}`,
+    site.emailUrl,
     site.booking,
+    site.github,
     site.twitter,
     site.linkedin,
   ]) {
@@ -50,6 +56,35 @@ for (const route of routeList) {
       `${route}: missing contact link ${href}`,
     );
   }
+  for (const href of site.metadataLinks) {
+    assert.ok(
+      html.includes(href),
+      `${route}: missing official link from metadata ${href}`,
+    );
+  }
+  const staticSchemaMatch = html.match(
+    /<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/,
+  );
+  assert.ok(staticSchemaMatch, `${route}: missing static JSON-LD metadata`);
+  const staticSchema = JSON.parse(staticSchemaMatch[1]);
+  const profilePage = staticSchema["@graph"].find(
+    (item) => item["@type"] === "ProfilePage",
+  );
+  assert.deepEqual(
+    profilePage?.relatedLink,
+    site.metadataLinks,
+    `${route}: incomplete official-link metadata`,
+  );
+  const removedCompanyTerms = [
+    String.fromCharCode(120, 65, 73),
+    String.fromCharCode(71, 114, 111, 107),
+  ];
+  assert.ok(
+    removedCompanyTerms.every(
+      (term) => !html.toLowerCase().includes(term.toLowerCase()),
+    ),
+    `${route}: removed company content remains in rendered HTML`,
+  );
   assert.ok(
     !/[\u2014\u2013]/.test(content),
     `${route}: banned dash in content`,
@@ -75,17 +110,17 @@ for (const [oldPath, target] of [
   ["/projects/rudra", "/projects/osiris"],
   ["/writing/rudra-camera-ingest", "/writing/osiris-camera-ingest"],
 ]) {
-  const legacy = await fetch(`${base}${oldPath}`).then((response) =>
-    response.text(),
-  );
-  assert.ok(
-    legacy.includes(`url=${target}`),
-    `${oldPath}: missing legacy redirect`,
-  );
+  const response = await fetch(`${base}${oldPath}`, { redirect: "manual" });
+  if ([301, 302, 307, 308].includes(response.status)) {
+    assert.equal(new URL(response.headers.get("location"), base).pathname, target, `${oldPath}: wrong redirect`);
+  } else {
+    assert.equal(response.status, 200, `${oldPath}: redirect page status`);
+    assert.ok((await response.text()).includes(`url=${target}`), `${oldPath}: missing legacy redirect`);
+  }
 }
 assert.ok(
   missing.includes("Page not found") && missing.includes("noindex, follow"),
 );
 console.log(
-  `PASS: ${routeList.length} real HTTP routes; prerendered content, unique metadata, local assets, links, and copy checks.`,
+  `PASS: ${routeList.length} real HTTP routes at ${base}; prerendered content, unique metadata, local assets, links, and copy checks.`,
 );

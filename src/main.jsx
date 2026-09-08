@@ -21,6 +21,12 @@ if (renamed) {
   window.location.replace(`/${legacyPath}`);
 } else {
   const root = document.getElementById("root");
+  const isLiveWriting = window.location.pathname.startsWith("/writing/live/");
+  if (isLiveWriting) {
+    // The host serves the homepage fallback here; it is not article HTML to hydrate.
+    root.replaceChildren();
+    document.head.querySelectorAll('title, meta[name="description"], meta[property^="og:"], link[rel="canonical"]').forEach((element) => element.remove());
+  }
   const app = (
     <StrictMode>
       <App />

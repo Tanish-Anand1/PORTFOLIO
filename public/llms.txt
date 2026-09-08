@@ -10,7 +10,7 @@ Vivacity is building a simulation runtime for AI agents: persistent world state,
 - [Work](https://tanishanand.com/work)
 - [Writing](https://tanishanand.com/writing)
 
-Project archive: Robowars, OSIRIS, AIRIS, AEGIS, EduCore, PhysicsGPT, ComplianceGuard, Anti-Sleep Pilot, ByteForge.
+Project archive: Robowars, ARGUS, AIRIS, EduCore, PhysicsGPT, ComplianceGuard, Anti-Sleep Pilot, ByteForge.
 Contact: tanishanand@paxus.in
 
 Book a call: https://cal.com/tanishanand

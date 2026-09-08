@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build && node scripts/prerender.mjs",
     "test:portfolio": "node --test tests/orbit.test.mjs",
+    "test:writer": "node --experimental-test-module-mocks --test tests/writer.test.mjs",
     "lint:portfolio": "eslint src/portfolio src/main.jsx",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -15,6 +16,7 @@
     "@fontsource-variable/geist": "^5.3.0",
     "@fontsource-variable/geist-mono": "^5.3.0",
     "@tailwindcss/vite": "^4.2.2",
+    "@vercel/blob": "^2.8.0",
     "framer-motion": "^12.38.0",
     "react": "^19.2.4",
     "react-activity-calendar": "^3.2.0",

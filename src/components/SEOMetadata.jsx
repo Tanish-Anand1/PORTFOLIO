@@ -155,13 +155,24 @@ const SEOMetadata = () => {
           { "@type": "PropertyValue", "propertyID": "LinkedIn", "value": "tanish-anand24" },
           { "@type": "PropertyValue", "propertyID": "X", "value": "sullaxive" }
         ],
-        "url": "https://tanish.gg",
+        "url": "https://tanishanand.com/",
         "sameAs": [
           "https://github.com/Tanish-Anand1",
-          "https://www.linkedin.com/in/tanish-anand24/",
+          "https://linkedin.com/in/tanish-anand24",
           "https://x.com/sullaxive",
-          "https://twitter.com/sullaxive"
+          "https://cal.com/tanishanand"
         ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "tanishanand@paxus.in",
+          "url": "https://cal.com/tanishanand",
+          "contactType": "professional inquiries"
+        },
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Vivacity",
+          "url": "https://www.tryvivacity.com/"
+        },
         "interactionStatistic": [
           {
             "@type": "InteractionCounter",
@@ -184,8 +195,8 @@ const SEOMetadata = () => {
       "@context": "https://schema.org",
       "@type": "Blog",
       "name": "Tanish Anand's Research Blog",
-      "url": "https://tanish.gg/#blog",
-      "author": { "@type": "Person", "name": "Tanish Anand", "url": "https://tanish.gg" },
+      "url": "https://tanishanand.com/writing",
+      "author": { "@type": "Person", "name": "Tanish Anand", "url": "https://tanishanand.com/" },
       "blogPost": [
         {
           "@type": "BlogPosting",

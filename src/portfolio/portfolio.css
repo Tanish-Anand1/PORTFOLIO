@@ -41,12 +41,14 @@ a:hover {
   color: #fff;
 }
 button,
-input {
+input,
+textarea {
   font: inherit;
 }
 button,
 a,
 input,
+textarea,
 summary {
   -webkit-tap-highlight-color: transparent;
 }
@@ -1016,6 +1018,273 @@ figcaption {
 .post-body {
   padding-top: 5px;
 }
+.writer-desk-note {
+  max-width: 720px;
+  border-left: 2px solid var(--accent);
+  padding: 13px 16px;
+  color: var(--muted);
+  background: #0d0d0c;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.writer-desk-note strong {
+  color: var(--text);
+}
+.writer-desk-gate {
+  max-width: 520px;
+  margin: 34px 0 64px;
+  padding: 28px;
+  border: 1px solid var(--line);
+  background: #0d0d0c;
+}
+.writer-desk-gate .mono {
+  margin: 0 0 18px;
+  color: var(--accent);
+  font-size: 10px;
+}
+.writer-desk-gate h2 {
+  margin: 0 0 12px;
+  font-size: 25px;
+  letter-spacing: -0.7px;
+}
+.writer-desk-gate > p:not(.mono) {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.writer-desk-gate code {
+  color: var(--text);
+  font-family: "Geist Mono Variable", monospace;
+  font-size: 0.88em;
+}
+.writer-desk-login label {
+  display: grid;
+  gap: 9px;
+  margin: 22px 0;
+  font-size: 12px;
+  font-weight: 550;
+}
+.writer-desk-login input {
+  border: 1px solid #353530;
+  padding: 11px 12px;
+  background: #10100f;
+  color: var(--text);
+  font-size: 14px;
+}
+.writer-desk-grid {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 38px;
+  align-items: start;
+  margin: 34px 0 64px;
+}
+.writer-desk-list {
+  position: sticky;
+  top: 24px;
+  border-top: 1px solid var(--line);
+}
+.writer-desk-list > div {
+  max-height: 520px;
+  overflow-y: auto;
+}
+.writer-desk-list button {
+  width: 100%;
+  display: block;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  color: var(--muted);
+}
+.writer-desk-list button:hover,
+.writer-desk-list button.is-selected {
+  color: var(--text);
+}
+.writer-desk-list button.is-selected {
+  box-shadow: inset 2px 0 0 var(--accent);
+  padding-left: 11px;
+}
+.writer-desk-list span,
+.writer-desk-list small {
+  display: block;
+}
+.writer-desk-list span {
+  font-size: 12px;
+  line-height: 1.45;
+}
+.writer-desk-list small {
+  margin-top: 5px;
+  color: var(--faint);
+  font-family: "Geist Mono Variable", monospace;
+  font-size: 9px;
+}
+.writer-desk-list .writer-desk-new {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 600;
+}
+.writer-desk-form {
+  max-width: 590px;
+}
+.writer-desk-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+.writer-desk-toolbar .mono {
+  color: var(--accent);
+  font-size: 10px;
+}
+.writer-desk-toolbar button,
+.writer-desk-danger button,
+.writer-desk-image button {
+  color: var(--muted);
+  font-size: 11px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.writer-desk-status {
+  min-height: 26px;
+  margin: 0 0 24px;
+  color: var(--faint);
+  font-size: 12px;
+  line-height: 1.65;
+}
+.writer-desk-form label {
+  display: grid;
+  gap: 9px;
+  margin: 19px 0;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 550;
+}
+.writer-desk-form input,
+.writer-desk-form textarea {
+  width: 100%;
+  border: 1px solid #353530;
+  border-radius: 3px;
+  padding: 11px 12px;
+  background: #10100f;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.55;
+}
+.writer-desk-form textarea {
+  resize: vertical;
+}
+.writer-desk-form input:hover,
+.writer-desk-form textarea:hover {
+  border-color: #55544c;
+}
+.writer-desk-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 19px;
+  align-items: center;
+  margin-top: 29px;
+}
+.writer-desk-actions button {
+  border-bottom: 1px solid #535148;
+  padding: 10px 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+.writer-desk-actions .writer-desk-save {
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  padding: 10px 14px;
+  background: var(--accent);
+  color: #171510;
+  font-weight: 650;
+}
+.writer-desk-actions .writer-desk-save:hover:enabled {
+  background: #e3c394;
+}
+.writer-desk-images {
+  margin: 28px 0 0;
+  padding: 20px 0 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+.writer-desk-images legend {
+  padding: 0;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 550;
+}
+.writer-desk-images > p {
+  margin: 9px 0 15px;
+  color: var(--faint);
+  font-size: 11px;
+  line-height: 1.6;
+}
+.writer-desk-upload {
+  display: inline-flex !important;
+  position: relative;
+  overflow: hidden;
+  align-items: center;
+  min-height: 38px;
+  margin: 0 0 18px !important;
+  border: 1px dashed #55544c;
+  padding: 0 12px;
+  color: var(--accent) !important;
+  cursor: pointer;
+}
+.writer-desk-upload input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.writer-desk-image {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 16px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+}
+.writer-desk-image img {
+  width: 112px;
+  height: 86px;
+  object-fit: cover;
+  background: #161614;
+}
+.writer-desk-image label {
+  margin: 0 0 11px;
+  font-size: 10px;
+}
+.writer-desk-image input {
+  padding: 8px 9px;
+  font-size: 12px;
+}
+.writer-desk-image em {
+  color: var(--faint);
+  font-style: normal;
+  font-weight: 400;
+}
+.writer-desk-danger {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 45px;
+  padding-top: 18px;
+  border-top: 1px solid #392523;
+}
+.writer-desk-danger p {
+  width: 100%;
+  margin: 0;
+  color: #c7a6a0;
+  font-size: 12px;
+  line-height: 1.55;
+}
+.writer-desk-danger button:first-of-type {
+  color: #d79287;
+}
 @media (min-width: 1100px) {
   .site-shell {
     max-width: 860px;
@@ -1131,6 +1400,27 @@ figcaption {
     align-items: flex-start;
     flex-direction: column;
     gap: 15px;
+  }
+  .writer-desk-grid {
+    grid-template-columns: 1fr;
+    gap: 27px;
+  }
+  .writer-desk-list {
+    position: static;
+  }
+  .writer-desk-list > div {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 18px;
+    max-height: none;
+  }
+  .writer-desk-image {
+    grid-template-columns: 84px minmax(0, 1fr);
+    gap: 12px;
+  }
+  .writer-desk-image img {
+    width: 84px;
+    height: 72px;
   }
   .search-label,
   .search-label input {

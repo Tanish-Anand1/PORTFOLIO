@@ -13,19 +13,17 @@ MPC and cryptography under Prof. Adithya Vadapalli. Work also includes discrete 
 
 SELECTED WORK
 Google DeepMind | Robotics work
-xAI | Grok open-source work
 Anduril | Bare-metal firmware project, details redacted
 Inflection | Grant recipient
 IIT Bombay | International Robowars 2025, 8 kg category winner
 Prolearn | Video pipeline engineering
 
 PROJECTS
-OSIRIS: WebGL geospatial interface and live-data ingestion.
+ARGUS: WebGL geospatial interface and live-data ingestion.
 AIRIS: STM32F405 firmware and sensor-driver integration; hardware build in progress.
-AEGIS: Terminal interface for an AIP control plane.
 EduCore: Offline learning-device project using quantized Phi-3 Mini on Raspberry Pi.
 PhysicsGPT: Offline physics tutor focused on the CBSE curriculum.
-ComplianceGuard: Grok/Claude assisted review prototype.
+ComplianceGuard: Claude-assisted review prototype.
 Anti-Sleep Pilot: Computer-vision hackathon prototype.
 ByteForge: Hardware and AI community, co-founded with Pavitra Kushwaha.
 Earlier experiments: ORCA, D2AR, ORBIS 2045, LumenSeed, ClusterOrch-Gym.

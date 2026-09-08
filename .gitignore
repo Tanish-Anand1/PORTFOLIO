@@ -31,3 +31,4 @@ __pycache__/
 .next/
 public/artifacts/
 .vercel
+.env*
