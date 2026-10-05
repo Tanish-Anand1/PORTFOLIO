@@ -7,6 +7,7 @@ import {
   forkWorld,
   commitBranch,
   energy,
+  chooseSafeBranch,
 } from "../src/portfolio/orbit.js";
 
 test("circular orbit preserves radius and energy over the whole horizon", () => {
@@ -56,4 +57,20 @@ test("forks are independent; commit returns the evaluated endpoint without mutat
 test("invalid impulse input is rejected", () => {
   for (const impulse of [NaN, Infinity, -51, 51, "10"])
     assert.throws(() => simulate(INITIAL_STATE, impulse), RangeError);
+});
+
+test("the illustrative policy chooses the strongest braking branch that passes, or none", () => {
+  const branches = forkWorld(INITIAL_STATE, -25).map((branch) => ({
+    ...branch,
+    report: verify(branch.trace),
+  }));
+  assert.deepEqual(branches.map((branch) => branch.trace.impulse), [-37, -25, -13]);
+  assert.equal(chooseSafeBranch(branches)?.id, "branch-3");
+  assert.equal(chooseSafeBranch(branches)?.report.passed, true);
+
+  const unsafe = forkWorld(INITIAL_STATE, -35).map((branch) => ({
+    ...branch,
+    report: verify(branch.trace),
+  }));
+  assert.equal(chooseSafeBranch(unsafe), null);
 });

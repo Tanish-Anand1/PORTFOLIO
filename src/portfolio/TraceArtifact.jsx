@@ -1,7 +1,7 @@
 import { useId, useRef, useState } from "react";
 import { DT } from "./orbit.js";
 
-export default function TraceArtifact({ parent, trace, branch, report }) {
+export default function TraceArtifact({ parent, trace, branch, report, lineage = null }) {
   const id = useId();
   const input = useRef(null);
   const [message, setMessage] = useState("");
@@ -16,6 +16,7 @@ export default function TraceArtifact({ parent, trace, branch, report }) {
       branch,
       trace,
       verification: report,
+      lineage,
     },
     null,
     2,

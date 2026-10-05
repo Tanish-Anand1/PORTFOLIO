@@ -363,6 +363,7 @@ export const workNotes = [
 export const routeList = [
   "/",
   "/vivacity",
+  "/vivacity/brief",
   "/projects",
   "/research",
   "/work",
@@ -387,6 +388,10 @@ export function routeMeta(path) {
     "/vivacity": [
       "Vivacity",
       "Building a simulation runtime for AI agents. Persistent state, branching, backend routing, and verification. Explore an interactive orbital model.",
+    ],
+    "/vivacity/brief": [
+      "Vivacity investor brief",
+      "A concise overview of Vivacity’s first-wedge hypothesis, current product evidence, grant support, and next milestone.",
     ],
     "/projects": [
       "Projects",

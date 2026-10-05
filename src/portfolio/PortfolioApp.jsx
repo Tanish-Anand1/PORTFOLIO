@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import OrbitSimulation from "./OrbitSimulation.jsx";
+import AgentRunDemo from "./AgentRunDemo.jsx";
 import { site, highlights, projects, posts, workNotes, routeMeta } from "./content.js";
 import { Brand, CompanyText } from "./Brand.jsx";
 
@@ -247,12 +248,17 @@ function Home() {
           Inside the runtime <Arrow />
         </a>
         <p className="home-proof-note">
-          Change an impulse, compare three futures, verify the physics, and
-          inspect the exported trace. This is a deterministic browser
-          simulation, not a production API demo.
+          Run a short, inspectable policy example in the browser. The physics
+          executes here; the agent policy is illustrative, not production AI.
         </p>
         <a className="text-link" href="/vivacity#playground">
-          Inspect a run <Arrow />
+          Explore the orbital model <Arrow />
+        </a>
+        <a className="text-link" href="/vivacity#agent-run">
+          Run the short agent example <Arrow />
+        </a>
+        <a className="text-link" href="/vivacity/brief">
+          Investor brief <Arrow />
         </a>
       </section>
       <section className="home-projects">
@@ -373,8 +379,11 @@ function Vivacity() {
       </PageHeader>
       <div className="page-links">
         <External href={site.vivacity}>Visit Vivacity</External>
-        <a href="#playground">
-          Try the model <Arrow />
+        <a href="#agent-run">
+          Run the example <Arrow />
+        </a>
+        <a href="/vivacity/brief">
+          Investor brief <Arrow />
         </a>
       </div>
       <article className="article-body">
@@ -441,28 +450,7 @@ if report.passed:
           </p>
         </section>
       </article>
-      <section className="run-proof" aria-labelledby="run-proof-title">
-        <p className="experiment-kicker mono">
-          A working slice / not a staged result
-        </p>
-        <h2 id="run-proof-title">A run you can inspect.</h2>
-        <p>
-          Change an impulse, fork three trajectories from the same parent,
-          compare the outcomes, then verify, commit, or roll back. The browser
-          model exports its sampled state and checks as JSON.
-        </p>
-        <div className="run-proof-boundary">
-          <span className="mono">SCOPE</span>
-          <p>
-            This is a real, deterministic two-body simulation and an
-            independent browser implementation of the runtime idea, not a
-            connection to Vivacity’s production API or an AI-agent run.
-          </p>
-        </div>
-        <a className="run-proof-link" href="#playground">
-          Inspect the orbital run <Arrow />
-        </a>
-      </section>
+      <AgentRunDemo />
       <section id="playground" className="playground-section">
         <p className="experiment-kicker mono">
           Vivacity / Research experiments / 001
@@ -808,6 +796,96 @@ function ProjectPage({ project: p }) {
         <div className="article-end">
           <a href="/projects">← All projects</a>
         </div>
+      </article>
+    </>
+  );
+}
+
+function InvestorBrief() {
+  return (
+    <>
+      <PageHeader
+        back="/vivacity"
+        backLabel="Vivacity"
+        title="Investor brief"
+        meta="Vivacity / October 2026 / one-page overview"
+      >
+        <p>
+          <CompanyText>
+            Simulation infrastructure for agents that need to reason about what
+            happens next.
+          </CompanyText>
+        </p>
+      </PageHeader>
+      <article className="article-body investor-brief">
+        <section>
+          <p className="brief-status mono">FIRST WEDGE / HYPOTHESIS TO VALIDATE</p>
+          <h2>Start with teams building agents for simulated robotics.</h2>
+          <p>
+            The hypothesis: these teams currently stitch an agent to a simulator,
+            write one-off state and replay tooling, then build task-specific
+            checks around it. Vivacity aims to give each run one inspectable
+            lineage: parent world → action → alternative branches → domain checks
+            → committed state and replay.
+          </p>
+          <p className="brief-caveat">
+            This wedge and workflow description are a starting hypothesis, not a
+            completed customer study or validated market claim.
+          </p>
+        </section>
+        <section>
+          <p className="brief-status mono">CURRENT STATE / EVIDENCE</p>
+          <h2>A working browser explainer; production integration is not claimed.</h2>
+          <p>
+            The public portfolio model runs deterministic two-body physics in
+            the browser. It applies an action, compares branches, checks energy
+            and surface clearance, commits a passing branch, replays its states,
+            and exports a trace. The short agent-policy example is explicitly
+            illustrative and does not call an LLM or the production API.
+          </p>
+          <p>
+            Next product proof point: one design partner completes its own
+            simulator-backed task from initial state through action, branching,
+            domain checks, commit, and reproducible replay. Measure setup time,
+            replay success, and where the workflow fails. This is a target, not a
+            completed milestone.
+          </p>
+        </section>
+        <section className="brief-traction">
+          <p className="brief-status mono">TRACTION / KEEPING THE CATEGORIES SEPARATE</p>
+          <h2>A $10,000 grant, not investment or customer revenue.</h2>
+          <p>
+            Emergent Ventures awarded a $10,000 grant to build Vivacity; the
+            program is administered by the Mercatus Center. It is grant support,
+            not equity investment, a customer contract, or usage traction.
+          </p>
+          <p>
+            No dated user, pilot, or revenue figures are claimed on this brief.
+            Design-partner conversations are the next evidence to turn into
+            measured product usage.
+          </p>
+          <div className="brief-grant-links">
+            <a href="https://www.mercatus.org/emergent-ventures" target="_blank" rel="noreferrer">
+              <Brand name="emergent">Emergent Ventures</Brand>
+              <span>Grant program ↗</span>
+            </a>
+            <a href="https://www.mercatus.org/" target="_blank" rel="noreferrer">
+              <Brand name="mercatus">Mercatus Center</Brand>
+              <span>Program administrator ↗</span>
+            </a>
+          </div>
+        </section>
+        <section className="brief-contact">
+          <p className="brief-status mono">NEXT CONVERSATION</p>
+          <h2>Bring us a real environment and a decision your agent needs to make.</h2>
+          <p>
+            We’re looking for design partners who can help test the first
+            simulator-backed workflow and define the checks that matter.
+          </p>
+          <a className="text-link" href={`mailto:${site.email}?subject=Vivacity%20design%20partner%20conversation`}>
+            Contact the Vivacity team <span aria-hidden="true">→</span>
+          </a>
+        </section>
       </article>
     </>
   );
@@ -1556,6 +1634,7 @@ export default function PortfolioApp({
   const pages = {
     "/": <Home />,
     "/vivacity": <Vivacity />,
+    "/vivacity/brief": <InvestorBrief />,
     "/projects": <ProjectIndex />,
     "/research": <Research />,
     "/work": <Work />,

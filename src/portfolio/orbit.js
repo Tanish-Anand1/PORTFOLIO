@@ -85,6 +85,16 @@ export function forkWorld(parent, impulse) {
   }));
 }
 
+export function chooseSafeBranch(branches) {
+  return branches
+    .filter((branch) => branch.report?.passed)
+    .reduce(
+      (best, branch) =>
+        !best || branch.trace.impulse < best.trace.impulse ? branch : best,
+      null,
+    );
+}
+
 export function commitBranch(branch, report) {
   if (!report?.passed || !verify(branch.trace).passed)
     throw new Error("Only a verified branch can be committed.");
