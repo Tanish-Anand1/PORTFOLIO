@@ -246,6 +246,14 @@ function Home() {
         <a className="text-link" href="/vivacity">
           Inside the runtime <Arrow />
         </a>
+        <p className="home-proof-note">
+          Change an impulse, compare three futures, verify the physics, and
+          inspect the exported trace. This is a deterministic browser
+          simulation, not a production API demo.
+        </p>
+        <a className="text-link" href="/vivacity#playground">
+          Inspect a run <Arrow />
+        </a>
       </section>
       <section className="home-projects">
         <div className="section-title">
@@ -433,6 +441,28 @@ if report.passed:
           </p>
         </section>
       </article>
+      <section className="run-proof" aria-labelledby="run-proof-title">
+        <p className="experiment-kicker mono">
+          A working slice / not a staged result
+        </p>
+        <h2 id="run-proof-title">A run you can inspect.</h2>
+        <p>
+          Change an impulse, fork three trajectories from the same parent,
+          compare the outcomes, then verify, commit, or roll back. The browser
+          model exports its sampled state and checks as JSON.
+        </p>
+        <div className="run-proof-boundary">
+          <span className="mono">SCOPE</span>
+          <p>
+            This is a real, deterministic two-body simulation and an
+            independent browser implementation of the runtime idea, not a
+            connection to Vivacity’s production API or an AI-agent run.
+          </p>
+        </div>
+        <a className="run-proof-link" href="#playground">
+          Inspect the orbital run <Arrow />
+        </a>
+      </section>
       <section id="playground" className="playground-section">
         <p className="experiment-kicker mono">
           Vivacity / Research experiments / 001

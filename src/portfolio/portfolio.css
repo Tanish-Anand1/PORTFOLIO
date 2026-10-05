@@ -793,6 +793,64 @@ pre code {
   margin-top: 54px;
   scroll-margin-top: 28px;
 }
+.run-proof {
+  max-width: 720px;
+  margin: 54px 0 0;
+  padding: 22px 24px 24px;
+  border-left: 2px solid var(--accent);
+  background: #11110f;
+}
+.run-proof .experiment-kicker {
+  margin: 0 0 12px;
+}
+.run-proof h2 {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: clamp(25px, 4vw, 34px);
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0 0 12px;
+}
+.run-proof > p:not(.experiment-kicker),
+.run-proof-boundary p,
+.home-proof-note {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+.run-proof > p:not(.experiment-kicker) {
+  margin: 0;
+}
+.run-proof-boundary {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.run-proof-boundary > span {
+  color: var(--accent);
+  font-size: 10px;
+  padding-top: 4px;
+}
+.run-proof-boundary p {
+  margin: 0;
+  font-size: 12px;
+}
+.run-proof-link {
+  display: inline-block;
+  margin-top: 17px;
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 4px;
+  padding: 8px 0;
+}
+.home-proof-note {
+  max-width: 610px;
+  margin: 13px 0 4px;
+  font-size: 13px;
+}
 .model-details {
   margin-top: 20px;
   border-bottom: 1px solid var(--line);
