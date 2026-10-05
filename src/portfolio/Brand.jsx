@@ -34,7 +34,7 @@ const pattern = new RegExp(
 );
 
 export function Brand({ name, children, inline = false }) {
-  const ext = { vivacity: "svg", anduril: "svg", iitk: "ico" }[name] || "png";
+  const ext = { vivacity: "svg", anduril: "svg", emergent: "svg", mercatus: "svg", iitk: "ico" }[name] || "png";
   return (
     <span className={`brand${inline ? " brand-inline" : ""}`}>
       <img src={`/brands/${name}.${ext}`} width="19" height="19" alt="" />

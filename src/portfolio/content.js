@@ -35,6 +35,12 @@ export const site = {
 // employment title, a paper, or a model contribution from an institution name.
 export const highlights = [
   {
+    name: "Emergent Ventures",
+    logo: "emergent",
+    detail: "$10,000 grant to build Vivacity",
+    href: "/work/emergent-ventures",
+  },
+  {
     name: "Google DeepMind",
     logo: "deepmind",
     detail: "Robotics",
@@ -295,6 +301,24 @@ export const posts = writingPosts.map((post) => ({
 
 export const workNotes = [
   {
+    slug: "emergent-ventures",
+    title: "a $10,000 bet on vivacity",
+    subtitle: "Emergent Ventures grant recipient · building simulation infrastructure for AI agents",
+    date: "2026",
+    role: "Grant · Vivacity",
+    views: "",
+    organizations: [
+      { name: "Emergent Ventures", logo: "emergent", href: "https://www.mercatus.org/emergent-ventures" },
+      { name: "Mercatus Center", logo: "mercatus", href: "https://www.mercatus.org/" },
+    ],
+    body: [
+      "I got a $10,000 Emergent Ventures grant to build Vivacity. That is a wild sentence to get to write, and I do not want to make it sound smaller than it is: someone looked at this idea and decided it was worth backing.",
+      "Vivacity is the thing I keep coming back to: simulation infrastructure for AI agents. Not another polished demo that only works in the happy path. I want agents to be able to act in a world, see what their choices do, branch the state, and try again. The hard part is making that loop real, inspectable, and useful beyond one carefully staged run.",
+      "That is what I am building toward with this grant. Ten thousand dollars is serious fuel for an early project, and I want to turn it into a much more serious system: one where the world keeps its state, actions have consequences, and an agent can learn by actually doing. Vivacity is still being built. The point is to make the next version more real than the last one, then keep going.",
+      "Emergent Ventures is a grant program administered by the Mercatus Center. I am grateful they chose to back me and Vivacity while the work is still at the stage where focused support can change what becomes possible.",
+    ],
+  },
+  {
     slug: "inflection",
     title: "inflection grant",
     subtitle: "$2k from edge city. the pool was jensen huang's leather jacket after sotheby's hit $960k.",
@@ -358,7 +382,7 @@ export function routeMeta(path) {
   const base = {
     "/": [
       "Tanish Anand",
-      "16. Founder & CTO of Vivacity. Research Fellow at IIT Kanpur. AI systems, simulation infrastructure, and robotics.",
+      "16. Founder & CTO of Vivacity. Awarded a $10,000 Emergent Ventures grant to build simulation infrastructure for AI agents. Research Fellow at IIT Kanpur.",
     ],
     "/vivacity": [
       "Vivacity",

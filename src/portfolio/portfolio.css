@@ -239,6 +239,65 @@ pre,
   margin-top: 11px;
   padding: 5px 0;
 }
+.grant-attribution {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-top: 9px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.grant-attribution > a {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--text);
+}
+.grant-attribution-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.055em;
+}
+.grant-attribution .brand img {
+  width: 17px;
+  height: 17px;
+}
+.grant-attribution-separator {
+  opacity: 0.6;
+}
+.grant-organizations {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 30px;
+  max-width: 700px;
+  margin: 1rem auto 2.5rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.grant-organizations > a {
+  display: grid;
+  gap: 4px;
+  min-height: 44px;
+  align-content: center;
+  text-decoration: none;
+}
+.grant-organizations .brand {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.035em;
+}
+.grant-organizations .brand img {
+  width: 21px;
+  height: 21px;
+}
+.grant-organization-caption {
+  color: var(--muted);
+  font-size: 11px;
+}
 .home-vivacity {
   margin-top: 58px;
 }

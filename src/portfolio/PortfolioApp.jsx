@@ -212,6 +212,17 @@ function Home() {
             <Arrow external />
           </a>
         ))}
+        <div className="grant-attribution" aria-label="Grant program and administrator">
+          <span className="grant-attribution-label">Grant program</span>
+          <a href="https://www.mercatus.org/emergent-ventures" target="_blank" rel="noreferrer" aria-label="Emergent Ventures official page (opens in a new tab)">
+            <Brand name="emergent">Emergent Ventures</Brand>
+          </a>
+          <span className="grant-attribution-separator" aria-hidden="true">·</span>
+          <span className="grant-attribution-label">Administered by</span>
+          <a href="https://www.mercatus.org/" target="_blank" rel="noreferrer" aria-label="Mercatus Center official page (opens in a new tab)">
+            <Brand name="mercatus">Mercatus Center</Brand>
+          </a>
+        </div>
         <a className="quiet-link background-link" href="/work">
           Work & background <Arrow />
         </a>
@@ -1456,9 +1467,19 @@ function WorkNote({ note }) {
           <CompanyText>{note.subtitle}</CompanyText>
         </p>
         <p className="mono" style={{ fontSize: "0.85rem", opacity: 0.6, marginTop: "2rem" }}>
-          {note.views} · <a href={site.emailUrl} style={{ textDecoration: "underline", color: "inherit" }}>leave a note →</a>
+          {note.views ? <>{note.views} · </> : null}<a href={site.emailUrl} style={{ textDecoration: "underline", color: "inherit" }}>leave a note →</a>
         </p>
       </PageHeader>
+      {note.organizations && (
+        <nav className="grant-organizations" aria-label="Grant organizations">
+          {note.organizations.map((organization) => (
+            <a key={organization.name} href={organization.href} target="_blank" rel="noreferrer" aria-label={`${organization.name} (opens in a new tab)`}>
+              <Brand name={organization.logo}>{organization.name}</Brand>
+              <span className="grant-organization-caption">Official program site ↗</span>
+            </a>
+          ))}
+        </nav>
+      )}
       <article className="article-body">
         {note.body.map((paragraph, i) => (
           <p key={i}>
