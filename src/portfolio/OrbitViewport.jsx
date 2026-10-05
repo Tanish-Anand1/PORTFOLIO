@@ -402,6 +402,8 @@ export default function OrbitViewport({
         <label className="playback-speed">
           <span className="sr-only">Playback speed</span>
           <select
+            id={`${id}-playback-speed`}
+            name={`${id}-playback-speed`}
             value={speed}
             onChange={(event) => setSpeed(Number(event.target.value))}
           >
